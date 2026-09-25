@@ -1,0 +1,48 @@
+*:not(dialog, svg, svg *) {
+	appearance: none;
+
+	box-sizing: border-box;
+
+	width: unset;
+	height: unset;
+	min-width: 0;
+	min-height: 0;
+	max-width: unset;
+	max-height: unset;
+	margin: unset;
+	border: unset;
+	padding: unset;
+
+	font: unset;
+
+	opacity: unset;
+	background: unset;
+	color: unset;
+	text-decoration: unset;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	vertical-align: middle;
+	font-style: italic;
+	background-repeat: no-repeat;
+	background-size: cover;
+	shape-margin: 1rem;
+}
+
+dialog {
+	appearance: none;
+	box-sizing: border-box;
+	padding: unset;
+	border: unset;
+	background: unset;
+	max-width: unset;
+	max-height: unset;
+	padding: unset;
+}

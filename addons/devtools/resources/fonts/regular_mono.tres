@@ -1,0 +1,11 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://xigoa2r18dy0"]
+
+[ext_resource type="FontFile" uid="uid://xwppqlluxy3g" path="res://addons/devtools/content/fonts/geist_mono.woff2" id="1_kyctw"]
+
+[resource]
+base_font = ExtResource("1_kyctw")
+variation_opentype = {
+2003265652: 600
+}
+spacing_top = -3
+spacing_bottom = -3

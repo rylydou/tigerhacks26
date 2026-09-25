@@ -1,0 +1,11 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://cj857i2hcaiay"]
+
+[ext_resource type="FontFile" uid="uid://bgw6li4ojo55b" path="res://addons/devtools/content/fonts/geist.woff2" id="1_emrxg"]
+
+[resource]
+base_font = ExtResource("1_emrxg")
+variation_opentype = {
+2003265652: 600
+}
+spacing_top = -3
+spacing_bottom = -3

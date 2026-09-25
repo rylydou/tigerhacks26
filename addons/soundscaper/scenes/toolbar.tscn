@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://da3guh3vvwel8"]
+
+[ext_resource type="Script" uid="uid://bg6dnxrwqdbjx" path="res://addons/soundscaper/scripts/toolbar.gd" id="1_2kq77"]
+[ext_resource type="Script" uid="uid://bacyq8c560l4s" path="res://addons/soundscaper/scripts/helpers/icon_setter.gd" id="1_r1e11"]
+[ext_resource type="Texture2D" uid="uid://dgpw55v2c6ph" path="res://addons/soundscaper/content/icons/autoplay.svg" id="3_ufwqu"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ijnds"]
+device = -1
+keycode = 69
+unicode = 101
+
+[sub_resource type="Shortcut" id="Shortcut_voukb"]
+events = [SubResource("InputEventKey_ijnds")]
+
+[sub_resource type="Image" id="Image_1ilf8"]
+data = {
+"data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 225, 225, 225, 182, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 180, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 255, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 255, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 255, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 255, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 255, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 224, 224, 224, 171, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 170, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 231, 231, 231, 21, 224, 224, 224, 234, 224, 224, 224, 234, 231, 231, 231, 21, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 225, 225, 225, 85, 225, 225, 225, 85, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
+"format": "RGBA8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_mmau6"]
+image = SubResource("Image_1ilf8")
+
+[sub_resource type="InputEventKey" id="InputEventKey_4n36x"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_kuqtc"]
+events = [SubResource("InputEventKey_4n36x")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_j6o0v"]
+device = -1
+shift_pressed = true
+keycode = 65
+unicode = 65
+
+[sub_resource type="Shortcut" id="Shortcut_ifwld"]
+events = [SubResource("InputEventKey_j6o0v")]
+
+[node name="Toolbar" type="MarginContainer" unique_id=1876006578]
+offset_right = 400.0
+offset_bottom = 29.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
+script = ExtResource("1_2kq77")
+
+[node name="Box" type="HBoxContainer" parent="." unique_id=754258819]
+layout_mode = 2
+
+[node name="Edit Button" type="Button" parent="Box" unique_id=991674723]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+tooltip_text = "Edit this event"
+shortcut = SubResource("Shortcut_voukb")
+text = "Edit"
+icon = SubResource("ImageTexture_mmau6")
+
+[node name="Icon" type="Node" parent="Box/Edit Button" unique_id=1141605931]
+script = ExtResource("1_r1e11")
+icon_name = &"Edit"
+
+[node name="Separator 1" type="VSeparator" parent="Box" unique_id=1487585793]
+visible = false
+custom_minimum_size = Vector2(11, 0)
+layout_mode = 2
+
+[node name="Play Button" type="Button" parent="Box" unique_id=2047455745]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+tooltip_text = "Play (right-click to stop all sounds)"
+shortcut = SubResource("Shortcut_kuqtc")
+icon_alignment = 1
+
+[node name="Icon" type="Node" parent="Box/Play Button" unique_id=536109381]
+script = ExtResource("1_r1e11")
+icon_name = &"Play"
+
+[node name="Autoplay Button" type="Button" parent="Box" unique_id=1769174271]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+tooltip_text = "Toggle autoplay"
+toggle_mode = true
+shortcut = SubResource("Shortcut_ifwld")
+text = "Off"
+icon = ExtResource("3_ufwqu")
+alignment = 0
+
+[node name="Autoplay Rate" type="Control" parent="Box" unique_id=704204084]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Autoplay rate"
+
+[node name="Label" type="Label" parent="Box/Autoplay Rate" unique_id=18126007]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 1.0
+offset_bottom = 15.0
+text = "Autoplay rate"
+
+[node name="Autoplay Rate Label" type="Label" parent="Box/Autoplay Rate" unique_id=1529666560]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_bottom = 15.0
+grow_horizontal = 0
+text = "On change"
+horizontal_alignment = 2
+
+[node name="Autoplay Rate Slider" type="HSlider" parent="Box/Autoplay Rate" unique_id=683300279]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -13.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+min_value = 1.0
+value = 1.0
+exp_edit = true
+scrollable = false
+
+[node name="Menu Button" type="MenuButton" parent="Box" unique_id=1208144536]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "More options..."
+flat = false
+item_count = 3
+popup/item_0/text = "Play on Select"
+popup/item_0/checkable = 1
+popup/item_0/checked = true
+popup/item_0/id = 0
+popup/item_1/id = 1
+popup/item_1/separator = true
+popup/item_2/text = "Save Autoplay Config as Default"
+popup/item_2/id = 2
+
+[node name="Icon" type="Node" parent="Box/Menu Button" unique_id=812674470]
+script = ExtResource("1_r1e11")
+icon_name = &"GuiTabMenuHl"
+
+[connection signal="pressed" from="Box/Play Button" to="." method="play"]
+[connection signal="toggled" from="Box/Autoplay Button" to="." method="set_autoplay"]
+[connection signal="drag_ended" from="Box/Autoplay Rate/Autoplay Rate Slider" to="." method="_on_autoplay_rate_slider_drag_ended"]
+[connection signal="value_changed" from="Box/Autoplay Rate/Autoplay Rate Slider" to="." method="_on_autoplay_rate_slider_chaned"]

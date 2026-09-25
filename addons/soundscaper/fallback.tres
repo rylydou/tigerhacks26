@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SoundEvent" format=3 uid="uid://bmeeqfxc8k1gp"]
+
+[ext_resource type="Script" uid="uid://crch1a5rk337u" path="res://addons/soundscaper/scripts/resources/sound_event.gd" id="1_4ud45"]
+[ext_resource type="AudioStream" uid="uid://b83ygebc58v1i" path="res://addons/soundscaper/fallback.wav" id="2_jmvtq"]
+
+[resource]
+script = ExtResource("1_4ud45")
+streams = Array[AudioStream]([ExtResource("2_jmvtq")])
+pitch = 2.0

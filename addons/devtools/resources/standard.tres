@@ -1,0 +1,80 @@
+[gd_resource type="Theme" load_steps=17 format=3 uid="uid://btuxi35s3rpn8"]
+
+[ext_resource type="StyleBox" uid="uid://ct8whhca87qyr" path="res://addons/devtools/resources/styles_standard/item_hovered.tres" id="1_dkckr"]
+[ext_resource type="StyleBox" uid="uid://cv3yjpr6kqpty" path="res://addons/devtools/resources/styles_pixel/button.tres" id="1_sm2d8"]
+[ext_resource type="StyleBox" uid="uid://dn4jjwh6feipi" path="res://addons/devtools/resources/styles_standard/item_selected.tres" id="2_cd8aa"]
+[ext_resource type="StyleBox" uid="uid://8jeffb1rg4gv" path="res://addons/devtools/resources/styles_standard/sub_panel.tres" id="3_ivmpv"]
+[ext_resource type="StyleBox" uid="uid://b2wlxtc1wrbp5" path="res://addons/devtools/resources/styles_standard/entry_focus.tres" id="4_iga8l"]
+[ext_resource type="StyleBox" uid="uid://cm70cnld07yud" path="res://addons/devtools/resources/styles_standard/entry.tres" id="5_7urjt"]
+[ext_resource type="StyleBox" uid="uid://ddeg4eofjjop" path="res://addons/devtools/resources/styles_standard/panel.tres" id="6_sm2d8"]
+[ext_resource type="FontVariation" uid="uid://xigoa2r18dy0" path="res://addons/devtools/resources/fonts/regular_mono.tres" id="7_7urjt"]
+[ext_resource type="StyleBox" uid="uid://ck3mu2ttmr0we" path="res://addons/devtools/resources/styles_standard/toast.tres" id="7_iga8l"]
+[ext_resource type="StyleBox" uid="uid://bh2o37hjtfd0l" path="res://addons/devtools/resources/styles_standard/scroll_grab.tres" id="7_ivmpv"]
+[ext_resource type="FontVariation" uid="uid://cj857i2hcaiay" path="res://addons/devtools/resources/fonts/regular.tres" id="7_nk8ns"]
+[ext_resource type="StyleBox" uid="uid://bxevuaonojx0j" path="res://addons/devtools/resources/styles_standard/scroll_track.tres" id="8_iga8l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rct03"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ijx6u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_60ba6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iga8l"]
+
+[resource]
+default_base_scale = 2.0
+default_font = ExtResource("7_nk8ns")
+default_font_size = 16
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0, 0, 0, 0.2509804)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/styles/normal = ExtResource("1_sm2d8")
+HBoxContainer/constants/separation = 16
+ItemList/colors/font_color = Color(0, 0, 0, 1)
+ItemList/colors/font_hovered_color = Color(0, 0, 0, 1)
+ItemList/colors/font_hovered_selected_color = Color(0, 0, 0, 1)
+ItemList/colors/font_selected_color = Color(0, 0, 0, 1)
+ItemList/colors/guide_color = Color(0, 0, 0, 0)
+ItemList/constants/h_separation = 12
+ItemList/constants/line_separation = 0
+ItemList/constants/v_separation = 6
+ItemList/styles/cursor = SubResource("StyleBoxEmpty_rct03")
+ItemList/styles/cursor_unfocused = SubResource("StyleBoxEmpty_ijx6u")
+ItemList/styles/focus = SubResource("StyleBoxEmpty_60ba6")
+ItemList/styles/hovered = ExtResource("1_dkckr")
+ItemList/styles/hovered_selected = ExtResource("2_cd8aa")
+ItemList/styles/hovered_selected_focus = ExtResource("2_cd8aa")
+ItemList/styles/panel = ExtResource("3_ivmpv")
+ItemList/styles/selected = ExtResource("2_cd8aa")
+ItemList/styles/selected_focus = ExtResource("2_cd8aa")
+Label/colors/font_color = Color(0, 0, 0, 1)
+LineEdit/colors/caret_color = Color(0.992157, 0.635294, 0, 1)
+LineEdit/colors/font_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_placeholder_color = Color(0, 0, 0, 0.5)
+LineEdit/colors/font_selected_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_uneditable_color = Color(0, 0, 0, 0.5)
+LineEdit/colors/selection_color = Color(1, 1, 0, 1)
+LineEdit/constants/caret_width = 2
+LineEdit/styles/focus = ExtResource("4_iga8l")
+LineEdit/styles/normal = ExtResource("5_7urjt")
+MarginContainer/constants/margin_bottom = 12
+MarginContainer/constants/margin_left = 12
+MarginContainer/constants/margin_right = 12
+MarginContainer/constants/margin_top = 12
+PanelContainer/styles/panel = ExtResource("6_sm2d8")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+StickyToast/base_type = &"Label"
+StickyToast/font_sizes/font_size = 14
+StickyToast/fonts/font = ExtResource("7_7urjt")
+StickyToast/styles/normal = ExtResource("7_iga8l")
+Toast/base_type = &"Label"
+Toast/styles/normal = ExtResource("7_iga8l")
+VBoxContainer/constants/separation = 12
+VScrollBar/styles/grabber = ExtResource("7_ivmpv")
+VScrollBar/styles/grabber_highlight = ExtResource("7_ivmpv")
+VScrollBar/styles/grabber_pressed = ExtResource("7_ivmpv")
+VScrollBar/styles/scroll = ExtResource("8_iga8l")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_iga8l")

@@ -1,0 +1,7 @@
+@font-face {
+	font-family: "jetbrains-mono";
+	src: url("/fonts/jetbrains-mono.woff2") format("woff2");
+	font-weight: 100 800;
+	font-display: swap;
+	font-style: normal;
+}

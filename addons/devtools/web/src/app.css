@@ -1,0 +1,163 @@
+@import './lib/fonts/hyperlegible.css';
+@import './reset.css';
+
+:root {
+	font-family: 'hyperlegible', system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	/* color-scheme: light dark; */
+	color: var(--clr-mg);
+	background-color: var(--clr-base);
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	user-select: none;
+}
+
+
+:root {
+	--clr-base: light-dark(#fff, #000);
+	--clr-bg: light-dark(#e2e2e2, #111);
+	--clr-mg: light-dark(#888, #aaa);
+	--clr-fg: light-dark(#000, #fff);
+}
+
+
+* {
+	appearance: none;
+	margin: 0;
+	padding: 0;
+	border: unset;
+	background: unset;
+	color: unset;
+	font-family: inherit;
+}
+
+
+body {
+	min-height: 100vh;
+}
+
+
+main {
+	padding: 1rem;
+}
+
+
+h1 {
+	font-size: 2rem;
+	font-weight: bold;
+	color: var(--clr-fg);
+}
+
+
+.toolbar {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+
+	display: flex;
+	gap: 6px;
+
+	--pad: 4px;
+	padding: var(--pad);
+	margin-inline: calc(var(--pad) * -1);
+	/* margin-top: calc(var(--pad) * -1); */
+	margin-bottom: 2rem;
+	padding-top: 1rem;
+
+	background-color: var(--clr-base);
+}
+
+
+.btn {
+	cursor: pointer;
+
+	min-height: 2rem;
+	padding-inline: 1rem;
+
+	font-size: 14px;
+	font-weight: bold;
+	border-radius: 6px;
+	background-color: var(--clr-bg);
+	color: var(--clr-fg);
+}
+
+
+.search-box {
+	flex: 1;
+	display: grid;
+	justify-items: stretch;
+	align-items: stretch;
+	min-height: 2rem;
+	font-size: 14px;
+	border-radius: 6px;
+	background-color: var(--clr-bg);
+
+	& input {
+		border-radius: inherit;
+		width: 100%;
+		height: 100%;
+		padding-left: 12px;
+		color: var(--clr-fg);
+
+		&::placeholder {
+			color: var(--clr-mg);
+			opacity: 1;
+		}
+	}
+}
+
+
+.command-list {
+	display: grid;
+	/* This creates columns that are at least 200px wide and can grow to fill available space.
+	   The grid will automatically create as many columns as can fit in the container. */
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 1rem 2rem;
+}
+
+
+.command {
+	text-align: left;
+	opacity: 1;
+	scale: 1.0;
+	align-self: flex-start;
+
+	transition: opacity 500ms ease-out, scale 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+	& .command__header {
+		display: flex;
+		flex-direction: row;
+
+		& .command__title {
+			color: var(--clr-fg);
+		}
+	}
+
+
+	& h3 {
+		font-weight: bold;
+	}
+
+	& .run-button {}
+
+	& .command__description {
+		text-wrap: balence;
+		text-wrap: pretty;
+		color: var(--clr-mg);
+	}
+
+	&:hover,
+	&:focus-visible {}
+
+	&:active {
+		transition: opacity 0ms;
+		opacity: 0.5;
+		scale: 0.9;
+	}
+}

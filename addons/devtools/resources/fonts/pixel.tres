@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://dy6wrhnogjnqg"]
+
+[ext_resource type="FontFile" uid="uid://j1tq70nwalvb" path="res://addons/devtools/content/fonts/m3x6.ttf" id="1_28dxe"]
+
+[resource]
+base_font = ExtResource("1_28dxe")
+spacing_top = -4
+spacing_bottom = -1

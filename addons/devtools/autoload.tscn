@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://b70ku84xsxsyj"]
+
+[ext_resource type="Script" uid="uid://dtmnqath5ry0d" path="res://addons/devtools/scripts/dev_tools.gd" id="1_g6qgo"]
+[ext_resource type="PackedScene" uid="uid://dqjcq0lepie40" path="res://addons/devtools/scenes/command_palette.tscn" id="2_1wyy5"]
+[ext_resource type="AudioStream" uid="uid://byxv6cotixbnx" path="res://addons/devtools/content/hkey.wav" id="2_ho0xq"]
+[ext_resource type="Theme" uid="uid://btuxi35s3rpn8" path="res://addons/devtools/resources/standard.tres" id="3_mpek1"]
+[ext_resource type="AudioStream" uid="uid://c1r0bn1td2kec" path="res://addons/devtools/content/tick.wav" id="3_ykpff"]
+[ext_resource type="Script" uid="uid://husyar8qg3n" path="res://addons/devtools/scripts/smooth_stack.gd" id="4_wxlbj"]
+
+[node name="Dev Tools" type="CanvasLayer" unique_id=376153991 node_paths=PackedStringArray("ui_root", "toasts_container", "sticky_toasts_container", "shortcut_sound", "tick_a_sound", "tick_b_sound")]
+process_mode = 3
+physics_interpolation_mode = 2
+auto_translate_mode = 2
+layer = 9001
+script = ExtResource("1_g6qgo")
+ui_root = NodePath("UI")
+toasts_container = NodePath("UI/Popup Margin/Container/Top Right/Toasts")
+sticky_toasts_container = NodePath("UI/Popup Margin/Container/Top Left/Sticky")
+shortcut_sound = NodePath("Shortcut Sound")
+tick_a_sound = NodePath("Tick A Sound")
+tick_b_sound = NodePath("Tick B Sound")
+
+[node name="Shortcut Sound" type="AudioStreamPlayer" parent="." unique_id=61186044]
+stream = ExtResource("2_ho0xq")
+volume_db = -20.0
+pitch_scale = 1.5
+
+[node name="Tick A Sound" type="AudioStreamPlayer" parent="." unique_id=1301608288]
+stream = ExtResource("3_ykpff")
+
+[node name="Tick B Sound" type="AudioStreamPlayer" parent="." unique_id=1661012055]
+stream = ExtResource("3_ykpff")
+pitch_scale = 0.75
+
+[node name="UI" type="Control" parent="." unique_id=1416417813]
+texture_filter = 4
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("3_mpek1")
+
+[node name="Control" type="CenterContainer" parent="UI" unique_id=1627857825]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Command Palette" parent="UI/Control" unique_id=1964309899 instance=ExtResource("2_1wyy5")]
+layout_mode = 2
+toggle_hkey = "ctrl+p, tilde"
+
+[node name="Popup Margin" type="MarginContainer" parent="UI" unique_id=1358882497]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="Container" type="Control" parent="UI/Popup Margin" unique_id=485427921]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Top Left" type="Control" parent="UI/Popup Margin/Container" unique_id=149459518]
+layout_mode = 1
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="Sticky" type="VBoxContainer" parent="UI/Popup Margin/Container/Top Left" unique_id=1868877923]
+layout_mode = 1
+offset_right = 63.0
+offset_bottom = 18.0
+mouse_filter = 2
+alignment = 2
+script = ExtResource("4_wxlbj")
+
+[node name="Top Right" type="Control" parent="UI/Popup Margin/Container" unique_id=340641813]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="Toasts" type="VBoxContainer" parent="UI/Popup Margin/Container/Top Right" unique_id=462181074]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -63.0
+offset_bottom = 18.0
+grow_horizontal = 0
+mouse_filter = 2
+alignment = 2
+script = ExtResource("4_wxlbj")

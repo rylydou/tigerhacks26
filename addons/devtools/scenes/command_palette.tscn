@@ -1,0 +1,184 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqjcq0lepie40"]
+
+[ext_resource type="Theme" uid="uid://btuxi35s3rpn8" path="res://addons/devtools/resources/standard.tres" id="1_uur17"]
+[ext_resource type="Script" uid="uid://bg6t86v7gmouu" path="res://addons/devtools/scripts/command_palette.gd" id="1_xxo0b"]
+[ext_resource type="Script" uid="uid://c676ebcbgoi8u" path="res://addons/devtools/scripts/ui_themer.gd" id="3_nyr8g"]
+[ext_resource type="Script" uid="uid://ba76q61sopt2g" path="res://addons/devtools/scripts/hkey_entry.gd" id="4_xu021"]
+
+[node name="Command Palette" type="PanelContainer" node_paths=PackedStringArray("input_edit", "command_info_container", "command_description_container", "command_description_label", "command_shortcut_label", "item_list", "status_label", "hkey_wizard", "hkey_entry")]
+texture_filter = 4
+custom_minimum_size = Vector2(400, 300)
+offset_right = 400.0
+offset_bottom = 300.0
+theme = ExtResource("1_uur17")
+script = ExtResource("1_xxo0b")
+input_edit = NodePath("Box/HBoxContainer/Command Input")
+command_info_container = NodePath("Free/Right/Box/Command Info Container")
+command_description_container = NodePath("Free/Right/Box/Command Info Container/Command Description")
+command_description_label = NodePath("Free/Right/Box/Command Info Container/Command Description/Command Info Label")
+command_shortcut_label = NodePath("Free/Right/Box/Command Info Container/Command Shortcut/Shortcut Label")
+item_list = NodePath("Box/Command List")
+status_label = NodePath("Box/Command List/Margin/Status Label")
+hkey_wizard = NodePath("HKey Wizard")
+hkey_entry = NodePath("HKey Wizard/Panel/Box/HKey Entry")
+
+[node name="Theme" type="Node" parent="."]
+script = ExtResource("3_nyr8g")
+pixel_size = Vector2(180, 100)
+
+[node name="Free" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Right" type="Control" parent="Free"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Box" type="HBoxContainer" parent="Free/Right"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 228.0
+grow_vertical = 2
+
+[node name="Spacer" type="Control" parent="Free/Right/Box"]
+layout_mode = 2
+
+[node name="Command Info Container" type="VBoxContainer" parent="Free/Right/Box"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Command Description" type="PanelContainer" parent="Free/Right/Box/Command Info Container"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Theme" type="Node" parent="Free/Right/Box/Command Info Container/Command Description"]
+script = ExtResource("3_nyr8g")
+pixel_size = Vector2(100, 0)
+
+[node name="Command Info Label" type="RichTextLabel" parent="Free/Right/Box/Command Info Container/Command Description"]
+layout_mode = 2
+bbcode_enabled = true
+text = "Command description"
+fit_content = true
+shortcut_keys_enabled = false
+
+[node name="Command Shortcut" type="PanelContainer" parent="Free/Right/Box/Command Info Container"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Shortcut Label" type="Label" parent="Free/Right/Box/Command Info Container/Command Shortcut"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Shortcut"
+
+[node name="Box" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Box"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Command Input" type="LineEdit" parent="Box/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+placeholder_text = "Search for commands..."
+
+[node name="Help Button" type="Button" parent="Box/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Open cheatsheet"
+focus_mode = 0
+text = "?"
+
+[node name="Command List" type="ItemList" parent="Box"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 1
+allow_reselect = true
+allow_search = false
+item_count = 1
+item_0/text = "No recent commands..."
+item_0/disabled = true
+
+[node name="Margin" type="MarginContainer" parent="Box/Command List"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Status Label" type="Label" parent="Box/Command List/Margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 2
+text = "10 total commands"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="HKey Wizard" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="HKey Wizard"]
+custom_minimum_size = Vector2(300, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -45.0
+offset_right = 150.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Theme" type="Node" parent="HKey Wizard/Panel"]
+script = ExtResource("3_nyr8g")
+pixel_size = Vector2(160, 100)
+
+[node name="Box" type="VBoxContainer" parent="HKey Wizard/Panel"]
+layout_mode = 2
+
+[node name="HKey Wizard Label" type="Label" parent="HKey Wizard/Panel/Box"]
+layout_mode = 2
+text = "Enter a shortcut for this command:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HKey Entry" type="LineEdit" parent="HKey Wizard/Panel/Box"]
+layout_mode = 2
+placeholder_text = "(no shortcut)"
+alignment = 1
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+script = ExtResource("4_xu021")
+
+[node name="Instructions Label" type="Label" parent="HKey Wizard/Panel/Box"]
+layout_mode = 2
+text = "ENTER to submit · DELETE to clear"
+horizontal_alignment = 1
+
+[connection signal="text_submitted" from="HKey Wizard/Panel/Box/HKey Entry" to="." method="set_hkey" unbinds=1]

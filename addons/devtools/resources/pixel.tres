@@ -1,0 +1,63 @@
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://b3qe5q31xt3q3"]
+
+[ext_resource type="StyleBox" uid="uid://dkkqjlrhwmu0y" path="res://addons/devtools/resources/styles_pixel/item_hovered.tres" id="1_3ln4j"]
+[ext_resource type="StyleBox" uid="uid://66okvv3jceon" path="res://addons/devtools/resources/styles_pixel/item_selected.tres" id="2_c8rfo"]
+[ext_resource type="StyleBox" uid="uid://cfgxyxm8sasbp" path="res://addons/devtools/resources/styles_pixel/sub_panel.tres" id="3_3ub6n"]
+[ext_resource type="StyleBox" uid="uid://ccgb7jt5gv4eo" path="res://addons/devtools/resources/styles_pixel/entry_focus.tres" id="4_3ln4j"]
+[ext_resource type="StyleBox" uid="uid://xl1bbxcavbbv" path="res://addons/devtools/resources/styles_pixel/entry.tres" id="5_c8rfo"]
+[ext_resource type="StyleBox" uid="uid://be6cuevhs0asu" path="res://addons/devtools/resources/styles_pixel/panel.tres" id="6_5g6ok"]
+[ext_resource type="StyleBox" uid="uid://bssmgwbdq5wrc" path="res://addons/devtools/resources/styles_pixel/scroll_grab.tres" id="7_3ub6n"]
+[ext_resource type="StyleBox" uid="uid://c0hpo7t3e6ae5" path="res://addons/devtools/resources/styles_pixel/scroll_track.tres" id="7_c8rfo"]
+[ext_resource type="FontVariation" uid="uid://dy6wrhnogjnqg" path="res://addons/devtools/resources/fonts/pixel.tres" id="7_yqus3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rct03"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ijx6u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_60ba6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bhhbp"]
+
+[resource]
+default_font = ExtResource("7_yqus3")
+default_font_size = 16
+HBoxContainer/constants/separation = 8
+ItemList/colors/font_color = Color(0, 0, 0, 1)
+ItemList/colors/font_hovered_color = Color(0, 0, 0, 1)
+ItemList/colors/font_hovered_selected_color = Color(0, 0, 0, 1)
+ItemList/colors/font_selected_color = Color(0, 0, 0, 1)
+ItemList/colors/guide_color = Color(0, 0, 0, 0)
+ItemList/constants/h_separation = 2
+ItemList/constants/line_separation = 0
+ItemList/constants/v_separation = 2
+ItemList/styles/cursor = SubResource("StyleBoxEmpty_rct03")
+ItemList/styles/cursor_unfocused = SubResource("StyleBoxEmpty_ijx6u")
+ItemList/styles/focus = SubResource("StyleBoxEmpty_60ba6")
+ItemList/styles/hovered = ExtResource("1_3ln4j")
+ItemList/styles/hovered_selected = ExtResource("2_c8rfo")
+ItemList/styles/hovered_selected_focus = ExtResource("2_c8rfo")
+ItemList/styles/panel = ExtResource("3_3ub6n")
+ItemList/styles/selected = ExtResource("2_c8rfo")
+ItemList/styles/selected_focus = ExtResource("2_c8rfo")
+Label/colors/font_color = Color(0, 0, 0, 1)
+LineEdit/colors/caret_color = Color(0.992157, 0.635294, 0, 1)
+LineEdit/colors/font_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_placeholder_color = Color(0, 0, 0, 0.5)
+LineEdit/colors/font_selected_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_uneditable_color = Color(0, 0, 0, 0.5)
+LineEdit/colors/selection_color = Color(1, 1, 0, 1)
+LineEdit/constants/caret_width = 2
+LineEdit/styles/focus = ExtResource("4_3ln4j")
+LineEdit/styles/normal = ExtResource("5_c8rfo")
+MarginContainer/constants/margin_bottom = 4
+MarginContainer/constants/margin_left = 4
+MarginContainer/constants/margin_right = 4
+MarginContainer/constants/margin_top = 4
+PanelContainer/styles/panel = ExtResource("6_5g6ok")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+VBoxContainer/constants/separation = 4
+VScrollBar/styles/grabber = ExtResource("7_3ub6n")
+VScrollBar/styles/grabber_highlight = ExtResource("7_3ub6n")
+VScrollBar/styles/grabber_pressed = ExtResource("7_3ub6n")
+VScrollBar/styles/scroll = ExtResource("7_c8rfo")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_bhhbp")

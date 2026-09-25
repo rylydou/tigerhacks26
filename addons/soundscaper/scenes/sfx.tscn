@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cne6bib0kbwe6"]
+
+[ext_resource type="Script" uid="uid://cvvarlr4uutru" path="res://addons/soundscaper/scripts/sfx.gd" id="1_ij37m"]
+
+[node name="SFX" type="Node"]
+process_mode = 3
+process_priority = -10000
+process_physics_priority = -10000
+script = ExtResource("1_ij37m")

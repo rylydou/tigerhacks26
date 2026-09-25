@@ -1,0 +1,45 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://bgw6li4ojo55b"
+path="res://.godot/imported/geist.woff2-c3b3d1063dfc1c9b43e7a4c8975cb9c3.fontdata"
+
+[deps]
+
+source_file="res://addons/devtools/content/fonts/geist.woff2"
+dest_files=["res://.godot/imported/geist.woff2-c3b3d1063dfc1c9b43e7a4c8975cb9c3.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=true
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+modulate_color_glyphs=false
+hinting=0
+subpixel_positioning=0
+keep_rounding_remainders=true
+oversampling=3.0
+Fallbacks=null
+fallbacks=[null]
+Compress=null
+compress=true
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0),
+&"variation_embolden": 0.0,
+&"variation_opentype": {
+2003265652: 400
+}
+}]
+language_support={}
+script_support={}
+opentype_features={}

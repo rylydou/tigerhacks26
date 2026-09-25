@@ -1,0 +1,21 @@
+{
+	"search.exclude": {
+		"**/.godot": true,
+		"**/*.ase": true,
+		"**/*.import": true,
+		"**/*.png": true,
+		"**/*.svg": true,
+		"**/*.tres": true,
+		"**/*.tscn": true,
+		"fmod/**": true,
+		"addons/**": true,
+	},
+	"files.exclude": {
+		"**/*.uid": true,
+	},
+	"editor.renderWhitespace": "boundary",
+	"editor.experimentalWhitespaceRendering": "svg",
+	"editor.trimAutoWhitespace": false,
+	"files.trimTrailingWhitespace": false,
+	"editor.lineNumbers": "off",
+}

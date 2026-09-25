@@ -1,0 +1,8 @@
+# Godot 4+ specific ignores
+.godot/
+
+# Ignore builds
+/bin
+
+# Ignore development files
+/dev

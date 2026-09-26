@@ -59,6 +59,7 @@ objective=""
 [gui]
 
 common/snap_controls_to_pixels=false
+theme/custom="uid://bba71h53b5b7"
 
 [input]
 

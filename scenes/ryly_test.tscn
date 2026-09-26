@@ -118,7 +118,6 @@ position = Vector2(-134, 109)
 tile_set = SubResource("TileSet_emgfa")
 script = ExtResource("8_g04cy")
 map_size = Vector2i(64, 64)
-rng_seed = 1
 steps = Array[ExtResource("9_emgfa")]([SubResource("Resource_0p4x6"), SubResource("Resource_glu8d"), SubResource("Resource_xnjde"), SubResource("Resource_dbd5e"), SubResource("Resource_g04cy")])
 wall_atlas_coords = null
 save_png = null

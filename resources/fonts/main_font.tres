@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" format=3 uid="uid://dpaou6q7mndsl"]
+
+[ext_resource type="FontFile" uid="uid://ydrb6b3p72u3" path="res://content/fonts/ChiKareGo.ttf" id="1_fnnfa"]
+
+[resource]
+base_font = ExtResource("1_fnnfa")

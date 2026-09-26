@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Tiger Hacks"
 run/main_scene="uid://cvguk7t5510lo"
-config/features=PackedStringArray("4.6")
+config/features=PackedStringArray("4.7")
 config/icon="res://icon.svg"
 
 [audio]
@@ -22,6 +22,11 @@ soundscaper/soundbank_dir="res://resources/sound_events"
 [autoload]
 
 SFX="*uid://cvvarlr4uutru"
+DevTools="*uid://b70ku84xsxsyj"
+
+[debug]
+
+gdscript/warnings/enable=false
 
 [display]
 

@@ -6,6 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://c0a0je4155ljr" path="res://scenes/ranged_enemy.tscn" id="4_ldi2q"]
 [ext_resource type="Texture2D" uid="uid://bef1kodxao80y" path="res://content/art/melee_bacteria.png" id="5_m7d7t"]
 [ext_resource type="Texture2D" uid="uid://bvc3n3njy78js" path="res://content/art/ranged_bacteria.png" id="6_p7i23"]
+[ext_resource type="Texture2D" uid="uid://dn73adkgnhehh" path="res://content/art/aim_indicator.png" id="7_t2bfo"]
+[ext_resource type="Texture2D" uid="uid://f8gv7jog2t8o" path="res://content/art/player_sprite.png" id="8_q85k4"]
+[ext_resource type="Texture2D" uid="uid://cqb5mgioxpamj" path="res://content/art/ui_battery_outline.png" id="9_81747"]
+[ext_resource type="Texture2D" uid="uid://df43arvkfd462" path="res://content/art/ui_battery_inner.png" id="10_a3gn8"]
+[ext_resource type="Texture2D" uid="uid://gf2ugt25t41d" path="res://content/art/menu_button_pressed.png" id="11_81747"]
+[ext_resource type="Texture2D" uid="uid://b5y05ew7xqgww" path="res://content/art/menu_button_unpressed.png" id="12_a3gn8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j0ssb"]
 radius = 9.219544
@@ -39,3 +45,28 @@ texture = ExtResource("5_m7d7t")
 [node name="RangedBacteria" type="Sprite2D" parent="." unique_id=695242134]
 position = Vector2(-30, -10)
 texture = ExtResource("6_p7i23")
+
+[node name="AimIndicator" type="Sprite2D" parent="." unique_id=1421727805]
+position = Vector2(-126, -73)
+texture = ExtResource("7_t2bfo")
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1411535046]
+position = Vector2(-169, -81)
+texture = ExtResource("8_q85k4")
+
+[node name="UiBatteryOutline" type="Sprite2D" parent="." unique_id=143663406]
+position = Vector2(-262, -57)
+texture = ExtResource("9_81747")
+
+[node name="UiBatteryInner" type="Sprite2D" parent="." unique_id=1034556264]
+z_index = -1
+position = Vector2(-262, -57)
+texture = ExtResource("10_a3gn8")
+
+[node name="MenuButtonPressed" type="Sprite2D" parent="." unique_id=1214234946]
+position = Vector2(-228, -90)
+texture = ExtResource("11_81747")
+
+[node name="MenuButtonUnpressed" type="Sprite2D" parent="." unique_id=1565164659]
+position = Vector2(-267, -88)
+texture = ExtResource("12_a3gn8")

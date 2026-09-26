@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://coxfu178vwrco" path="res://scenes/player.tscn" id="1_k50al"]
 [ext_resource type="Texture2D" uid="uid://bbsg5vudkasav" path="res://content/art/TestSet.png" id="2_722ph"]
 [ext_resource type="Script" uid="uid://bavrfcsxipu3o" path="res://scripts/static/map_generator.gd" id="3_4ux0u"]
-[ext_resource type="PackedScene" uid="uid://ba6mwjrqaf8r5" path="res://scenes/objectives/exp.tscn" id="4_dt3p3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ux0u"]
 texture = ExtResource("2_722ph")
@@ -388,6 +387,3 @@ map_dimensions = Vector2i(64, 64)
 fill_chance = 0.43
 tilemap_layer = NodePath("..")
 metadata/_custom_type_script = "uid://bavrfcsxipu3o"
-
-[node name="Exp" parent="." unique_id=1923105895 instance=ExtResource("4_dt3p3")]
-position = Vector2(-75, -40)

@@ -2,12 +2,16 @@
 
 [ext_resource type="Script" uid="uid://dbpfqiugdvk76" path="res://scripts/entities/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://dtw2wsnn0aent" path="res://content/art/placeholder.png" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://d1ydlfnt00bos" path="res://scenes/player_bullet.tscn" id="2_qhqgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 radius = 8.0
 
-[node name="Player" type="CharacterBody2D" unique_id=291338747]
+[node name="Player" type="CharacterBody2D" unique_id=291338747 node_paths=PackedStringArray("cursor_node")]
 script = ExtResource("1_3vyb7")
+move_speed = 10.0
+bullet_scene = ExtResource("2_qhqgy")
+cursor_node = NodePath("Cursor")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=700019964]
 texture = ExtResource("2_g2els")
@@ -19,3 +23,17 @@ debug_color = Color(0, 1, 0, 0)
 [node name="Camera" type="Camera2D" parent="." unique_id=1016671712]
 top_level = true
 zoom = Vector2(4, 4)
+
+[node name="Aim" type="Node2D" parent="." unique_id=752974397]
+
+[node name="Sprite" type="Sprite2D" parent="Aim" unique_id=255861979]
+position = Vector2(12, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_g2els")
+
+[node name="Cursor" type="Node2D" parent="." unique_id=2046794580]
+top_level = true
+
+[node name="Sprite" type="Sprite2D" parent="Cursor" unique_id=1539824544]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_g2els")

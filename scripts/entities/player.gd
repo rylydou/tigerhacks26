@@ -18,6 +18,7 @@ var shoot_cooldown := 0.0
 
 @export var bullet_scene: PackedScene
 @export var cursor_node: Node2D
+@export var shoot_pos_node: Node2D
 
 
 var gamepad := Gamepad.create(Gamepad.DEVICE_AUTO)
@@ -58,6 +59,8 @@ func _process_movement(delta: float) -> void:
 			use_mouse_aim = false
 			# Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			# cursor_node.hide()
+	else:
+		use_mouse_aim = false
 	
 	var aim_input := Vector2.ZERO
 	if use_mouse_aim:
@@ -85,8 +88,8 @@ func _process_movement(delta: float) -> void:
 func shoot() -> void:
 	if not bullet_scene: return
 	var bullet_instance: BasicProjectile = bullet_scene.instantiate()
-	bullet_instance.global_position = global_position
-	bullet_instance.rotation = angle
+	bullet_instance.global_position = shoot_pos_node.global_position
+	bullet_instance.rotation = shoot_pos_node.global_rotation
 	bullet_instance.player = self
 	get_tree().current_scene.add_child(bullet_instance)
 

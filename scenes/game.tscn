@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bi7vti6j0pcfu"]
+
+[ext_resource type="Script" uid="uid://yii4wxwaowb1" path="res://scripts/game.gd" id="1_uwrxv"]
+
+[node name="Game" type="Node" unique_id=384931952 node_paths=PackedStringArray("pause_menu")]
+script = ExtResource("1_uwrxv")
+pause_menu = NodePath("UI/Pause Menu")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=841616947]
+layer = 2
+
+[node name="Pause Menu" type="Control" parent="UI" unique_id=1608401548]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Fill" type="ColorRect" parent="UI/Pause Menu" unique_id=1499887223]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Pause Menu" unique_id=502789649]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -33.0
+offset_right = 35.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="UI/Pause Menu/VBoxContainer" unique_id=1046958743]
+layout_mode = 2
+text = "Resume"
+
+[node name="Button2" type="Button" parent="UI/Pause Menu/VBoxContainer" unique_id=1960505116]
+layout_mode = 2
+text = "Quit"
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=481595629]
+
+[node name="HUD" type="Control" parent="HUD" unique_id=295431011]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

@@ -10,7 +10,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 radius = 16.0
 
-[node name="Player" type="CharacterBody2D" unique_id=291338747 node_paths=PackedStringArray("cursor_node")]
+[node name="Player" type="CharacterBody2D" unique_id=291338747 node_paths=PackedStringArray("cursor_node", "shoot_pos_node")]
 z_index = -800
 z_as_relative = false
 collision_layer = 48
@@ -19,6 +19,7 @@ script = ExtResource("1_3vyb7")
 move_speed = 5.0
 bullet_scene = ExtResource("2_qhqgy")
 cursor_node = NodePath("Cursor")
+shoot_pos_node = NodePath("Anchor/Aim/Shoot Pos Marker")
 
 [node name="SortingLayer" type="Node" parent="." unique_id=86120003]
 script = ExtResource("3_qlg0r")
@@ -58,7 +59,7 @@ position = Vector2(24, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_g2els")
 
-[node name="Shoot Pos" type="Node2D" parent="Anchor/Aim" unique_id=1925815167]
+[node name="Shoot Pos Marker" type="Node2D" parent="Anchor/Aim" unique_id=1925815167]
 position = Vector2(16, 0)
 script = ExtResource("6_tuyoq")
 metadata/_custom_type_script = "uid://cmh4vrcbqixfw"

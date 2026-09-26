@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bhgxqpfih436q" path="res://scripts/entities/ranged_enemy_movement.gd" id="1_u2kgh"]
 [ext_resource type="Texture2D" uid="uid://rc1jrs1472il" path="res://content/art/Purple_guy.png" id="2_rs3ab"]
+[ext_resource type="PackedScene" uid="uid://t3ta3s8hpvtw" path="res://scenes/health.tscn" id="3_32iyl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ldi2q"]
 
@@ -13,3 +14,5 @@ shape = SubResource("CircleShape2D_ldi2q")
 
 [node name="PurpleGuy" type="Sprite2D" parent="." unique_id=818458884]
 texture = ExtResource("2_rs3ab")
+
+[node name="Health" parent="." unique_id=402873615 instance=ExtResource("3_32iyl")]

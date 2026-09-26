@@ -10,6 +10,12 @@ texture = ExtResource("2_lnu2h")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lnu2h"]
 texture = ExtResource("3_lbhrr")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lbhrr"]
+texture = ExtResource("2_lnu2h")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iywne"]
+texture = ExtResource("3_lbhrr")
+
 [node name="Game" type="Node" unique_id=384931952 node_paths=PackedStringArray("pause_menu")]
 process_mode = 3
 script = ExtResource("1_uwrxv")
@@ -56,8 +62,10 @@ expand_icon = true
 
 [node name="Quit Button" type="Button" parent="UI/Pause Menu/VBoxContainer" unique_id=1960505116]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_lbhrr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_iywne")
 text = "Quit"
-icon = ExtResource("2_lnu2h")
 icon_alignment = 1
 expand_icon = true
 

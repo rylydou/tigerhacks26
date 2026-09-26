@@ -51,6 +51,11 @@ folder_colors={
 "res://scripts/": "green"
 }
 
+[global_group]
+
+enemy=""
+objective=""
+
 [gui]
 
 common/snap_controls_to_pixels=false

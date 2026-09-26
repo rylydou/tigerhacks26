@@ -83,7 +83,6 @@ func _physics_process(delta: float) -> void:
 	sprite.position.x = flash_shake
 	
 	if stun_timer <= 0.0 and not no_ai:
-		print("running ai")
 		if ai_init:
 			ai._tick(delta)
 		else:

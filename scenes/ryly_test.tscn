@@ -2,21 +2,29 @@
 
 [ext_resource type="PackedScene" uid="uid://coxfu178vwrco" path="res://scenes/player.tscn" id="1_hljss"]
 [ext_resource type="PackedScene" uid="uid://bdvkkoo15mqai" path="res://scenes/enemies/trooper.tscn" id="2_ne7xr"]
+[ext_resource type="Shader" uid="uid://dngmyb4e35gx5" path="res://content/shaders/actor.gdshader" id="3_qxrsy"]
+[ext_resource type="PackedScene" uid="uid://c4eynv1vp3i3a" path="res://scenes/objectives/tumor.tscn" id="4_4hfe6"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6edp"]
-size = Vector2(32, 32)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4hfe6"]
+resource_local_to_scene = true
+shader = ExtResource("3_qxrsy")
+shader_parameter/invert_intensity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lgnhk"]
+resource_local_to_scene = true
+shader = ExtResource("3_qxrsy")
+shader_parameter/invert_intensity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
 
 [node name="Ryly Test" type="Node2D" unique_id=986588181]
 
 [node name="Player" parent="." unique_id=291338747 instance=ExtResource("1_hljss")]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1091543239]
-collision_layer = 3
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1567030010]
-position = Vector2(40, 0)
-shape = SubResource("RectangleShape2D_j6edp")
-
 [node name="Trooper" parent="." unique_id=1744553126 instance=ExtResource("2_ne7xr")]
+material = SubResource("ShaderMaterial_4hfe6")
 position = Vector2(100, 1)
+
+[node name="Tumor" parent="." unique_id=1277576953 instance=ExtResource("4_4hfe6")]
+material = SubResource("ShaderMaterial_lgnhk")
+position = Vector2(49, -56)

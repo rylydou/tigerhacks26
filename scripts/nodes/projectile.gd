@@ -29,8 +29,6 @@ func _ready() -> void:
 	if blocked_on_wall:
 		raycast.set_collision_mask_value(2, true)
 	
-	pierce_count = 1
-	
 	attack_overlap()
 
 

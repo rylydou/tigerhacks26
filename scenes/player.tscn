@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="3_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://f8gv7jog2t8o" path="res://content/art/player_sprite.png" id="4_qlg0r"]
 [ext_resource type="Script" uid="uid://cmh4vrcbqixfw" path="res://scripts/nodes/arrow_marker.gd" id="6_tuyoq"]
+[ext_resource type="PackedScene" uid="uid://dc8xyp5dwr6r6" path="res://scenes/health_bar.tscn" id="7_fjrip"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 radius = 16.0
@@ -81,3 +82,6 @@ metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 [node name="Sprite" type="Sprite2D" parent="Cursor" unique_id=1539824544]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_g2els")
+
+[node name="Health Bar" parent="." unique_id=156660026 instance=ExtResource("7_fjrip")]
+position = Vector2(0, 8)

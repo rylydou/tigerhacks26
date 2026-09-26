@@ -19,11 +19,11 @@ var remembered_hits: Array[Node2D] = []
 
 
 func _ready() -> void:
-	if not is_instance_valid(player):
-		if owner is Player:
-			player = owner
-		else:
-			player = owner.player
+	# if not is_instance_valid(player):
+	# 	if owner is Player:
+	# 		player = owner
+	# 	else:
+	# 		player = owner.player
 	
 	area_entered.connect(func(node: Node) -> void: if auto_attack: attack_node(node))
 	body_entered.connect(func(node: Node) -> void: if auto_attack: attack_node(node))
@@ -52,7 +52,7 @@ func attack_node(node: Node2D) -> bool:
 	if is_instance_valid(player):
 		has_hit = player.try_attack(node, damage, knockback_strength)
 	elif node.has_method(&"take_damage"):
-		has_hit = node.take_damage(damage, knockback_strength)
+		has_hit = node.take_damage(damage, Vector2.RIGHT * knockback_strength)
 	
 	if not has_hit:
 		return false

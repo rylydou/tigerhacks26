@@ -21,7 +21,7 @@ collision_layer = 65
 motion_mode = 1
 script = ExtResource("1_2kb2m")
 
-[node name="AI" type="Node" parent="." unique_id=321266617]
+[node name="AI" type="Node" parent="." unique_id=321266617 groups=["enemy"]]
 unique_name_in_owner = true
 script = ExtResource("3_tonni")
 metadata/_custom_type_script = "uid://1080m73s0jqw"

@@ -22,7 +22,6 @@ var angle := 0.0
 
 
 func _start() -> int:
-	print("Starting move step")
 	enemy.update_move_angle()
 	angle = enemy.move_angle
 	match direction_mode:
@@ -52,10 +51,8 @@ func _physics_process(delta: float) -> void:
 
 
 func move(delta: float) -> int:
-	print("move start")
 	if not is_instance_valid(enemy): return DONE
 	if enemy.stun_timer > 0.0: return CONTINUE
-	print("moving")
 	
 	if speed > 0.0:
 		enemy.velocity = Vector2.from_angle(angle) * speed * 16.0

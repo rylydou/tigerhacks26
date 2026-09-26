@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ba6mwjrqaf8r5"]
+
+[ext_resource type="Texture2D" uid="uid://cv3f8tah1hs3e" path="res://content/art/xp.png" id="1_e6s7u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ht3n"]
+
+[node name="Exp" type="Node2D" unique_id=1923105895]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=388875274]
+shape = SubResource("CircleShape2D_7ht3n")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=971922552]
+texture = ExtResource("1_e6s7u")

@@ -42,7 +42,8 @@ func _physics_process(delta: float) -> void:
 	
 	for microstep in microsteps_per_frame:
 		var micro_delta := delta / microsteps_per_frame
-		do_step(micro_delta)
+		age += micro_delta
+		_step(micro_delta)
 		attack_overlap()
 		if is_dead:
 			return
@@ -58,19 +59,9 @@ func _physics_process(delta: float) -> void:
 	
 	_previous_position = position
 
-
-func do_step(delta: float) -> void:
-	age += delta
-	var continue_running := _step(delta)
-	
-	if not continue_running:
-		print("die eol")
-		die()
-
-
 ## Return false when the projectile should stop die
-func _step(delta: float) -> bool:
-	return true
+func _step(delta: float) -> void:
+	pass
 
 
 func _on_attacked(node: Node2D) -> void:
@@ -78,7 +69,6 @@ func _on_attacked(node: Node2D) -> void:
 	
 	pierce_count -= 1
 	if pierce_count < 0:
-		print("die from attack")
 		destroy(true)
 
 

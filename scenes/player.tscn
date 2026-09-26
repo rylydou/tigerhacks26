@@ -3,20 +3,22 @@
 [ext_resource type="Script" uid="uid://dbpfqiugdvk76" path="res://scripts/entities/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://dtw2wsnn0aent" path="res://content/art/placeholder.png" id="2_g2els"]
 [ext_resource type="PackedScene" uid="uid://d1ydlfnt00bos" path="res://scenes/player_bullet.tscn" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://bef1kodxao80y" path="res://content/art/melee_bacteria.png" id="3_dqkch"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 radius = 16.0
 
 [node name="Player" type="CharacterBody2D" unique_id=291338747 node_paths=PackedStringArray("cursor_node")]
 collision_layer = 48
+motion_mode = 1
 script = ExtResource("1_3vyb7")
 move_speed = 10.0
 bullet_scene = ExtResource("2_qhqgy")
 cursor_node = NodePath("Cursor")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=700019964]
-scale = Vector2(2, 2)
-texture = ExtResource("2_g2els")
+modulate = Color(0.6507602, 0.3457007, 0.4465384, 1)
+texture = ExtResource("3_dqkch")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2033808832]
 shape = SubResource("CircleShape2D_j6edp")

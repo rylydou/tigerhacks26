@@ -12,7 +12,7 @@ var range_scale := 1.0
 @onready var starting_position := position
 
 
-func _step(delta: float) -> bool:
+func _step(delta: float) -> void:
 	var distance := age * speed * Global.UNIT_SCALE
 	
 	position = starting_position + direction * distance
@@ -21,6 +21,3 @@ func _step(delta: float) -> bool:
 	
 	if distance >= range * Global.UNIT_SCALE * range_scale:
 		die()
-		return false
-	
-	return true

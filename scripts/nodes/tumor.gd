@@ -100,8 +100,8 @@ func _physics_process(delta: float) -> void:
 func take_damage(damage: int, knockback: Vector2) -> bool:
 	if health <= 0: return false
 	
-	#if damage > 0:
-	#	SFX.play(&'hit_enemy', global_position).volume_db = 5.0
+	if damage > 0:
+		SFX.event(&"enemy_hit").at(global_position).play()
 	
 	health -= damage
 	activate()
@@ -114,7 +114,7 @@ func take_damage(damage: int, knockback: Vector2) -> bool:
 
 
 func die() -> void:
-	#SFX.play(&'death_enemy', global_position).volume_db = 0.0
+	SFX.event(&"tumor_death").at(global_position).play()
 	#VFX.poof(global_position)
 	died.emit()
 	queue_free()
@@ -191,7 +191,7 @@ func spawn_wave() -> bool:
 	# Allowed to go over the cap with a single wave, but not start one while at it
 	if my_spawns.size() >= max_alive_enemies: return false
 	
-	SFX.event(&"tumor_spawn").at(self).play()
+	SFX.event(&"tumor_spawn").at(global_position).play()
 	
 	time_since_spawn = 0.0
 	spawn_shake_timer = spawn_shake_duration

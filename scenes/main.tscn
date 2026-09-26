@@ -1,3 +1,26 @@
 [gd_scene format=3 uid="uid://cvguk7t5510lo"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5bu17"]
+
 [node name="Main" type="Node" unique_id=380468002]
+
+[node name="Main Menu" type="Control" parent="." unique_id=2021067527]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu" unique_id=1488562985]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Start Button" type="Button" parent="Main Menu/VBoxContainer" unique_id=2086730872]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_5bu17")
+text = "Start
+"
+
+[node name="Quit Button" type="Button" parent="Main Menu/VBoxContainer" unique_id=256625058]
+layout_mode = 2
+text = "Quit"

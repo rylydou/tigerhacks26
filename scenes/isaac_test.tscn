@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://cgrctg1wgrtfy"]
 
-[ext_resource type="Script" uid="uid://ckfpww4b1v4ew" path="res://scripts/entities/simple_enemy_movement.gd" id="1_g35av"]
-[ext_resource type="Texture2D" uid="uid://dtw2wsnn0aent" path="res://content/art/placeholder.png" id="2_ldi2q"]
 [ext_resource type="PackedScene" uid="uid://coxfu178vwrco" path="res://scenes/player.tscn" id="3_m7d7t"]
-[ext_resource type="PackedScene" uid="uid://c0a0je4155ljr" path="res://scenes/ranged_enemy.tscn" id="4_ldi2q"]
 [ext_resource type="Texture2D" uid="uid://bef1kodxao80y" path="res://content/art/melee_bacteria.png" id="5_m7d7t"]
 [ext_resource type="Texture2D" uid="uid://bvc3n3njy78js" path="res://content/art/ranged_bacteria.png" id="6_p7i23"]
 [ext_resource type="Texture2D" uid="uid://dn73adkgnhehh" path="res://content/art/aim_indicator.png" id="7_t2bfo"]
@@ -13,31 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://gf2ugt25t41d" path="res://content/art/menu_button_pressed.png" id="11_81747"]
 [ext_resource type="Texture2D" uid="uid://b5y05ew7xqgww" path="res://content/art/menu_button_unpressed.png" id="12_a3gn8"]
 [ext_resource type="Texture2D" uid="uid://k3kraixjli1m" path="res://content/art/tumor.png" id="13_a3gn8"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_j0ssb"]
-radius = 9.219544
+[ext_resource type="Texture2D" uid="uid://5ytovld4qlas" path="res://content/art/syringe.png" id="14_1ao3e"]
 
 [node name="isaac_test" type="Node2D" unique_id=2017672281]
 metadata/_edit_lock_ = true
 
-[node name="SimpleEnemy" type="CharacterBody2D" parent="." unique_id=269751586 node_paths=PackedStringArray("player")]
-position = Vector2(190, -14)
-motion_mode = 1
-script = ExtResource("1_g35av")
-player = NodePath("../Player")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SimpleEnemy" unique_id=1280511194]
-shape = SubResource("CircleShape2D_j0ssb")
-
-[node name="Placeholder" type="Sprite2D" parent="SimpleEnemy" unique_id=106720641]
-texture = ExtResource("2_ldi2q")
-
 [node name="Player" parent="." unique_id=291338747 instance=ExtResource("3_m7d7t")]
 position = Vector2(-196, -47)
-
-[node name="ranged_enemy" parent="." unique_id=1675570422 node_paths=PackedStringArray("player") instance=ExtResource("4_ldi2q")]
-position = Vector2(198, -96)
-player = NodePath("../Player")
 
 [node name="MeleeBacteria" type="Sprite2D" parent="." unique_id=1900620180]
 position = Vector2(-79, -10)
@@ -75,3 +54,8 @@ texture = ExtResource("12_a3gn8")
 [node name="Tumor" type="Sprite2D" parent="." unique_id=643298969]
 position = Vector2(-94, -79)
 texture = ExtResource("13_a3gn8")
+
+[node name="Syringe" type="Sprite2D" parent="." unique_id=486880773]
+position = Vector2(-155, -36)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("14_1ao3e")

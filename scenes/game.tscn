@@ -1,8 +1,17 @@
 [gd_scene format=3 uid="uid://bi7vti6j0pcfu"]
 
 [ext_resource type="Script" uid="uid://yii4wxwaowb1" path="res://scripts/game.gd" id="1_uwrxv"]
+[ext_resource type="Texture2D" uid="uid://b5y05ew7xqgww" path="res://content/art/menu_button_unpressed.png" id="2_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://gf2ugt25t41d" path="res://content/art/menu_button_pressed.png" id="3_lbhrr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yqjtg"]
+texture = ExtResource("2_lnu2h")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lnu2h"]
+texture = ExtResource("3_lbhrr")
 
 [node name="Game" type="Node" unique_id=384931952 node_paths=PackedStringArray("pause_menu")]
+process_mode = 3
 script = ExtResource("1_uwrxv")
 pause_menu = NodePath("UI/Pause Menu")
 
@@ -10,7 +19,6 @@ pause_menu = NodePath("UI/Pause Menu")
 layer = 2
 
 [node name="Pause Menu" type="Control" parent="UI" unique_id=1608401548]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,15 +46,23 @@ offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="UI/Pause Menu/VBoxContainer" unique_id=1046958743]
+[node name="Resume Button" type="Button" parent="UI/Pause Menu/VBoxContainer" unique_id=1046958743]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_yqjtg")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_lnu2h")
 text = "Resume"
+expand_icon = true
 
-[node name="Button2" type="Button" parent="UI/Pause Menu/VBoxContainer" unique_id=1960505116]
+[node name="Quit Button" type="Button" parent="UI/Pause Menu/VBoxContainer" unique_id=1960505116]
 layout_mode = 2
 text = "Quit"
+icon = ExtResource("2_lnu2h")
+icon_alignment = 1
+expand_icon = true
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=481595629]
+visible = false
 
 [node name="HUD" type="Control" parent="HUD" unique_id=295431011]
 layout_mode = 3

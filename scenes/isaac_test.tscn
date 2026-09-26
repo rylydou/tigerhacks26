@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dtw2wsnn0aent" path="res://content/art/placeholder.png" id="2_ldi2q"]
 [ext_resource type="PackedScene" uid="uid://coxfu178vwrco" path="res://scenes/player.tscn" id="3_m7d7t"]
 [ext_resource type="PackedScene" uid="uid://c0a0je4155ljr" path="res://scenes/ranged_enemy.tscn" id="4_ldi2q"]
+[ext_resource type="Texture2D" uid="uid://bef1kodxao80y" path="res://content/art/melee_bacteria.png" id="5_m7d7t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j0ssb"]
 radius = 9.219544
@@ -29,3 +30,7 @@ position = Vector2(-196, -47)
 [node name="ranged_enemy" parent="." unique_id=1675570422 node_paths=PackedStringArray("player") instance=ExtResource("4_ldi2q")]
 position = Vector2(198, -96)
 player = NodePath("../Player")
+
+[node name="MeleeBacteria" type="Sprite2D" parent="." unique_id=1900620180]
+position = Vector2(-79, -10)
+texture = ExtResource("5_m7d7t")

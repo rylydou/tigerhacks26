@@ -14,6 +14,7 @@ resource_local_to_scene = true
 shader = ExtResource("2_hjanu")
 shader_parameter/invert_intensity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/desaturate = 0.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_j6edp"]
 font_size = 6
@@ -39,14 +40,14 @@ material = SubResource("ShaderMaterial_ahyh1")
 collision_layer = 65
 motion_mode = 1
 script = ExtResource("2_jok2d")
-spawn_radius_max = 6.0
-spawn_radius_min = 2.0
 activation_radius = 2.0
+spawn_radius_min = 2.0
+spawn_radius_max = 6.0
 max_alive_enemies = 5
-health_milestones = Array[int]([25, 75])
+spawn_cooldown = 3.0
 interval_time = 15.0
 interval_max_waves = 2
-spawn_cooldown = 3.0
+health_milestones = Array[int]([25, 75])
 shaker = NodePath("Anchor/Flip/Sprite/Shaker")
 
 [node name="AI" type="Node" parent="." unique_id=321266617 groups=["enemy", "objective"]]
@@ -86,6 +87,7 @@ position = Vector2(0, 16)
 is_boss = true
 
 [node name="Label" type="Label" parent="Anchor/Health Bar" unique_id=1826131091]
+visible = false
 texture_filter = 4
 anchors_preset = 8
 anchor_left = 0.5

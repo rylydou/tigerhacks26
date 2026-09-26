@@ -1,6 +1,9 @@
 class_name Actor extends CharacterBody2D
 
 
+signal landed()
+
+
 @onready var anchor_node: Node2D = %"Anchor"
 @onready var flip_node: Node2D = %"Flip"
 @onready var aim_node: Node2D = %"Aim"
@@ -32,6 +35,7 @@ func _physics_process(delta: float) -> void:
 	if height_velocity < 0.0 and height <= 0.0:
 		height = 0.0
 		height_velocity = 0.0
+		landed.emit()
 		#VFX.land_impact(global_position, 32.0)
 	
 	anchor_node.position.y = -height * 16.0

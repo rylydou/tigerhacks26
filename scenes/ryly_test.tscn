@@ -3,59 +3,122 @@
 [ext_resource type="PackedScene" uid="uid://coxfu178vwrco" path="res://scenes/player.tscn" id="1_hljss"]
 [ext_resource type="PackedScene" uid="uid://bdvkkoo15mqai" path="res://scenes/enemies/trooper.tscn" id="2_ne7xr"]
 [ext_resource type="Shader" uid="uid://dngmyb4e35gx5" path="res://content/shaders/actor.gdshader" id="3_qxrsy"]
-[ext_resource type="PackedScene" uid="uid://c4eynv1vp3i3a" path="res://scenes/objectives/tumor.tscn" id="4_4hfe6"]
 [ext_resource type="PackedScene" uid="uid://m8pqti13a75g" path="res://scenes/enemies/shooter_1.tscn" id="5_lgnhk"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lv11a"]
-resource_local_to_scene = true
-shader = ExtResource("3_qxrsy")
-shader_parameter/invert_intensity = 0.0
-shader_parameter/flash_color = Color(1, 1, 1, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ek1xu"]
-resource_local_to_scene = true
-shader = ExtResource("3_qxrsy")
-shader_parameter/invert_intensity = 0.0
-shader_parameter/flash_color = Color(1, 1, 1, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3t2q"]
-resource_local_to_scene = true
-shader = ExtResource("3_qxrsy")
-shader_parameter/invert_intensity = 0.0
-shader_parameter/flash_color = Color(1, 1, 1, 0)
+[ext_resource type="Texture2D" uid="uid://dn2qoahh2td4u" path="res://content/art/background.png" id="6_lv11a"]
+[ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="7_ek1xu"]
+[ext_resource type="Script" uid="uid://d3gtrw58eq813" path="res://scripts/map_gen/level_generator.gd" id="8_g04cy"]
+[ext_resource type="Texture2D" uid="uid://cbboke5xqvxno" path="res://content/art/dev_block.png" id="8_oq6fy"]
+[ext_resource type="Script" uid="uid://drw3a8xj2cq80" path="res://scripts/map_gen/map_step.gd" id="9_emgfa"]
+[ext_resource type="Script" uid="uid://die1ga14ef1co" path="res://scripts/map_gen/steps/place_arenas_step.gd" id="10_oq6fy"]
+[ext_resource type="Script" uid="uid://bbn7td00ho1ak" path="res://scripts/map_gen/steps/noise_step.gd" id="11_e0xjg"]
+[ext_resource type="Script" uid="uid://b53xmjqtgm4r3" path="res://scripts/map_gen/steps/carve_tunnels_step.gd" id="12_mci7o"]
+[ext_resource type="Script" uid="uid://cf716wnr1xou8" path="res://scripts/map_gen/steps/smooth_step.gd" id="13_ceqwj"]
+[ext_resource type="Script" uid="uid://c31ipm6w48f6c" path="res://scripts/map_gen/steps/fill_isolated_step.gd" id="14_emgfa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cyfga"]
 resource_local_to_scene = true
 shader = ExtResource("3_qxrsy")
 shader_parameter/invert_intensity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/desaturate = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6kaf4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xk2b5"]
 resource_local_to_scene = true
 shader = ExtResource("3_qxrsy")
 shader_parameter/invert_intensity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/desaturate = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k1a5r"]
+resource_local_to_scene = true
+shader = ExtResource("3_qxrsy")
+shader_parameter/invert_intensity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/desaturate = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g04cy"]
+resource_local_to_scene = true
+shader = ExtResource("3_qxrsy")
+shader_parameter/invert_intensity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/desaturate = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0xjg"]
+texture = ExtResource("8_oq6fy")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_emgfa"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_e0xjg")
+
+[sub_resource type="Resource" id="Resource_0p4x6"]
+script = ExtResource("10_oq6fy")
+radius_range = Vector2(10, 15)
+edge_margin = 3.0
+min_gap = 3.0
+
+[sub_resource type="Resource" id="Resource_glu8d"]
+script = ExtResource("11_e0xjg")
+edge_falloff = 8.0
+arena_influence = 1.0
+
+[sub_resource type="Resource" id="Resource_xnjde"]
+script = ExtResource("12_mci7o")
+extra_connection_chance = 0.25
+
+[sub_resource type="Resource" id="Resource_dbd5e"]
+script = ExtResource("13_ceqwj")
+
+[sub_resource type="Resource" id="Resource_g04cy"]
+script = ExtResource("14_emgfa")
+metadata/_custom_type_script = "uid://c31ipm6w48f6c"
 
 [node name="Ryly Test" type="Node2D" unique_id=986588181]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=500628467]
+z_index = -1210
+z_as_relative = false
+offset_left = -1024.0
+offset_top = -1024.0
+offset_right = 1024.0
+offset_bottom = 1024.0
+texture = ExtResource("6_lv11a")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="SortingLayer" type="Node" parent="TextureRect" unique_id=1751285583]
+script = ExtResource("7_ek1xu")
+bias = -10
+layer_name = &"floor"
+metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 
 [node name="Player" parent="." unique_id=291338747 instance=ExtResource("1_hljss")]
 
 [node name="Trooper" parent="." unique_id=1744553126 instance=ExtResource("2_ne7xr")]
-material = SubResource("ShaderMaterial_lv11a")
+material = SubResource("ShaderMaterial_cyfga")
 position = Vector2(100, 1)
 
-[node name="Tumor" parent="." unique_id=1277576953 instance=ExtResource("4_4hfe6")]
-material = SubResource("ShaderMaterial_ek1xu")
-position = Vector2(49, -56)
-
 [node name="Trooper2" parent="." unique_id=1988776274 instance=ExtResource("5_lgnhk")]
-material = SubResource("ShaderMaterial_l3t2q")
+material = SubResource("ShaderMaterial_xk2b5")
 position = Vector2(-110, -49)
 
 [node name="Trooper3" parent="." unique_id=1135049489 instance=ExtResource("5_lgnhk")]
-material = SubResource("ShaderMaterial_cyfga")
+material = SubResource("ShaderMaterial_k1a5r")
 position = Vector2(-63, -128)
 
 [node name="Trooper4" parent="." unique_id=814614736 instance=ExtResource("5_lgnhk")]
-material = SubResource("ShaderMaterial_6kaf4")
+material = SubResource("ShaderMaterial_g04cy")
 position = Vector2(-134, 109)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1846879771]
+tile_set = SubResource("TileSet_emgfa")
+script = ExtResource("8_g04cy")
+map_size = Vector2i(64, 64)
+rng_seed = 1
+steps = Array[ExtResource("9_emgfa")]([SubResource("Resource_0p4x6"), SubResource("Resource_glu8d"), SubResource("Resource_xnjde"), SubResource("Resource_dbd5e"), SubResource("Resource_g04cy")])
+wall_atlas_coords = null
+save_png = null

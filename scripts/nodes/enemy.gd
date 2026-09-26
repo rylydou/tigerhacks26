@@ -22,6 +22,13 @@ signal died()
 @export var ignore_nav := false
 @export var nav_update_cooldown := 1.0
 
+@export_group("Death")
+@export var death_launch_height := 8.0
+@export var death_launch_speed := 9.0
+@export var death_spin_speed := 12.0
+@export var death_fade_time := 0.12
+@export var death_ground_friction := 40.0
+
 
 @onready var ai: Step = %"AI"
 var ai_init := false
@@ -40,6 +47,10 @@ var stun_timer := 0.0
 var flash_timer := 0.0
 var knockback_velocity := Vector2.ZERO
 
+var dying := false
+var death_velocity := Vector2.ZERO
+var death_spin := 0.0
+
 
 func _ready() -> void:
 	#material = material.duplicate()
@@ -56,6 +67,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if dying:
+		_process_death(delta)
+		return
 	if health <= 0: return
 	
 	super._physics_process(delta)
@@ -122,15 +136,78 @@ func take_damage(damage: int, knockback: Vector2) -> bool:
 	flash()
 	damage_taken.emit()
 	if health <= 0:
-		die()
+		die(knockback)
 	return true
 
 
-func die() -> void:
+func die(knockback := Vector2.ZERO) -> void:
+	if dying: return
+	dying = true
+	health = mini(health, 0)
 	#SFX.play(&'death_enemy', global_position).volume_db = 0.0
-	#VFX.poof(global_position)
+	
+	# Go completely inert
+	remove_from_group(Global.ENEMY_GROUP)
+	collision_layer = 0
+	collision_mask = 0
+	velocity = Vector2.ZERO
+	knockback_velocity = Vector2.ZERO
+	stun_timer = 0.0
+	los_raycast.enabled = false
+	ai.process_mode = Node.PROCESS_MODE_DISABLED
+	_disable_areas(self)
+	
+	var health_bar := anchor_node.get_node_or_null(^"Health Bar") as CanvasItem
+	if health_bar: health_bar.hide()
+	
+	# Gray out
+	flash_timer = 0.0
+	sprite.position.x = 0.0
+	material.set_shader_parameter(&'flash_color', Color(1.0, 1.0, 1.0, 0.0))
+	material.set_shader_parameter(&'desaturate', 1.0)
+	
+	# Launch up and back along the killing hit
+	var direction := knockback.normalized()
+	if direction == Vector2.ZERO and is_instance_valid(aggro):
+		direction = aggro.global_position.direction_to(global_position)
+	if direction == Vector2.ZERO:
+		direction = Vector2.from_angle(randf() * TAU)
+	death_velocity = direction * death_launch_speed
+	death_spin = death_spin_speed * (1.0 if direction.x >= 0.0 else -1.0)
+	height_velocity = death_launch_height
+	height = maxf(height, 0.01)
+	landed.connect(_on_death_landed, CONNECT_ONE_SHOT)
+	
 	died.emit()
-	queue_free()
+
+
+func _process_death(delta: float) -> void:
+	super._physics_process(delta)
+	global_position += death_velocity * 16.0 * delta
+	flip_node.rotation += death_spin * delta
+	if height <= 0.0:
+		death_velocity = death_velocity.move_toward(Vector2.ZERO, death_ground_friction * delta)
+		death_spin = move_toward(death_spin, 0.0, death_spin_speed * 4.0 * delta)
+
+
+func _on_death_landed() -> void:
+	#VFX.poof(global_position)
+	var tween := create_tween()
+	tween.tween_property(self, ^"modulate:a", 0.0, death_fade_time)
+	tween.tween_callback(queue_free)
+
+
+func _disable_areas(node: Node) -> void:
+	for child in node.get_children():
+		if child is Hurtbox:
+			child.active = false
+		if child is Area2D:
+			child.set_deferred(&"monitoring", false)
+			child.set_deferred(&"monitorable", false)
+		if child is CollisionObject2D:
+			child.collision_layer = 0
+			child.collision_mask = 0
+		_disable_areas(child)
 
 
 func stun(time: float) -> void:

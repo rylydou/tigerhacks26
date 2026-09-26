@@ -9,9 +9,7 @@ class_name map_generator
 @export var itterations: int = 3
 @export var tilemap_layer: TileMapLayer
 @export var wall_atlas_coords: Vector2i = Vector2i(1, 1)
-@export var floor_atlas_coords: Vector2i = Vector2i(0, 0)
 @export var wall_source_id: int = 0 
-@export var floor_source_id: int = 0
 @export_tool_button("Generate Map") var map_gen_button = generate_map
 
 # Called when the node enters the scene tree for the first time.
@@ -71,7 +69,5 @@ func render_map(grid: Array) -> void:
 		for y in range(map_dimensions.y):
 			if grid[grid_helper(x, y, map_dimensions.x)]==true:
 				tilemap_layer.set_cell(Vector2i(x, y), wall_source_id, wall_atlas_coords)
-			else:
-				tilemap_layer.set_cell(Vector2i(x, y), floor_source_id, floor_atlas_coords)
 	
 	

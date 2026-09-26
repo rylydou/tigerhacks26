@@ -7,8 +7,12 @@ class_name map_generator
 @export var map_dimensions: Vector2i = Vector2i(10, 10)
 @export var fill_chance: float = 0.45
 @export var itterations: int = 3
-@export_tool_button("Generate Map") var map_gen_button = generate_map
 @export var tilemap_layer: TileMapLayer
+@export var wall_atlas_coords: Vector2i = Vector2i(1, 1)
+@export var floor_atlas_coords: Vector2i = Vector2i(0, 0)
+@export var wall_source_id: int = 0 
+@export var floor_source_id: int = 0
+@export_tool_button("Generate Map") var map_gen_button = generate_map
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,10 +20,8 @@ func _ready() -> void:
 
 func generate_map() -> void:
 	var grid: Array = grid_maker(map_dimensions)
-	print(grid)
-	print(grid.size())
 	grid_itterations(grid)
-	print(grid)
+	render_map(grid)
 
 func grid_helper(x_coord: int, y_coord: int, size: int) -> int:
 	return y_coord*size+x_coord
@@ -58,4 +60,16 @@ func grid_itterations(grid: Array)->void:
 					grid[grid_helper(x, y, map_dimensions.x)] = false
 				elif grid[grid_helper(x, y, map_dimensions.x)] == false and wall_count < 4:
 					grid[grid_helper(x, y, map_dimensions.x)] = true
+
+func render_map(grid: Array) -> void:
+	if !tilemap_layer:
+		pass
+	tilemap_layer.clear()
+	for x in range(map_dimensions.x):
+		for y in range(map_dimensions.y):
+			if grid[grid_helper(x, y, map_dimensions.x)]==true:
+				tilemap_layer.set_cell(Vector2i(x, y), wall_source_id, wall_atlas_coords)
+			else:
+				tilemap_layer.set_cell(Vector2i(x, y), floor_source_id, floor_atlas_coords)
+	
 	

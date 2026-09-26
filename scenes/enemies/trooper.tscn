@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bdvkkoo15mqai"]
+
+[ext_resource type="PackedScene" uid="uid://douuygm6x2pjt" path="res://scenes/base_enemy.tscn" id="1_kcpkc"]
+[ext_resource type="Shader" uid="uid://dngmyb4e35gx5" path="res://content/shaders/actor.gdshader" id="2_a48sw"]
+[ext_resource type="Script" uid="uid://b6qo6m0jbhvc4" path="res://scripts/ai/set_aggro.gd" id="2_vtgb6"]
+[ext_resource type="Script" uid="uid://1080m73s0jqw" path="res://scripts/ai/inf_loop.gd" id="4_t4eop"]
+[ext_resource type="PackedScene" uid="uid://bwokgdo8siiaw" path="res://scenes/shadow.tscn" id="4_yibdx"]
+[ext_resource type="Script" uid="uid://dru0qb2u35mg8" path="res://scripts/ai/angle_aggro.gd" id="5_qkkks"]
+[ext_resource type="Script" uid="uid://dm6irqqo5gany" path="res://scripts/ai/repeat.gd" id="5_yu4b7"]
+[ext_resource type="Script" uid="uid://3drffr203isv" path="res://scripts/ai/move.gd" id="6_yu4b7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qkkks"]
+resource_local_to_scene = true
+shader = ExtResource("2_a48sw")
+shader_parameter/invert_intensity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1bvlm"]
+radius = 14.0
+
+[node name="Trooper" unique_id=1744553126 instance=ExtResource("1_kcpkc")]
+material = SubResource("ShaderMaterial_qkkks")
+max_health = 20
+
+[node name="SetAggro" type="Node" parent="AI" parent_id_path=PackedInt32Array(321266617) index="0" unique_id=309202717]
+script = ExtResource("2_vtgb6")
+metadata/_custom_type_script = "uid://b6qo6m0jbhvc4"
+
+[node name="InfLoop" type="Node" parent="AI" parent_id_path=PackedInt32Array(321266617) index="1" unique_id=1100846405]
+script = ExtResource("4_t4eop")
+
+[node name="AngleAggro" type="Node" parent="AI/InfLoop" index="0" unique_id=912034490]
+script = ExtResource("5_qkkks")
+metadata/_custom_type_script = "uid://dru0qb2u35mg8"
+
+[node name="Repeat" type="Node" parent="AI/InfLoop" index="1" unique_id=2142245016]
+script = ExtResource("5_yu4b7")
+count_max = 5
+
+[node name="Move" type="Node" parent="AI/InfLoop/Repeat" index="0" unique_id=2136900097]
+script = ExtResource("6_yu4b7")
+speed = 2.0
+distance = 1.0
+metadata/_custom_type_script = "uid://3drffr203isv"
+
+[node name="Collision" parent="." index="3" unique_id=1447223190]
+shape = SubResource("CircleShape2D_1bvlm")
+
+[node name="Shadow" parent="." index="4" unique_id=1880057843 instance=ExtResource("4_yibdx")]
+position = Vector2(0, 14)

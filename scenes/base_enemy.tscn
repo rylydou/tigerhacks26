@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://douuygm6x2pjt"]
+
+[ext_resource type="Script" uid="uid://b708ohghwciv7" path="res://scripts/nodes/enemy.gd" id="1_2kb2m"]
+[ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="1_sw3va"]
+[ext_resource type="Shader" uid="uid://dngmyb4e35gx5" path="res://content/shaders/actor.gdshader" id="1_tonni"]
+[ext_resource type="Texture2D" uid="uid://bef1kodxao80y" path="res://content/art/melee_bacteria.png" id="2_2kb2m"]
+[ext_resource type="Script" uid="uid://1080m73s0jqw" path="res://scripts/ai/inf_loop.gd" id="3_tonni"]
+[ext_resource type="PackedScene" uid="uid://dc8xyp5dwr6r6" path="res://scenes/health_bar.tscn" id="5_64ljx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tonni"]
+resource_local_to_scene = true
+shader = ExtResource("1_tonni")
+shader_parameter/invert_intensity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+
+[node name="Base Enemy" type="CharacterBody2D" unique_id=1744553126]
+z_index = -700
+z_as_relative = false
+material = SubResource("ShaderMaterial_tonni")
+collision_layer = 65
+motion_mode = 1
+script = ExtResource("1_2kb2m")
+
+[node name="AI" type="Node" parent="." unique_id=321266617]
+unique_name_in_owner = true
+script = ExtResource("3_tonni")
+metadata/_custom_type_script = "uid://1080m73s0jqw"
+
+[node name="SortingLayer" type="Node" parent="." unique_id=426600721]
+script = ExtResource("1_sw3va")
+layer_name = &"enemy"
+metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
+
+[node name="Anchor" type="Node2D" parent="." unique_id=1136662229]
+unique_name_in_owner = true
+use_parent_material = true
+
+[node name="Flip" type="Node2D" parent="Anchor" unique_id=110987953]
+unique_name_in_owner = true
+use_parent_material = true
+
+[node name="Sprite" type="Sprite2D" parent="Anchor/Flip" unique_id=734140586]
+unique_name_in_owner = true
+use_parent_material = true
+texture = ExtResource("2_2kb2m")
+
+[node name="Health Bar" parent="Anchor" unique_id=733537454 instance=ExtResource("5_64ljx")]
+position = Vector2(0, 16)
+
+[node name="Aim" type="Node2D" parent="Anchor" unique_id=1272666351]
+unique_name_in_owner = true
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1447223190]
+debug_color = Color(0, 1, 0, 0)

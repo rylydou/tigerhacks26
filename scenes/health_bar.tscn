@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://dc8xyp5dwr6r6"]
+
+[ext_resource type="Script" uid="uid://br7kp8xnno8c2" path="res://scripts/components/health_bar.gd" id="1_vamd8"]
+[ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="2_y3kqx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytj5b"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnoww"]
+bg_color = Color(1, 0.988235, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kau2l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m1c8e"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0)
+
+[node name="Health Bar" type="CanvasGroup" unique_id=156660026]
+z_index = -100
+z_as_relative = false
+script = ExtResource("1_vamd8")
+
+[node name="Flash" type="ProgressBar" parent="." unique_id=535060788]
+unique_name_in_owner = true
+offset_left = -8.0
+offset_right = 8.0
+offset_bottom = 3.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ytj5b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bnoww")
+step = 1.0
+value = 67.0
+show_percentage = false
+
+[node name="Fill" type="ProgressBar" parent="." unique_id=1394816185]
+unique_name_in_owner = true
+offset_left = -8.0
+offset_right = 8.0
+offset_bottom = 3.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_kau2l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_m1c8e")
+step = 1.0
+value = 33.0
+show_percentage = false
+
+[node name="SortingLayer" type="Node" parent="." unique_id=1697377058]
+script = ExtResource("2_y3kqx")
+layer_name = &"health_bar"
+metadata/_custom_type_script = "uid://dkcr2cy77fa0a"

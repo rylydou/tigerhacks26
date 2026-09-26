@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://dbpfqiugdvk76" path="res://scripts/entities/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://dtw2wsnn0aent" path="res://content/art/placeholder.png" id="2_g2els"]
 [ext_resource type="PackedScene" uid="uid://d1ydlfnt00bos" path="res://scenes/player_bullet.tscn" id="2_qhqgy"]
-[ext_resource type="Texture2D" uid="uid://bef1kodxao80y" path="res://content/art/melee_bacteria.png" id="3_dqkch"]
 [ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="3_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://f8gv7jog2t8o" path="res://content/art/player_sprite.png" id="4_qlg0r"]
+[ext_resource type="Script" uid="uid://cmh4vrcbqixfw" path="res://scripts/nodes/arrow_marker.gd" id="6_tuyoq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 radius = 16.0
@@ -33,12 +34,15 @@ unique_name_in_owner = true
 [node name="Flip" type="Node2D" parent="Anchor" unique_id=1497506262]
 unique_name_in_owner = true
 
-[node name="Sprite" type="Sprite2D" parent="Anchor/Flip" unique_id=700019964]
-modulate = Color(0.6507602, 0.3457007, 0.4465384, 1)
-texture = ExtResource("3_dqkch")
-
 [node name="Aim" type="Node2D" parent="Anchor" unique_id=74387387]
 unique_name_in_owner = true
+
+[node name="Sprite" type="Sprite2D" parent="Anchor/Aim" unique_id=700019964]
+unique_name_in_owner = true
+position = Vector2(9, 0)
+rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_qlg0r")
 
 [node name="Aim Indicator" type="Node2D" parent="Anchor/Aim" unique_id=752974397]
 z_as_relative = false
@@ -49,9 +53,15 @@ layer_name = &"overlay"
 metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 
 [node name="Sprite" type="Sprite2D" parent="Anchor/Aim/Aim Indicator" unique_id=255861979]
+visible = false
 position = Vector2(24, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_g2els")
+
+[node name="Shoot Pos" type="Node2D" parent="Anchor/Aim" unique_id=1925815167]
+position = Vector2(16, 0)
+script = ExtResource("6_tuyoq")
+metadata/_custom_type_script = "uid://cmh4vrcbqixfw"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2033808832]
 shape = SubResource("CircleShape2D_j6edp")

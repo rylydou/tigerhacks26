@@ -32,6 +32,7 @@ gdscript/warnings/enable=false
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 
@@ -49,6 +50,10 @@ folder_colors={
 "res://scripts/": "green"
 }
 
+[gui]
+
+common/snap_controls_to_pixels=false
+
 [layer_names]
 
 2d_physics/layer_1="Blocks Movement"
@@ -65,3 +70,10 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true
+
+[shader_globals]
+
+SHADOW_COLOR={
+"type": "color",
+"value": Color(0, 0, 0, 0.5019608)
+}

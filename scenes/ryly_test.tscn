@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://brbihjb6josjy"]
 
 [ext_resource type="PackedScene" uid="uid://coxfu178vwrco" path="res://scenes/player.tscn" id="1_hljss"]
+[ext_resource type="PackedScene" uid="uid://bdvkkoo15mqai" path="res://scenes/enemies/trooper.tscn" id="2_ne7xr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j6edp"]
 size = Vector2(32, 32)
@@ -16,3 +17,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1567030010]
 position = Vector2(40, 0)
 shape = SubResource("RectangleShape2D_j6edp")
+
+[node name="Trooper" parent="." unique_id=1744553126 instance=ExtResource("2_ne7xr")]
+position = Vector2(100, 1)

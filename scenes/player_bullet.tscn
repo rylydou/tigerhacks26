@@ -7,11 +7,12 @@
 radius = 6.0
 
 [node name="Player Bullet" type="Area2D" unique_id=1522787912]
-collision_layer = 0
-collision_mask = 130
+collision_layer = 144
+collision_mask = 66
 script = ExtResource("1_46jqs")
 range = 20.0
 speed = 10.0
+base_damage = 5
 metadata/_custom_type_script = "uid://b1oonu3v42rwi"
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1584146586]

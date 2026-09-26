@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bwokgdo8siiaw"]
+
+[ext_resource type="Material" uid="uid://dq1txoibl0wnc" path="res://resources/materials/shadow.tres" id="1_vc16s"]
+[ext_resource type="Texture2D" uid="uid://by8woxm4wdh6r" path="res://content/art/shadow.png" id="2_nrv75"]
+[ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="3_bs2fw"]
+
+[node name="Shadow" type="Sprite2D" unique_id=1277822842]
+z_index = -1100
+z_as_relative = false
+material = ExtResource("1_vc16s")
+texture = ExtResource("2_nrv75")
+
+[node name="SortingLayer" type="Node" parent="." unique_id=1161091506]
+script = ExtResource("3_bs2fw")
+layer_name = &"shadow"
+metadata/_custom_type_script = "uid://dkcr2cy77fa0a"

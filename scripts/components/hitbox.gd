@@ -10,6 +10,7 @@ signal attacked(node: Node2D)
 @export var knockback_strength := 0.0
 @export var stun := 0.0
 @export var always_attack := false
+@export var remember_hits := true
 
 
 var player: Player
@@ -42,7 +43,6 @@ func attack_node(node: Node2D) -> bool:
 		if player.health <= 0 and not always_attack:
 			return false
 	
-	
 	# Compute damage
 	var damage := base_damage
 	damage *= Math.rand_var(1.0, damage_variation / 2.0)
@@ -53,6 +53,12 @@ func attack_node(node: Node2D) -> bool:
 		has_hit = player.try_attack(node, damage, knockback_strength)
 	elif node.has_method(&"take_damage"):
 		has_hit = node.take_damage(damage, knockback_strength)
+	
+	if not has_hit:
+		return false
+	
+	if remember_hits:
+		remembered_hits.append(node)
 	
 	_on_attacked(node)
 	attacked.emit(node)

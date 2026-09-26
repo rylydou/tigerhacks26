@@ -128,8 +128,8 @@ func take_damage(damage: int, knockback: Vector2) -> bool:
 	if health <= 0: return false
 	if immune_in_air and height > 0.0: return false
 	
-	#if damage > 0:
-	#	SFX.play(&'hit_enemy', global_position).volume_db = 5.0
+	if damage > 0:
+		SFX.event(&"enemy_hit").at(global_position).play()
 	
 	health -= damage
 	knockback_velocity += knockback
@@ -144,7 +144,7 @@ func die(knockback := Vector2.ZERO) -> void:
 	if dying: return
 	dying = true
 	health = mini(health, 0)
-	#SFX.play(&'death_enemy', global_position).volume_db = 0.0
+	SFX.event(&"enemy_death").at(global_position).play()
 	
 	# Go completely inert
 	remove_from_group(Global.ENEMY_GROUP)

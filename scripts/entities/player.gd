@@ -92,6 +92,7 @@ func shoot() -> void:
 	bullet_instance.rotation = shoot_pos_node.global_rotation
 	bullet_instance.player = self
 	get_tree().current_scene.add_child(bullet_instance)
+	SFX.event(&"player_shoot").at(global_position).play()
 
 
 func try_attack(target: Node2D, damage: int, knockback_strength: float) -> bool:
@@ -123,6 +124,8 @@ func try_attack(target: Node2D, damage: int, knockback_strength: float) -> bool:
 
 
 func take_damage(damage: int, knockback: Vector2) -> bool:
+	SFX.event(&"player_hit").at(global_position).play()
+	
 	# Apply damage to the player's health
 	health -= damage
 	
@@ -137,5 +140,6 @@ func take_damage(damage: int, knockback: Vector2) -> bool:
 
 
 func die() -> void:
+	SFX.event(&"player_death").at(global_position).play()
 	health = max_health
 	velocity = Vector2.ZERO

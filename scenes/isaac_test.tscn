@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://df43arvkfd462" path="res://content/art/ui_battery_inner.png" id="10_a3gn8"]
 [ext_resource type="Texture2D" uid="uid://gf2ugt25t41d" path="res://content/art/menu_button_pressed.png" id="11_81747"]
 [ext_resource type="Texture2D" uid="uid://b5y05ew7xqgww" path="res://content/art/menu_button_unpressed.png" id="12_a3gn8"]
+[ext_resource type="Texture2D" uid="uid://k3kraixjli1m" path="res://content/art/tumor.png" id="13_a3gn8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j0ssb"]
 radius = 9.219544
@@ -47,7 +48,7 @@ position = Vector2(-30, -10)
 texture = ExtResource("6_p7i23")
 
 [node name="AimIndicator" type="Sprite2D" parent="." unique_id=1421727805]
-position = Vector2(-126, -73)
+position = Vector2(-140, -75)
 texture = ExtResource("7_t2bfo")
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1411535046]
@@ -70,3 +71,7 @@ texture = ExtResource("11_81747")
 [node name="MenuButtonUnpressed" type="Sprite2D" parent="." unique_id=1565164659]
 position = Vector2(-267, -88)
 texture = ExtResource("12_a3gn8")
+
+[node name="Tumor" type="Sprite2D" parent="." unique_id=643298969]
+position = Vector2(-94, -79)
+texture = ExtResource("13_a3gn8")

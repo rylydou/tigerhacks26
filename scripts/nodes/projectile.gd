@@ -25,7 +25,7 @@ func _ready() -> void:
 	add_child(raycast)
 	raycast.top_level = true
 	raycast.collision_mask = 0
-	raycast.enabled = false
+	raycast.enabled = true
 	if blocked_on_wall:
 		raycast.set_collision_mask_value(2, true)
 	
@@ -48,13 +48,17 @@ func _physics_process(delta: float) -> void:
 		if is_dead:
 			return
 	
-	if blocked_on_wall and position.is_equal_approx(saved_position):
+	force_update_transform()
+	
+	if blocked_on_wall and not position.is_equal_approx(saved_position):
 		raycast.position = saved_position
-		raycast.target_position = position
+		raycast.target_position = position - saved_position
+		raycast.force_update_transform()
 		raycast.force_raycast_update()
 		
 		if raycast.is_colliding():
-			global_position = raycast.get_collision_point()
+			position = raycast.get_collision_point()
+			force_update_transform()
 			destroy(true)
 	
 	_previous_position = position

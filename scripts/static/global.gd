@@ -6,5 +6,5 @@ const ENEMY_GROUP := &'enemy'
 const BLOCKER_GROUP := &'blocker'
 
 
-static var gravity := 16.0
-const UNIT_SCALE := 16.0
+static var gravity := 32.0
+const UNIT_SCALE := 32.0

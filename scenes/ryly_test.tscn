@@ -10,6 +10,8 @@ size = Vector2(32, 32)
 [node name="Player" parent="." unique_id=291338747 instance=ExtResource("1_hljss")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1091543239]
+collision_layer = 3
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1567030010]
 position = Vector2(40, 0)

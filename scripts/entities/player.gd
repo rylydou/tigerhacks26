@@ -1,4 +1,4 @@
-class_name Player extends CharacterBody2D
+class_name Player extends Actor
 
 
 static var instance: Player
@@ -22,7 +22,6 @@ var shoot_cooldown := 0.0
 
 var gamepad := Gamepad.create(Gamepad.DEVICE_AUTO)
 
-var angle := 0.0
 var use_mouse_aim := false
 
 
@@ -43,6 +42,8 @@ func _physics_process(delta: float) -> void:
 			# Perform attack logic here
 			shoot_cooldown = 1.0 / fire_rate
 			shoot()
+	
+	super._physics_process(delta)
 
 
 func _process_movement(delta: float) -> void:
@@ -77,7 +78,7 @@ func _process_movement(delta: float) -> void:
 		angle = aim_input.angle()
 	
 	var speed := move_speed
-	velocity = move_input * speed * 16.0
+	velocity = move_input * speed * Global.UNIT_SCALE
 	move_and_slide()
 
 

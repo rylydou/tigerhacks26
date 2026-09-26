@@ -4,40 +4,68 @@
 [ext_resource type="Texture2D" uid="uid://dtw2wsnn0aent" path="res://content/art/placeholder.png" id="2_g2els"]
 [ext_resource type="PackedScene" uid="uid://d1ydlfnt00bos" path="res://scenes/player_bullet.tscn" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://bef1kodxao80y" path="res://content/art/melee_bacteria.png" id="3_dqkch"]
+[ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="3_qlg0r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 radius = 16.0
 
 [node name="Player" type="CharacterBody2D" unique_id=291338747 node_paths=PackedStringArray("cursor_node")]
+z_index = -800
+z_as_relative = false
 collision_layer = 48
 motion_mode = 1
 script = ExtResource("1_3vyb7")
-move_speed = 10.0
+move_speed = 5.0
 bullet_scene = ExtResource("2_qhqgy")
 cursor_node = NodePath("Cursor")
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=700019964]
+[node name="SortingLayer" type="Node" parent="." unique_id=86120003]
+script = ExtResource("3_qlg0r")
+layer_name = &"player"
+metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1016671712]
+zoom = Vector2(4, 4)
+
+[node name="Anchor" type="Node2D" parent="." unique_id=1029665978]
+unique_name_in_owner = true
+
+[node name="Flip" type="Node2D" parent="Anchor" unique_id=1497506262]
+unique_name_in_owner = true
+
+[node name="Sprite" type="Sprite2D" parent="Anchor/Flip" unique_id=700019964]
 modulate = Color(0.6507602, 0.3457007, 0.4465384, 1)
 texture = ExtResource("3_dqkch")
+
+[node name="Aim" type="Node2D" parent="Anchor" unique_id=74387387]
+unique_name_in_owner = true
+
+[node name="Aim Indicator" type="Node2D" parent="Anchor/Aim" unique_id=752974397]
+z_as_relative = false
+
+[node name="SortingLayer" type="Node" parent="Anchor/Aim/Aim Indicator" unique_id=833504443]
+script = ExtResource("3_qlg0r")
+layer_name = &"overlay"
+metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
+
+[node name="Sprite" type="Sprite2D" parent="Anchor/Aim/Aim Indicator" unique_id=255861979]
+position = Vector2(24, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_g2els")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2033808832]
 shape = SubResource("CircleShape2D_j6edp")
 debug_color = Color(0, 1, 0, 0)
 
-[node name="Camera" type="Camera2D" parent="." unique_id=1016671712]
-top_level = true
-zoom = Vector2(4, 4)
-
-[node name="Aim" type="Node2D" parent="." unique_id=752974397]
-
-[node name="Sprite" type="Sprite2D" parent="Aim" unique_id=255861979]
-position = Vector2(24, 0)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_g2els")
-
 [node name="Cursor" type="Node2D" parent="." unique_id=2046794580]
 visible = false
 top_level = true
+z_as_relative = false
+
+[node name="SortingLayer" type="Node" parent="Cursor" unique_id=368737276]
+script = ExtResource("3_qlg0r")
+layer_name = &"overlay"
+metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 
 [node name="Sprite" type="Sprite2D" parent="Cursor" unique_id=1539824544]
 scale = Vector2(0.5, 0.5)

@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cmh4vrcbqixfw" path="res://scripts/nodes/arrow_marker.gd" id="6_tuyoq"]
 [ext_resource type="PackedScene" uid="uid://dc8xyp5dwr6r6" path="res://scenes/health_bar.tscn" id="7_fjrip"]
 [ext_resource type="Texture2D" uid="uid://b7kc3vpy4q0ws" path="res://content/art/player_tentacle_segment.png" id="8_d2wvv"]
+[ext_resource type="Script" uid="uid://6fxhucstpsuh" path="res://scripts/nodes/player_claws.gd" id="9_claws"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 radius = 16.0
@@ -39,15 +40,17 @@ unique_name_in_owner = true
 [node name="Flip" type="Node2D" parent="Anchor" unique_id=1497506262]
 unique_name_in_owner = true
 
+[node name="Claws" type="Node2D" parent="Anchor" unique_id=1186114137 node_paths=PackedStringArray("aim_node", "head_attach")]
+z_index = -1
+script = ExtResource("9_claws")
+aim_node = NodePath("../Aim")
+head_attach = NodePath("../Aim/Sprite/Line Connet Point - Head")
+claw_texture = ExtResource("5_y4r1p")
+arm_texture = ExtResource("8_d2wvv")
+stretch_per_speed = 5.0
+
 [node name="Aim" type="Node2D" parent="Anchor" unique_id=74387387]
 unique_name_in_owner = true
-
-[node name="Line2D" type="Line2D" parent="Anchor/Aim" unique_id=241061451]
-texture_repeat = 2
-points = PackedVector2Array(2, 0, -6, -3, -13, 0)
-width = 7.0
-texture = ExtResource("8_d2wvv")
-texture_mode = 1
 
 [node name="Sprite" type="Sprite2D" parent="Anchor/Aim" unique_id=700019964]
 unique_name_in_owner = true
@@ -58,22 +61,6 @@ texture = ExtResource("4_qlg0r")
 
 [node name="Line Connet Point - Head" type="Marker2D" parent="Anchor/Aim/Sprite" unique_id=1269906581]
 position = Vector2(6.119594e-07, 14)
-gizmo_extents = 2.0
-
-[node name="Claw 1" type="Node2D" parent="Anchor/Aim" unique_id=1186114137]
-top_level = true
-
-[node name="Craw Sprite" type="Sprite2D" parent="Anchor/Aim/Claw 1" unique_id=1606455665]
-unique_name_in_owner = true
-position = Vector2(-20, 0)
-rotation = 1.5707964
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_y4r1p")
-
-[node name="Line Connet Point" type="Marker2D" parent="Anchor/Aim/Claw 1/Craw Sprite" unique_id=1597539594]
-position = Vector2(-6.119594e-07, -14)
-rotation = -1.5707964
-scale = Vector2(2, 2)
 gizmo_extents = 2.0
 
 [node name="Aim Indicator" type="Node2D" parent="Anchor/Aim" unique_id=752974397]

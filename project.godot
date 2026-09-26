@@ -49,6 +49,16 @@ folder_colors={
 "res://scripts/": "green"
 }
 
+[layer_names]
+
+2d_physics/layer_1="Blocks Movement"
+2d_physics/layer_2="Blocks Projectiles"
+2d_physics/layer_5="General"
+2d_physics/layer_6="Player"
+2d_physics/layer_7="Enemy"
+2d_physics/layer_8="Player Projectile"
+2d_physics/layer_9="Enemy Projectile"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

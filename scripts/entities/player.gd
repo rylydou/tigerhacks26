@@ -7,10 +7,13 @@ static var instance: Player
 signal dealt_damage_to_enemy(damage: int)
 
 
-@export var move_speed: float = 200.0
+@export var health := 100
+@onready var max_health := health
 
-@export var fire_rate: float = 2.0
-var shoot_cooldown: float = 0.0
+@export var move_speed := 4.0
+
+@export var fire_rate := 2.0
+var shoot_cooldown := 0.0
 
 
 @export var bullet_scene: PackedScene
@@ -80,7 +83,7 @@ func _process_movement(delta: float) -> void:
 
 func shoot() -> void:
 	if not bullet_scene: return
-	var bullet_instance: PlayerProjectile = bullet_scene.instantiate()
+	var bullet_instance: BasicProjectile = bullet_scene.instantiate()
 	bullet_instance.global_position = global_position
 	bullet_instance.rotation = angle
 	bullet_instance.player = self
@@ -113,3 +116,22 @@ func try_attack(target: Node2D, damage: int, knockback_strength: float) -> bool:
 		dealt_damage_to_enemy.emit(int(real_damage))
 	
 	return did_hit
+
+
+func take_damage(damage: int, knockback: Vector2) -> bool:
+	# Apply damage to the player's health
+	health -= damage
+	
+	# Apply knockback to the player
+	velocity += knockback
+	
+	# Check if the player is dead
+	if health <= 0:
+		die()
+	
+	return true
+
+
+func die() -> void:
+	health = max_health
+	velocity = Vector2.ZERO

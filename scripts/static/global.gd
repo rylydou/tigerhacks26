@@ -7,3 +7,4 @@ const BLOCKER_GROUP := &'blocker'
 
 
 static var gravity := 16.0
+const UNIT_SCALE := 16.0

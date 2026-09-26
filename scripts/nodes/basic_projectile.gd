@@ -1,20 +1,26 @@
-class_name BasicPlayerProjectile extends PlayerProjectile
+class_name BasicProjectile extends Projectile
 
 
-@export var base_range := 4.0
-@export var base_speed := 8.0
+@export var range := 6.0
+@export var speed := 5.0
+
+var speed_scale := 1.0
+var range_scale := 1.0
 
 
-func _physics_process(delta: float) -> void:
-	position += (
-		transform.basis_xform(Vector2.RIGHT) *
-		base_speed *
-		speed_scale *
-		delta * 16.0
-	)
+@onready var direction := transform.basis_xform(Vector2.RIGHT)
+@onready var starting_position := position
+
+
+func _step(delta: float) -> bool:
+	var distance := age * speed * Global.UNIT_SCALE
 	
-	super._physics_process(delta)
+	position = starting_position + direction * distance
 	
-	if distance_traveled > base_range * range_scale * 16.0:
-		destroy(false)
-		return
+	# prints("age=", age, "distance=", distance)
+	
+	if distance >= range * Global.UNIT_SCALE * range_scale:
+		die()
+		return false
+	
+	return true

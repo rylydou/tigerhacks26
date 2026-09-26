@@ -1,4 +1,4 @@
-class_name PlayerProjectile extends ShapeCast2D
+class_name Projectile extends Hitbox
 
 
 signal impacted()
@@ -6,83 +6,92 @@ signal destroyed_from_collision()
 signal destroyed_from_range()
 
 
-@export var damage := 0
-@export var damage_variation := 0.15
-@export var knockback_strength := 0.0
+@export var microsteps_per_frame := 1
+@export var blocked_on_wall := true
+
 @export var pierce_count := 0
-@export var stun := 0.0
-@export var hits_walls := true
 
 
-@onready var direction := global_transform.basis_xform(Vector2.RIGHT)
 @onready var _previous_position := position
 
 @onready var raycast := RayCast2D.new()
 
 
-var player: Player
-
-var speed_scale := 1.0
-var range_scale := 1.0
-
-var distance_traveled := 0.0
-var remembered_hits: Array[Node2D] = []
+var age := 0.0
+var is_dead := false
 
 
 func _ready() -> void:
 	add_child(raycast)
+	raycast.top_level = true
 	raycast.collision_mask = 0
-	if hits_walls:
+	raycast.enabled = false
+	if blocked_on_wall:
 		raycast.set_collision_mask_value(2, true)
 	
 	pierce_count = 1
 	
-	_physics_process(0.0)
+	attack_overlap()
 
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
+	
 	var saved_position := position
 	
-	var motion := saved_position - _previous_position
-	var distance := motion.length()
-	distance_traveled += distance
+	for microstep in microsteps_per_frame:
+		var micro_delta := delta / microsteps_per_frame
+		do_step(micro_delta)
+		attack_overlap()
+		if is_dead:
+			return
 	
-	raycast.target_position.y = 0
-	raycast.target_position.x = distance
-	raycast.force_raycast_update()
+	if blocked_on_wall and position.is_equal_approx(saved_position):
+		raycast.position = saved_position
+		raycast.target_position = position
+		raycast.force_raycast_update()
+		
+		if raycast.is_colliding():
+			global_position = raycast.get_collision_point()
+			destroy(true)
 	
-	position = _previous_position
-	if raycast.is_colliding():
-		target_position.x = to_local(raycast.get_collision_point()).length()
-	else:
-		target_position.x = distance
-	force_shapecast_update()
-	
-	for collision: Dictionary in collision_result:
-		var node: Node2D = collision.collider
-		if remembered_hits.has(node): continue
-		var has_hit := player.try_attack(node, damage * Math.rand_var(1.0, damage_variation / 2.0), knockback_strength)
-		if has_hit:
-			remembered_hits.append(node)
-			if stun > 0.0 and node.has_method('stun'):
-				node.stun(stun)
-			pierce_count -= 1
-			damage *= 0.5
-			knockback_strength *= 0.5
-			if pierce_count < 0:
-				position = collision.point
-				destroy(true)
-				return
-	
-	if raycast.is_colliding():
-		global_position = raycast.get_collision_point()
-		destroy(true)
-	
-	position = saved_position
 	_previous_position = position
 
 
+func do_step(delta: float) -> void:
+	age += delta
+	var continue_running := _step(delta)
+	
+	if not continue_running:
+		print("die eol")
+		die()
+
+
+## Return false when the projectile should stop die
+func _step(delta: float) -> bool:
+	return true
+
+
+func _on_attacked(node: Node2D) -> void:
+	if is_dead: return
+	
+	pierce_count -= 1
+	if pierce_count < 0:
+		print("die from attack")
+		destroy(true)
+
+
+func die() -> void:
+	destroy(false)
+
+
 func destroy(from_collision: bool) -> void:
+	if is_dead: return
+	is_dead = true
+	
+	auto_attack = false
+	
 	if from_collision:
 		destroyed_from_collision.emit()
 	else:

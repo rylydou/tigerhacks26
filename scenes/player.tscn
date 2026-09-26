@@ -5,15 +5,17 @@
 [ext_resource type="PackedScene" uid="uid://d1ydlfnt00bos" path="res://scenes/player_bullet.tscn" id="2_qhqgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
-radius = 8.0
+radius = 16.0
 
 [node name="Player" type="CharacterBody2D" unique_id=291338747 node_paths=PackedStringArray("cursor_node")]
+collision_layer = 48
 script = ExtResource("1_3vyb7")
 move_speed = 10.0
 bullet_scene = ExtResource("2_qhqgy")
 cursor_node = NodePath("Cursor")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=700019964]
+scale = Vector2(2, 2)
 texture = ExtResource("2_g2els")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2033808832]
@@ -27,13 +29,14 @@ zoom = Vector2(4, 4)
 [node name="Aim" type="Node2D" parent="." unique_id=752974397]
 
 [node name="Sprite" type="Sprite2D" parent="Aim" unique_id=255861979]
-position = Vector2(12, 0)
-scale = Vector2(0.25, 0.25)
+position = Vector2(24, 0)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_g2els")
 
 [node name="Cursor" type="Node2D" parent="." unique_id=2046794580]
+visible = false
 top_level = true
 
 [node name="Sprite" type="Sprite2D" parent="Cursor" unique_id=1539824544]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_g2els")

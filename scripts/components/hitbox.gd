@@ -1,15 +1,6 @@
 class_name Hitbox extends Area2D
 
 
-enum DamageType {
-	Generic,
-	Melee,
-	Bullet,
-	Explosion,
-	Crit,
-}
-
-
 signal attacked(node: Node2D)
 
 
@@ -17,7 +8,6 @@ signal attacked(node: Node2D)
 @export var base_damage := 0
 @export var damage_variation := 0.15
 @export var knockback_strength := 0.0
-@export var damage_type := DamageType.Generic
 @export var stun := 0.0
 @export var always_attack := false
 
@@ -47,11 +37,32 @@ func attack_overlap() -> void:
 
 func attack_node(node: Node2D) -> bool:
 	if remembered_hits.has(node): return false
-	if player.health <= 0 and not always_attack: return false
+	
+	if is_instance_valid(player):
+		if player.health <= 0 and not always_attack:
+			return false
+	
+	
+	# Compute damage
 	var damage := base_damage
 	damage *= Math.rand_var(1.0, damage_variation / 2.0)
-	var has_hit := player.try_attack(node, damage, knockback_strength, damage_type)
+	
+	var has_hit := false
+	
+	if is_instance_valid(player):
+		has_hit = player.try_attack(node, damage, knockback_strength)
+	elif node.has_method(&"take_damage"):
+		has_hit = node.take_damage(damage, knockback_strength)
+	
+	_on_attacked(node)
 	attacked.emit(node)
-	if has_hit and stun > 0.0 and node.has_method(&'stun'):
+	
+	# Inflict stun if the attack was successful and the target can be stunned
+	if has_hit and stun > 0.0 and node.has_method(&'take_stun'):
 		node.stun(stun)
+	
 	return has_hit
+
+
+func _on_attacked(node: Node2D) -> void:
+	pass

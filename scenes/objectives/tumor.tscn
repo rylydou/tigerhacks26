@@ -3,11 +3,9 @@
 [ext_resource type="Shader" uid="uid://dngmyb4e35gx5" path="res://content/shaders/actor.gdshader" id="2_hjanu"]
 [ext_resource type="Script" uid="uid://bjmxlb0bebeja" path="res://scripts/nodes/tumor.gd" id="2_jok2d"]
 [ext_resource type="Script" uid="uid://1080m73s0jqw" path="res://scripts/ai/inf_loop.gd" id="2_rpf30"]
-[ext_resource type="Script" uid="uid://baod8tk548u61" path="res://scripts/resources/enemy_wave.gd" id="3_1hhae"]
 [ext_resource type="Script" uid="uid://i28305hi3pn1" path="res://scripts/components/shaker.gd" id="3_hjanu"]
 [ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="3_jok2d"]
 [ext_resource type="PackedScene" uid="uid://bwokgdo8siiaw" path="res://scenes/shadow.tscn" id="4_ahyh1"]
-[ext_resource type="PackedScene" uid="uid://bdvkkoo15mqai" path="res://scenes/enemies/trooper.tscn" id="4_dywxy"]
 [ext_resource type="PackedScene" uid="uid://dc8xyp5dwr6r6" path="res://scenes/health_bar.tscn" id="6_1hhae"]
 [ext_resource type="Texture2D" uid="uid://k3kraixjli1m" path="res://content/art/tumor.png" id="7_1hhae"]
 
@@ -16,21 +14,6 @@ resource_local_to_scene = true
 shader = ExtResource("2_hjanu")
 shader_parameter/invert_intensity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 0)
-
-[sub_resource type="Resource" id="Resource_jok2d"]
-script = ExtResource("3_1hhae")
-enemies = Array[PackedScene]([ExtResource("4_dywxy")])
-metadata/_custom_type_script = "uid://baod8tk548u61"
-
-[sub_resource type="Resource" id="Resource_dibsq"]
-script = ExtResource("3_1hhae")
-enemies = Array[PackedScene]([ExtResource("4_dywxy"), ExtResource("4_dywxy")])
-metadata/_custom_type_script = "uid://baod8tk548u61"
-
-[sub_resource type="Resource" id="Resource_1hhae"]
-script = ExtResource("3_1hhae")
-enemies = Array[PackedScene]([ExtResource("4_dywxy"), ExtResource("4_dywxy"), ExtResource("4_dywxy")])
-metadata/_custom_type_script = "uid://baod8tk548u61"
 
 [sub_resource type="LabelSettings" id="LabelSettings_j6edp"]
 font_size = 6
@@ -59,12 +42,12 @@ script = ExtResource("2_jok2d")
 spawn_radius_max = 6.0
 spawn_radius_min = 2.0
 activation_radius = 2.0
-max_tumor_enemies = 5
-tumor_spawn_at_health = Array[int]([25, 75])
-tumor_max_interval_spawns = 2
-tumor_min_spawn_time = 3.0
+max_alive_enemies = 5
+health_milestones = Array[int]([25, 75])
+interval_time = 15.0
+interval_max_waves = 2
+spawn_cooldown = 3.0
 shaker = NodePath("Anchor/Flip/Sprite/Shaker")
-waves = Array[ExtResource("3_1hhae")]([SubResource("Resource_jok2d"), SubResource("Resource_dibsq"), SubResource("Resource_1hhae")])
 
 [node name="AI" type="Node" parent="." unique_id=321266617 groups=["enemy", "objective"]]
 unique_name_in_owner = true

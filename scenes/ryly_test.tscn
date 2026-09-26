@@ -4,14 +4,33 @@
 [ext_resource type="PackedScene" uid="uid://bdvkkoo15mqai" path="res://scenes/enemies/trooper.tscn" id="2_ne7xr"]
 [ext_resource type="Shader" uid="uid://dngmyb4e35gx5" path="res://content/shaders/actor.gdshader" id="3_qxrsy"]
 [ext_resource type="PackedScene" uid="uid://c4eynv1vp3i3a" path="res://scenes/objectives/tumor.tscn" id="4_4hfe6"]
+[ext_resource type="PackedScene" uid="uid://m8pqti13a75g" path="res://scenes/enemies/shooter_1.tscn" id="5_lgnhk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4hfe6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lv11a"]
 resource_local_to_scene = true
 shader = ExtResource("3_qxrsy")
 shader_parameter/invert_intensity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lgnhk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ek1xu"]
+resource_local_to_scene = true
+shader = ExtResource("3_qxrsy")
+shader_parameter/invert_intensity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3t2q"]
+resource_local_to_scene = true
+shader = ExtResource("3_qxrsy")
+shader_parameter/invert_intensity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cyfga"]
+resource_local_to_scene = true
+shader = ExtResource("3_qxrsy")
+shader_parameter/invert_intensity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6kaf4"]
 resource_local_to_scene = true
 shader = ExtResource("3_qxrsy")
 shader_parameter/invert_intensity = 0.0
@@ -22,9 +41,21 @@ shader_parameter/flash_color = Color(1, 1, 1, 0)
 [node name="Player" parent="." unique_id=291338747 instance=ExtResource("1_hljss")]
 
 [node name="Trooper" parent="." unique_id=1744553126 instance=ExtResource("2_ne7xr")]
-material = SubResource("ShaderMaterial_4hfe6")
+material = SubResource("ShaderMaterial_lv11a")
 position = Vector2(100, 1)
 
 [node name="Tumor" parent="." unique_id=1277576953 instance=ExtResource("4_4hfe6")]
-material = SubResource("ShaderMaterial_lgnhk")
+material = SubResource("ShaderMaterial_ek1xu")
 position = Vector2(49, -56)
+
+[node name="Trooper2" parent="." unique_id=1988776274 instance=ExtResource("5_lgnhk")]
+material = SubResource("ShaderMaterial_l3t2q")
+position = Vector2(-110, -49)
+
+[node name="Trooper3" parent="." unique_id=1135049489 instance=ExtResource("5_lgnhk")]
+material = SubResource("ShaderMaterial_cyfga")
+position = Vector2(-63, -128)
+
+[node name="Trooper4" parent="." unique_id=814614736 instance=ExtResource("5_lgnhk")]
+material = SubResource("ShaderMaterial_6kaf4")
+position = Vector2(-134, 109)

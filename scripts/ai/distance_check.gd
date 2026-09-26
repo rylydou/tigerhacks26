@@ -11,7 +11,7 @@ enum Condition {
 @export var distance := 0.0
 
 
-@onready var distance_sqr := (distance * 16) ** 2
+@onready var distance_sqr := (distance * Global.UNIT_SCALE) ** 2
 
 
 func _start() -> int:

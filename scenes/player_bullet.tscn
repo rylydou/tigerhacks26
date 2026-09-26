@@ -12,6 +12,7 @@ collision_mask = 66
 script = ExtResource("1_46jqs")
 range = 20.0
 speed = 10.0
+microsteps_per_frame = 4
 base_damage = 5
 metadata/_custom_type_script = "uid://b1oonu3v42rwi"
 

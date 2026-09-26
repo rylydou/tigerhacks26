@@ -19,6 +19,7 @@ enum DirectionMode {
 var timer := 0.0
 
 var angle := 0.0
+var move_speed := 0.0
 
 
 func _start() -> int:
@@ -30,11 +31,20 @@ func _start() -> int:
 		DirectionMode.Random:
 			angle = randf() * TAU
 	
-	if distance > 0.0:
-		var speed := (distance * 16.0) / time
-		enemy.velocity = Vector2.from_angle(angle) * speed
-	
+	# Any two of time/speed/distance define the move. A negative speed or
+	# distance moves backwards.
+	var backwards := speed < 0.0 or distance < 0.0
 	timer = time
+	move_speed = absf(speed)
+	if distance != 0.0:
+		if timer <= 0.0 and move_speed > 0.0:
+			timer = absf(distance) / move_speed
+		elif timer > 0.0:
+			move_speed = absf(distance) / timer
+	if backwards: move_speed = -move_speed
+	
+	if move_speed != 0.0:
+		enemy.velocity = Vector2.from_angle(angle) * move_speed * 16.0
 	if async: return DONE
 	return CONTINUE
 
@@ -54,8 +64,8 @@ func move(delta: float) -> int:
 	if not is_instance_valid(enemy): return DONE
 	if enemy.stun_timer > 0.0: return CONTINUE
 	
-	if speed > 0.0:
-		enemy.velocity = Vector2.from_angle(angle) * speed * 16.0
+	if move_speed != 0.0:
+		enemy.velocity = Vector2.from_angle(angle) * move_speed * 16.0
 	var hit := enemy.move_and_slide()
 	if hit and bloackable:
 		return DONE

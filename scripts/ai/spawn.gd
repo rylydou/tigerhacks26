@@ -3,7 +3,7 @@ class_name Spawn extends Step
 
 @export var spread := 0.0
 @export var scene: PackedScene
-@export var spawn_marker: Marker2D
+@export var spawn_marker: ArrowMarker2D
 
 
 func _start() -> int:

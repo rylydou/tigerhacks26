@@ -20,7 +20,7 @@ shader_parameter/flash_color = Color(1, 1, 1, 0)
 radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
-radius = 14.0
+radius = 13.0
 
 [node name="Trooper" unique_id=1744553126 instance=ExtResource("1_kcpkc")]
 material = SubResource("ShaderMaterial_n5i6k")

@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://m8pqti13a75g"]
+
+[ext_resource type="PackedScene" uid="uid://douuygm6x2pjt" path="res://scenes/base_enemy.tscn" id="1_ndfwh"]
+[ext_resource type="Shader" uid="uid://dngmyb4e35gx5" path="res://content/shaders/actor.gdshader" id="2_wg5ct"]
+[ext_resource type="Script" uid="uid://b6qo6m0jbhvc4" path="res://scripts/ai/set_aggro.gd" id="3_e4lkg"]
+[ext_resource type="Script" uid="uid://1080m73s0jqw" path="res://scripts/ai/inf_loop.gd" id="4_vwmxe"]
+[ext_resource type="Script" uid="uid://dru0qb2u35mg8" path="res://scripts/ai/angle_aggro.gd" id="5_57ak5"]
+[ext_resource type="Script" uid="uid://dm6irqqo5gany" path="res://scripts/ai/repeat.gd" id="6_7dfrs"]
+[ext_resource type="Script" uid="uid://3drffr203isv" path="res://scripts/ai/move.gd" id="7_1jytt"]
+[ext_resource type="Script" uid="uid://jqucvy5xowjc" path="res://scripts/ai/distance_check.gd" id="8_e4lkg"]
+[ext_resource type="PackedScene" uid="uid://bwokgdo8siiaw" path="res://scenes/shadow.tscn" id="8_nl5re"]
+[ext_resource type="Texture2D" uid="uid://bvc3n3njy78js" path="res://content/art/ranged_bacteria.png" id="8_wg5ct"]
+[ext_resource type="Script" uid="uid://dg5kvh3im5gs3" path="res://scripts/ai/wait.gd" id="9_1jytt"]
+[ext_resource type="Script" uid="uid://5obrtbl58nle" path="res://scripts/components/hitbox.gd" id="9_4de86"]
+[ext_resource type="Script" uid="uid://de8563vgpvbpu" path="res://scripts/ai/spawn.gd" id="9_57ak5"]
+[ext_resource type="Script" uid="uid://cdyexhaimbgdv" path="res://scripts/ai/jump.gd" id="10_4de86"]
+[ext_resource type="PackedScene" uid="uid://ctnlvpbpes54g" path="res://scenes/enemies/projectile/bullet_1.tscn" id="10_7dfrs"]
+[ext_resource type="Script" uid="uid://c3kxdy6tuip1g" path="res://scripts/ai/wait_until_grounded.gd" id="11_0kb7m"]
+[ext_resource type="Script" uid="uid://cmh4vrcbqixfw" path="res://scripts/nodes/arrow_marker.gd" id="11_7dfrs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndfwh"]
+resource_local_to_scene = true
+shader = ExtResource("2_wg5ct")
+shader_parameter/invert_intensity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1bvlm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
+
+[node name="Trooper" unique_id=1744553126 instance=ExtResource("1_ndfwh")]
+material = SubResource("ShaderMaterial_ndfwh")
+max_health = 20
+
+[node name="SetAggro" type="Node" parent="AI" parent_id_path=PackedInt32Array(321266617) index="0" unique_id=309202717]
+script = ExtResource("3_e4lkg")
+metadata/_custom_type_script = "uid://b6qo6m0jbhvc4"
+
+[node name="InfLoop" type="Node" parent="AI" parent_id_path=PackedInt32Array(321266617) index="1" unique_id=1100846405]
+script = ExtResource("4_vwmxe")
+
+[node name="Repeat" type="Node" parent="AI/InfLoop" index="0" unique_id=2142245016]
+script = ExtResource("6_7dfrs")
+count = 5
+count_max = 10
+
+[node name="AngleAggro" type="Node" parent="AI/InfLoop/Repeat" index="0" unique_id=912034490]
+script = ExtResource("5_57ak5")
+metadata/_custom_type_script = "uid://dru0qb2u35mg8"
+
+[node name="Backup" type="Node" parent="AI/InfLoop/Repeat" index="1" unique_id=2108858348]
+script = ExtResource("8_e4lkg")
+distance = 3.0
+metadata/_custom_type_script = "uid://jqucvy5xowjc"
+
+[node name="Move" type="Node" parent="AI/InfLoop/Repeat/Backup" index="0" unique_id=1487251306]
+script = ExtResource("7_1jytt")
+direction_mode = 2
+speed = 2.0
+distance = 1.0
+metadata/_custom_type_script = "uid://3drffr203isv"
+
+[node name="Move2" type="Node" parent="AI/InfLoop/Repeat/Backup" index="1" unique_id=272084076]
+script = ExtResource("7_1jytt")
+speed = -2.0
+distance = 3.0
+metadata/_custom_type_script = "uid://3drffr203isv"
+
+[node name="Approch" type="Node" parent="AI/InfLoop/Repeat" index="2" unique_id=202235704]
+script = ExtResource("8_e4lkg")
+condition = 1
+distance = 7.0
+metadata/_custom_type_script = "uid://jqucvy5xowjc"
+
+[node name="Move" type="Node" parent="AI/InfLoop/Repeat/Approch" index="0" unique_id=2093501578]
+script = ExtResource("7_1jytt")
+speed = 1.25
+distance = 1.0
+metadata/_custom_type_script = "uid://3drffr203isv"
+
+[node name="Shoot" type="Node" parent="AI/InfLoop" index="1" unique_id=1565009711]
+script = ExtResource("8_e4lkg")
+distance = 8.0
+metadata/_custom_type_script = "uid://jqucvy5xowjc"
+
+[node name="Wait" type="Node" parent="AI/InfLoop/Shoot" index="0" unique_id=718750978]
+script = ExtResource("9_1jytt")
+duration_max = 1.0
+metadata/_custom_type_script = "uid://dg5kvh3im5gs3"
+
+[node name="AngleAggro" type="Node" parent="AI/InfLoop/Shoot" index="1" unique_id=108959827]
+script = ExtResource("5_57ak5")
+metadata/_custom_type_script = "uid://dru0qb2u35mg8"
+
+[node name="Jump" type="Node" parent="AI/InfLoop/Shoot" index="2" unique_id=879748877]
+script = ExtResource("10_4de86")
+force = 5.0
+metadata/_custom_type_script = "uid://cdyexhaimbgdv"
+
+[node name="WaitUntilGrounded" type="Node" parent="AI/InfLoop/Shoot" index="3" unique_id=1973838766]
+script = ExtResource("11_0kb7m")
+metadata/_custom_type_script = "uid://c3kxdy6tuip1g"
+
+[node name="Spawn" type="Node" parent="AI/InfLoop/Shoot" index="4" unique_id=1117426747 node_paths=PackedStringArray("spawn_marker")]
+script = ExtResource("9_57ak5")
+scene = ExtResource("10_7dfrs")
+spawn_marker = NodePath("../../../../Anchor/Aim/ArrowMarker2D")
+metadata/_custom_type_script = "uid://de8563vgpvbpu"
+
+[node name="Wait2" type="Node" parent="AI/InfLoop/Shoot" index="5" unique_id=400771947]
+script = ExtResource("9_1jytt")
+duration_max = 1.0
+metadata/_custom_type_script = "uid://dg5kvh3im5gs3"
+
+[node name="Sprite" parent="Anchor/Flip" parent_id_path=PackedInt32Array(110987953) index="0" unique_id=734140586]
+texture = ExtResource("8_wg5ct")
+
+[node name="ArrowMarker2D" type="Node2D" parent="Anchor/Aim" parent_id_path=PackedInt32Array(1272666351) index="0" unique_id=1717523709]
+position = Vector2(10, 0)
+script = ExtResource("11_7dfrs")
+metadata/_custom_type_script = "uid://cmh4vrcbqixfw"
+
+[node name="Collision" parent="." index="3" unique_id=1447223190]
+shape = SubResource("CircleShape2D_1bvlm")
+
+[node name="Shadow" parent="." index="4" unique_id=1880057843 instance=ExtResource("8_nl5re")]
+position = Vector2(0, 14)
+
+[node name="Hitbox" type="Area2D" parent="." index="5" unique_id=690062315]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("9_4de86")
+auto_attack = true
+base_damage = 20
+remember_hits = false
+metadata/_custom_type_script = "uid://5obrtbl58nle"
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox" index="0" unique_id=68116109]
+shape = SubResource("CircleShape2D_j6edp")
+debug_color = Color(1, 0, 0, 0)

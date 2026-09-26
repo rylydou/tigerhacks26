@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://6fxhucstpsuh" path="res://scripts/nodes/player_claws.gd" id="9_claws"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
-radius = 16.0
+radius = 12.0
 
 [node name="Player" type="CharacterBody2D" unique_id=291338747 node_paths=PackedStringArray("cursor_node", "shoot_pos_node")]
 z_index = -800

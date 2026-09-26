@@ -2,11 +2,14 @@
 
 [ext_resource type="Script" uid="uid://b1oonu3v42rwi" path="res://scripts/nodes/basic_projectile.gd" id="1_v6s6y"]
 [ext_resource type="Texture2D" uid="uid://d4cyiyd73nx3t" path="res://content/art/enemy_projectile.png" id="2_o21tv"]
+[ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="3_rdjp7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 radius = 4.0
 
 [node name="Enemy Bullet 1" type="Area2D" unique_id=1522787912]
+z_index = -600
+z_as_relative = false
 collision_layer = 144
 collision_mask = 34
 script = ExtResource("1_v6s6y")
@@ -23,3 +26,8 @@ texture = ExtResource("2_o21tv")
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=510202460]
 shape = SubResource("CircleShape2D_j6edp")
 debug_color = Color(1, 0, 0, 0)
+
+[node name="SortingLayer" type="Node" parent="." unique_id=121500804]
+script = ExtResource("3_rdjp7")
+layer_name = &"projectile"
+metadata/_custom_type_script = "uid://dkcr2cy77fa0a"

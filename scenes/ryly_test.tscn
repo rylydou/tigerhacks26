@@ -14,29 +14,33 @@
 [ext_resource type="Script" uid="uid://b53xmjqtgm4r3" path="res://scripts/map_gen/steps/carve_tunnels_step.gd" id="12_mci7o"]
 [ext_resource type="Script" uid="uid://cf716wnr1xou8" path="res://scripts/map_gen/steps/smooth_step.gd" id="13_ceqwj"]
 [ext_resource type="Script" uid="uid://c31ipm6w48f6c" path="res://scripts/map_gen/steps/fill_isolated_step.gd" id="14_emgfa"]
+[ext_resource type="Texture2D" uid="uid://cvl25pap17t0y" path="res://content/art/tileset_template.png" id="15_oq6fy"]
+[ext_resource type="Texture2D" uid="uid://bgrpwrjmalfk3" path="res://content/art/tileset_side_walls.png" id="16_ceqwj"]
+[ext_resource type="Script" uid="uid://po8u41gtfnpo" path="res://scripts/map_gen/dual_grid_layer.gd" id="16_e0xjg"]
+[ext_resource type="Texture2D" uid="uid://cm5u5f05lb411" path="res://content/art/tileset_tops.png" id="17_0p4x6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cyfga"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e0xjg"]
 resource_local_to_scene = true
 shader = ExtResource("3_qxrsy")
 shader_parameter/invert_intensity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 0)
 shader_parameter/desaturate = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xk2b5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mci7o"]
 resource_local_to_scene = true
 shader = ExtResource("3_qxrsy")
 shader_parameter/invert_intensity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 0)
 shader_parameter/desaturate = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k1a5r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ceqwj"]
 resource_local_to_scene = true
 shader = ExtResource("3_qxrsy")
 shader_parameter/invert_intensity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 0)
 shader_parameter/desaturate = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g04cy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0p4x6"]
 resource_local_to_scene = true
 shader = ExtResource("3_qxrsy")
 shader_parameter/invert_intensity = 0.0
@@ -57,7 +61,7 @@ sources/0 = SubResource("TileSetAtlasSource_e0xjg")
 
 [sub_resource type="Resource" id="Resource_0p4x6"]
 script = ExtResource("10_oq6fy")
-radius_range = Vector2(10, 15)
+radius_range = Vector2(3, 5)
 edge_margin = 3.0
 min_gap = 3.0
 
@@ -68,7 +72,8 @@ arena_influence = 1.0
 
 [sub_resource type="Resource" id="Resource_xnjde"]
 script = ExtResource("12_mci7o")
-extra_connection_chance = 0.25
+radius = 2.0
+extra_connection_chance = 0.5
 
 [sub_resource type="Resource" id="Resource_dbd5e"]
 script = ExtResource("13_ceqwj")
@@ -76,6 +81,72 @@ script = ExtResource("13_ceqwj")
 [sub_resource type="Resource" id="Resource_g04cy"]
 script = ExtResource("14_emgfa")
 metadata/_custom_type_script = "uid://c31ipm6w48f6c"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mci7o"]
+texture = ExtResource("15_oq6fy")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+0:3/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_glu8d"]
+texture = ExtResource("16_ceqwj")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+0:3/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xnjde"]
+texture = ExtResource("17_0p4x6")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+0:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_j6edp"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_mci7o")
+sources/1 = SubResource("TileSetAtlasSource_glu8d")
+sources/2 = SubResource("TileSetAtlasSource_xnjde")
 
 [node name="Ryly Test" type="Node2D" unique_id=986588181]
 
@@ -99,25 +170,50 @@ metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 [node name="Player" parent="." unique_id=291338747 instance=ExtResource("1_hljss")]
 
 [node name="Trooper" parent="." unique_id=1744553126 instance=ExtResource("2_ne7xr")]
-material = SubResource("ShaderMaterial_cyfga")
+material = SubResource("ShaderMaterial_e0xjg")
 position = Vector2(100, 1)
 
 [node name="Trooper2" parent="." unique_id=1988776274 instance=ExtResource("5_lgnhk")]
-material = SubResource("ShaderMaterial_xk2b5")
+material = SubResource("ShaderMaterial_mci7o")
 position = Vector2(-110, -49)
 
 [node name="Trooper3" parent="." unique_id=1135049489 instance=ExtResource("5_lgnhk")]
-material = SubResource("ShaderMaterial_k1a5r")
+material = SubResource("ShaderMaterial_ceqwj")
 position = Vector2(-63, -128)
 
 [node name="Trooper4" parent="." unique_id=814614736 instance=ExtResource("5_lgnhk")]
-material = SubResource("ShaderMaterial_g04cy")
+material = SubResource("ShaderMaterial_0p4x6")
 position = Vector2(-134, 109)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1846879771]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1846879771 node_paths=PackedStringArray("visual_layers")]
+self_modulate = Color(1, 1, 1, 0)
 tile_set = SubResource("TileSet_emgfa")
 script = ExtResource("8_g04cy")
 map_size = Vector2i(64, 64)
 steps = Array[ExtResource("9_emgfa")]([SubResource("Resource_0p4x6"), SubResource("Resource_glu8d"), SubResource("Resource_xnjde"), SubResource("Resource_dbd5e"), SubResource("Resource_g04cy")])
-wall_atlas_coords = null
-save_png = null
+visual_layers = [NodePath("Side Walls"), NodePath("Tops")]
+
+[node name="Side Walls" type="TileMapLayer" parent="TileMapLayer" unique_id=1268823674]
+z_index = -1000
+z_as_relative = false
+tile_set = SubResource("TileSet_j6edp")
+script = ExtResource("16_e0xjg")
+display_source_id = 1
+
+[node name="SortingLayer" type="Node" parent="TileMapLayer/Side Walls" unique_id=154413621]
+script = ExtResource("7_ek1xu")
+layer_name = &"wall"
+metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
+
+[node name="Tops" type="TileMapLayer" parent="TileMapLayer" unique_id=1024917762]
+z_index = -400
+z_as_relative = false
+position = Vector2(0, -24)
+tile_set = SubResource("TileSet_j6edp")
+script = ExtResource("16_e0xjg")
+display_source_id = 2
+
+[node name="SortingLayer" type="Node" parent="TileMapLayer/Tops" unique_id=1581853842]
+script = ExtResource("7_ek1xu")
+layer_name = &"foreground"
+metadata/_custom_type_script = "uid://dkcr2cy77fa0a"

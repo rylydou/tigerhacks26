@@ -18,6 +18,8 @@ const SPAWNED_GROUP := &"level_generator_spawned"
 @export_group("Tiles")
 @export var wall_source_id := 0
 @export var wall_atlas_coords := Vector2i.ZERO
+## Visual layers rebuilt from this layer after generating.
+@export var visual_layers: Array[DualGridLayer] = []
 @export_group("Spawns")
 @export var tumor_scene: PackedScene = preload("res://scenes/objectives/tumor.tscn")
 @export_group("Debug")
@@ -39,6 +41,9 @@ func generate() -> MapGrid:
 			step.apply(ctx)
 
 	_paint_tiles(ctx.grid)
+	for layer in visual_layers:
+		if layer:
+			layer.refresh(self)
 	_spawn_tumors(ctx)
 	if save_png:
 		_save_png(ctx)

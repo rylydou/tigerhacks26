@@ -30,7 +30,7 @@ func grid_maker(dimensions: Vector2i) -> Array:
 	var grid: Array = []
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
-				if randf() > fill_chance:
+				if randf() < fill_chance:
 					grid.append(true)
 				elif x==0 or x==dimensions.x-1 or y==0 or y==dimensions.y-1:
 					grid.append(true)
@@ -52,14 +52,16 @@ func wall_counter(coords: Vector2i, grid: Array, dimensions: Vector2i) -> int:
 	
 func grid_itterations(grid: Array)->void:
 	var wall_count: int = 0
+	var clone_grid: Array = grid.duplicate()
 	for i in range(itterations):
 		for x in range(1, map_dimensions.x-1):
 			for y in range(1, map_dimensions.y-1):
 				wall_count = wall_counter(Vector2i(x, y), grid, map_dimensions)
 				if grid[grid_helper(x, y, map_dimensions.x)] == true and wall_count > 4:
-					grid[grid_helper(x, y, map_dimensions.x)] = false
-				elif grid[grid_helper(x, y, map_dimensions.x)] == false and wall_count < 4:
-					grid[grid_helper(x, y, map_dimensions.x)] = true
+					clone_grid[grid_helper(x, y, map_dimensions.x)] = false
+				elif grid[grid_helper(x, y, map_dimensions.x)] == false and wall_count <= 8:
+					clone_grid[grid_helper(x, y, map_dimensions.x)] = true
+		grid = clone_grid
 
 func render_map(grid: Array) -> void:
 	if !tilemap_layer:

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cgrctg1wgrtfy"]
+
+[ext_resource type="Script" uid="uid://ckfpww4b1v4ew" path="res://scripts/entities/simple_enemy_movement.gd" id="1_g35av"]
+[ext_resource type="Texture2D" uid="uid://dtw2wsnn0aent" path="res://content/art/placeholder.png" id="2_ldi2q"]
+[ext_resource type="PackedScene" uid="uid://coxfu178vwrco" path="res://scenes/player.tscn" id="3_m7d7t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j0ssb"]
+radius = 9.219544
+
+[node name="isaac_test" type="Node2D" unique_id=2017672281]
+
+[node name="SimpleEnemy" type="CharacterBody2D" parent="." unique_id=269751586 node_paths=PackedStringArray("player")]
+position = Vector2(129, 0)
+motion_mode = 1
+script = ExtResource("1_g35av")
+player = NodePath("../Player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SimpleEnemy" unique_id=1280511194]
+shape = SubResource("CircleShape2D_j0ssb")
+
+[node name="Placeholder" type="Sprite2D" parent="SimpleEnemy" unique_id=106720641]
+texture = ExtResource("2_ldi2q")
+
+[node name="Player" parent="." unique_id=291338747 instance=ExtResource("3_m7d7t")]
+position = Vector2(-144, 10)

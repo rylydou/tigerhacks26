@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b7pxy2u832cw0"]
+
+[ext_resource type="Script" uid="uid://ckfpww4b1v4ew" path="res://scripts/entities/simple_enemy_movement.gd" id="1_xtmrb"]
+[ext_resource type="Texture2D" uid="uid://dtw2wsnn0aent" path="res://content/art/placeholder.png" id="2_0j3ol"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j0ssb"]
+radius = 9.219544
+
+[node name="SimpleEnemy" type="CharacterBody2D" unique_id=1209147398]
+script = ExtResource("1_xtmrb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1276780382]
+shape = SubResource("CircleShape2D_j0ssb")
+
+[node name="Placeholder" type="Sprite2D" parent="." unique_id=1175559097]
+texture = ExtResource("2_0j3ol")

@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://i28305hi3pn1" path="res://scripts/components/shaker.gd" id="3_hjanu"]
 [ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="3_jok2d"]
 [ext_resource type="PackedScene" uid="uid://bwokgdo8siiaw" path="res://scenes/shadow.tscn" id="4_ahyh1"]
-[ext_resource type="Texture2D" uid="uid://bef1kodxao80y" path="res://content/art/melee_bacteria.png" id="4_dibsq"]
 [ext_resource type="PackedScene" uid="uid://bdvkkoo15mqai" path="res://scenes/enemies/trooper.tscn" id="4_dywxy"]
 [ext_resource type="PackedScene" uid="uid://dc8xyp5dwr6r6" path="res://scenes/health_bar.tscn" id="6_1hhae"]
+[ext_resource type="Texture2D" uid="uid://k3kraixjli1m" path="res://content/art/tumor.png" id="7_1hhae"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahyh1"]
 resource_local_to_scene = true
@@ -32,8 +32,14 @@ script = ExtResource("3_1hhae")
 enemies = Array[PackedScene]([ExtResource("4_dywxy"), ExtResource("4_dywxy"), ExtResource("4_dywxy")])
 metadata/_custom_type_script = "uid://baod8tk548u61"
 
+[sub_resource type="LabelSettings" id="LabelSettings_j6edp"]
+font_size = 6
+font_color = Color(1, 0, 0, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_hjanu"]
-radius = 16.0
+radius = 30.0
 
 [sub_resource type="Animation" id="Animation_1hhae"]
 resource_name = "spawn"
@@ -53,6 +59,10 @@ script = ExtResource("2_jok2d")
 spawn_radius_max = 6.0
 spawn_radius_min = 2.0
 activation_radius = 2.0
+max_tumor_enemies = 5
+tumor_spawn_at_health = Array[int]([25, 75])
+tumor_max_interval_spawns = 2
+tumor_min_spawn_time = 3.0
 shaker = NodePath("Anchor/Flip/Sprite/Shaker")
 waves = Array[ExtResource("3_1hhae")]([SubResource("Resource_jok2d"), SubResource("Resource_dibsq"), SubResource("Resource_1hhae")])
 
@@ -79,25 +89,46 @@ use_parent_material = true
 unique_name_in_owner = true
 modulate = Color(1, 0, 1, 1)
 use_parent_material = true
-texture = ExtResource("4_dibsq")
+position = Vector2(-1, -18)
+texture = ExtResource("7_1hhae")
 
 [node name="Shaker" type="Node" parent="Anchor/Flip/Sprite" unique_id=1128555727]
 script = ExtResource("3_hjanu")
-amplitude_max = 2.0
-frequency = 30.0
+amplitude = 0.0
+amplitude_max = 1.0
+frequency = 15.0
 
 [node name="Health Bar" parent="Anchor" unique_id=733537454 instance=ExtResource("6_1hhae")]
 position = Vector2(0, 16)
 is_boss = true
 
+[node name="Label" type="Label" parent="Anchor/Health Bar" unique_id=1826131091]
+texture_filter = 4
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -9.0
+offset_right = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "TUMOR"
+label_settings = SubResource("LabelSettings_j6edp")
+horizontal_alignment = 1
+vertical_alignment = 2
+
 [node name="Aim" type="Node2D" parent="Anchor" unique_id=1272666351]
 unique_name_in_owner = true
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1447223190]
+position = Vector2(0, -12)
 shape = SubResource("CircleShape2D_hjanu")
 debug_color = Color(0, 1, 0, 0)
 
 [node name="Shadow" parent="." unique_id=1277822842 instance=ExtResource("4_ahyh1")]
+visible = false
 position = Vector2(0, 14)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=486363414]

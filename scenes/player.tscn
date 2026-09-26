@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d1ydlfnt00bos" path="res://scenes/player_bullet.tscn" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="3_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://f8gv7jog2t8o" path="res://content/art/player_sprite.png" id="4_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://dn73adkgnhehh" path="res://content/art/aim_indicator.png" id="5_smehm"]
 [ext_resource type="Script" uid="uid://cmh4vrcbqixfw" path="res://scripts/nodes/arrow_marker.gd" id="6_tuyoq"]
 [ext_resource type="PackedScene" uid="uid://dc8xyp5dwr6r6" path="res://scenes/health_bar.tscn" id="7_fjrip"]
 
@@ -28,7 +29,7 @@ layer_name = &"player"
 metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 
 [node name="Camera" type="Camera2D" parent="." unique_id=1016671712]
-zoom = Vector2(4, 4)
+zoom = Vector2(3, 3)
 
 [node name="Anchor" type="Node2D" parent="." unique_id=1029665978]
 unique_name_in_owner = true
@@ -55,10 +56,9 @@ layer_name = &"overlay"
 metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 
 [node name="Sprite" type="Sprite2D" parent="Anchor/Aim/Aim Indicator" unique_id=255861979]
-visible = false
-position = Vector2(24, 0)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_g2els")
+position = Vector2(31, 0)
+rotation = 1.5707964
+texture = ExtResource("5_smehm")
 
 [node name="Shoot Pos Marker" type="Node2D" parent="Anchor/Aim" unique_id=1925815167]
 position = Vector2(16, 0)

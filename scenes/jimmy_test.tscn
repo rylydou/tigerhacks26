@@ -1,35 +1,59 @@
 [gd_scene format=3 uid="uid://dcl12vkd8x4w"]
 
 [ext_resource type="PackedScene" uid="uid://coxfu178vwrco" path="res://scenes/player.tscn" id="1_k50al"]
-[ext_resource type="Texture2D" uid="uid://bbsg5vudkasav" path="res://content/art/tilesheet_complete.png" id="2_722ph"]
+[ext_resource type="Texture2D" uid="uid://bbsg5vudkasav" path="res://content/art/TestSet.png" id="2_722ph"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ux0u"]
 texture = ExtResource("2_722ph")
 texture_region_size = Vector2i(64, 64)
 1:0/0 = 0
+1:0/0/terrain_set = 0
 2:0/0 = 0
+2:0/0/terrain_set = 0
 1:2/0 = 0
+1:2/0/terrain_set = 0
 1:1/0 = 0
+1:1/0/terrain_set = 0
 2:1/0 = 0
+2:1/0/terrain_set = 0
 2:2/0 = 0
+2:2/0/terrain_set = 0
 5:1/0 = 0
+5:1/0/terrain_set = 0
 6:1/0 = 0
+6:1/0/terrain_set = 0
 3:1/0 = 0
+3:1/0/terrain_set = 0
 4:1/0 = 0
+4:1/0/terrain_set = 0
 3:2/0 = 0
+3:2/0/terrain_set = 0
 4:2/0 = 0
+4:2/0/terrain_set = 0
 3:0/0 = 0
+3:0/0/terrain_set = 0
 4:0/0 = 0
+4:0/0/terrain_set = 0
 6:0/0 = 0
+6:0/0/terrain_set = 0
 5:0/0 = 0
+5:0/0/terrain_set = 0
 7:0/0 = 0
+7:0/0/terrain_set = 0
 8:0/0 = 0
+8:0/0/terrain_set = 0
 7:1/0 = 0
+7:1/0/terrain_set = 0
 8:1/0 = 0
+8:1/0/terrain_set = 0
 8:2/0 = 0
+8:2/0/terrain_set = 0
 7:2/0 = 0
+7:2/0/terrain_set = 0
 6:2/0 = 0
+6:2/0/terrain_set = 0
 5:2/0 = 0
+5:2/0/terrain_set = 0
 1:3/0 = 0
 2:3/0 = 0
 3:3/0 = 0
@@ -271,6 +295,11 @@ texture_region_size = Vector2i(64, 64)
 14:5/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_7ht3n"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Red"
+terrain_set_0/terrain_0/color = Color(0.58497113, 0.64948714, 1, 1)
 sources/0 = SubResource("TileSetAtlasSource_4ux0u")
 
 [node name="JimmyTest" type="Node2D" unique_id=2050139442]
@@ -280,5 +309,5 @@ position = Vector2(-2, 6)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1696686194]
 position = Vector2(351, 329)
-tile_map_data = PackedByteArray(0, 0, 232, 255, 241, 255, 0, 0, 1, 0, 0, 0, 0, 0, 233, 255, 241, 255, 0, 0, 2, 0, 0, 0, 0, 0, 234, 255, 241, 255, 0, 0, 3, 0, 0, 0, 0, 0, 235, 255, 241, 255, 0, 0, 4, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 249, 255, 252, 255, 0, 0, 1, 0, 0, 0, 0, 0, 250, 255, 252, 255, 0, 0, 2, 0, 0, 0, 0, 0, 251, 255, 252, 255, 0, 0, 3, 0, 0, 0, 0, 0, 252, 255, 252, 255, 0, 0, 4, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_7ht3n")

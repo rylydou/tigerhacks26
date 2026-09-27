@@ -36,7 +36,7 @@ const MASK_TO_ATLAS: Array[Vector2i] = [
 func refresh(world: TileMapLayer) -> void:
 	clear()
 	# Offset by half a tile so display tiles straddle world cell corners.
-	position -= Vector2(tile_set.tile_size) / 2.0
+	#position -= Vector2(tile_set.tile_size) / 2.0
 	var rect := world.get_used_rect().grow(1)
 	for y in range(rect.position.y, rect.end.y + 1):
 		for x in range(rect.position.x, rect.end.x + 1):

@@ -211,7 +211,7 @@ metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 [node name="Tops" type="TileMapLayer" parent="TileMapLayer" unique_id=1024917762]
 z_index = -400
 z_as_relative = false
-position = Vector2(0, -24)
+position = Vector2(-16, -40)
 tile_set = SubResource("TileSet_j6edp")
 script = ExtResource("16_e0xjg")
 display_source_id = 2

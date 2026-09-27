@@ -27,6 +27,21 @@ var gamepad := Gamepad.create(Gamepad.DEVICE_AUTO)
 var use_mouse_aim := false
 
 
+# --- STATS ---
+var stat_move_speed := Stat.new()
+var stat_damage_taken := Stat.new()
+var stat_hit_invuln_time := Stat.new()
+
+var stat_attack_damage_scale := Stat.new()
+var stat_knockback_scale := Stat.new()
+var stat_attack_speed_scale := Stat.new()
+var stat_attack_size_scale := Stat.new()
+var stat_spread_scale := Stat.new()
+var stat_proj_speed_scale := Stat.new()
+var stat_proj_range_scale := Stat.new()
+var stat_proj_pierce := Stat.new()
+
+
 func _enter_tree() -> void:
 	Player.instance = self
 

@@ -48,8 +48,10 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	# Keep running while the tree is paused on the win/upgrade screens.
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	# Only the UI keeps running while paused; gameplay (and everything spawned into the scene) freezes.
+	for screen in [win_screen, upgrade_screen]:
+		if screen:
+			screen.process_mode = Node.PROCESS_MODE_ALWAYS
 	if not level_generator:
 		level_generator = LevelGenerator.current
 	if not player:
@@ -57,6 +59,7 @@ func _ready() -> void:
 	player.died.connect(_on_player_died)
 	for i in upgrade_buttons.size():
 		upgrade_buttons[i].pressed.connect(func() -> void: upgrade_picked.emit(i))
+		upgrade_buttons[i].gui_input.connect(_on_upgrade_button_input.bind(upgrade_buttons[i]))
 	_hide_ui()
 	Cheats.register()
 	_start_level.call_deferred()
@@ -71,16 +74,16 @@ func _process(_delta: float) -> void:
 
 
 ## Let a controller confirm the focused upgrade button (A / bottom face button).
-func _input(event: InputEvent) -> void:
+## Handled on the button itself since this node is frozen while the tree is paused.
+func _on_upgrade_button_input(event: InputEvent, button: Button) -> void:
 	if state != State.CHOOSING_UPGRADE:
 		return
 	var joy := event as InputEventJoypadButton
 	if not joy or not joy.pressed or joy.button_index != JOY_BUTTON_A:
 		return
-	var focused := get_viewport().gui_get_focus_owner()
-	if focused is Button and focused in upgrade_buttons and focused.visible:
-		get_viewport().set_input_as_handled()
-		(focused as Button).pressed.emit()
+	if button.visible:
+		button.accept_event()
+		button.pressed.emit()
 
 
 ## Objective count, ignoring non-2D helper nodes that share the group (e.g. the tumor's AI node).

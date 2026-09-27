@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://df43arvkfd462" path="res://content/art/ui_battery_inner.png" id="19_glu8d"]
 [ext_resource type="Script" uid="uid://b40p3l4npw1bw" path="res://scripts/ui/upgrade_hotbar.gd" id="20_hotbr"]
 [ext_resource type="Script" uid="uid://cj407wxxg8b50" path="res://scripts/ui/health_bar.gd" id="21_hpbar"]
+[ext_resource type="PackedScene" uid="uid://bi7vti6j0pcfu" path="res://scenes/game.tscn" id="99_pause"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0xjg"]
 texture = ExtResource("8_oq6fy")
@@ -182,6 +183,7 @@ upgrade_screen = NodePath("CanvasLayer/Upgrade Screen")
 upgrade_buttons = [NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 1"), NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 2"), NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 3")]
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=989608220]
+process_mode = 3
 stream = ExtResource("2_dbd5e")
 autoplay = true
 bus = &"music"
@@ -426,3 +428,5 @@ autowrap_mode = 3
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
+
+[node name="Pause Menu" parent="." unique_id=2013058107 instance=ExtResource("99_pause")]

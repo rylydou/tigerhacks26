@@ -7,20 +7,27 @@ extends Node
 var waves: Array[Wave] = []
 
 func resume_game() -> void:
-	get_tree().paused = not get_tree().paused
+	get_tree().paused = false
 	pause_menu.hide()
 
 func quit_game() -> void:
-	get_tree().quit()
+	pause_menu.hide()
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func _ready() -> void:
 	waves = load_waves("res://resources/waves.csv")
 
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed(&"pause"):
-		get_tree().paused = not get_tree().paused
-		pause_menu.visible = get_tree().paused
+	if not Input.is_action_just_pressed(&"pause"):
+		return
+	if pause_menu.visible:
+		resume_game()
+	# Don't pause over the win/upgrade screens, which pause the tree themselves.
+	elif not get_tree().paused:
+		get_tree().paused = true
+		pause_menu.show()
 
 
 func load_waves(path: String) -> Array[Wave]:

@@ -35,6 +35,7 @@ texture = ExtResource("1_0wfyh")
 texture = ExtResource("2_sugp2")
 
 [node name="Main" type="Node" unique_id=380468002]
+process_mode = 3
 script = ExtResource("1_sugp2")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1045438135]

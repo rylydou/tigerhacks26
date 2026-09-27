@@ -13,6 +13,17 @@ static var current: GameLoop
 @export var level_generator: LevelGenerator
 @export var player: Player
 
+@export_group("Difficulty")
+## Enemies gain enemy_health_bonus (of their base HP) every this many levels.
+@export var enemy_health_interval := 5
+## 0.5 = +50% base HP per interval (levels 1-5: 100%, 6-10: 150%, 11-15: 200%...).
+@export var enemy_health_bonus := 0.5
+
+@export_group("HUD")
+## Optional. Shows how many tumors are left this level.
+@export var tumors_label: Label
+@export var tumors_label_format := "Tumors left: %d"
+
 @export_group("Win Screen")
 ## Shown when a level is cleared. Set its process_mode to Always so it animates while paused.
 @export var win_screen: Control
@@ -52,21 +63,39 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if state == State.PLAYING and get_tree().get_nodes_in_group(OBJECTIVE_GROUP).is_empty():
+	var remaining := get_remaining_objectives()
+	if tumors_label:
+		tumors_label.text = tumors_label_format % remaining
+	if state == State.PLAYING and remaining == 0:
 		_win_level()
+
+
+## Objective count, ignoring non-2D helper nodes that share the group (e.g. the tumor's AI node).
+func get_remaining_objectives() -> int:
+	return get_tree().get_nodes_in_group(OBJECTIVE_GROUP).filter(
+		func(node: Node) -> bool: return node is Node2D).size()
+
+
+## Multiplier for enemy max health at the current level. 1.0 when no GameLoop is running.
+static func enemy_health_multiplier() -> float:
+	if not is_instance_valid(current) or current.enemy_health_interval <= 0:
+		return 1.0
+	@warning_ignore("integer_division")
+	var tiers := maxi(current.level - 1, 0) / current.enemy_health_interval
+	return 1.0 + current.enemy_health_bonus * tiers
 
 
 func _start_level() -> void:
 	state = State.GENERATING
 	level += 1
 	_despawn_all()
-	# generate() also respawns tumors and moves the player to the map center.
-	level_generator.generate()
+	# generate() also respawns tumors, moves the player to the map center and spawns random waves.
+	level_generator.generate(level)
 	player.health = player.max_health
 	player.velocity = Vector2.ZERO
 	_hide_ui()
 	get_tree().paused = false
-	print("Level %d started, %d objectives" % [level, get_tree().get_nodes_in_group(OBJECTIVE_GROUP).size()])
+	print("Level %d started, %d objectives, enemy HP x%.2f" % [level, get_remaining_objectives(), enemy_health_multiplier()])
 	state = State.PLAYING
 
 

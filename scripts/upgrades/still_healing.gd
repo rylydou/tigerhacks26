@@ -2,8 +2,8 @@ extends Upgrade
 
 
 ## Seconds without moving before the bonus kicks in
-const DELAY := 0.5
-const HEAL_PER_SECOND_PER_LEVEL := 3.0
+const DELAY := 1.0
+const HEAL_PER_SECOND_PER_LEVEL := 10.0
 
 
 func get_icon() -> Texture2D:

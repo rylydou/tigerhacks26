@@ -158,10 +158,11 @@ font_size = 128
 outline_size = 64
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Ryly Test" type="Node2D" unique_id=986588181 node_paths=PackedStringArray("level_generator", "player", "win_screen", "upgrade_screen", "upgrade_buttons")]
+[node name="Ryly Test" type="Node2D" unique_id=986588181 node_paths=PackedStringArray("level_generator", "player", "tumors_label", "win_screen", "upgrade_screen", "upgrade_buttons")]
 script = ExtResource("1_mci7o")
-level_generator = NodePath("TileMapLayer")
+level_generator = NodePath("Level Gen")
 player = NodePath("Player")
+tumors_label = NodePath("CanvasLayer/Tumors Label")
 win_screen = NodePath("CanvasLayer/Win Screen")
 upgrade_screen = NodePath("CanvasLayer/Upgrade Screen")
 upgrade_buttons = [NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 1"), NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 2"), NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 3")]
@@ -185,7 +186,7 @@ metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 
 [node name="Player" parent="." unique_id=291338747 instance=ExtResource("1_hljss")]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1846879771 node_paths=PackedStringArray("visual_layers", "player")]
+[node name="Level Gen" type="TileMapLayer" parent="." unique_id=1846879771 node_paths=PackedStringArray("visual_layers", "player")]
 self_modulate = Color(1, 1, 1, 0)
 tile_set = SubResource("TileSet_emgfa")
 script = ExtResource("8_g04cy")
@@ -194,8 +195,9 @@ generate_on_ready = false
 steps = Array[ExtResource("9_emgfa")]([SubResource("Resource_0p4x6"), SubResource("Resource_glu8d"), SubResource("Resource_xnjde"), SubResource("Resource_dbd5e"), SubResource("Resource_g04cy")])
 visual_layers = [NodePath("Side Walls"), NodePath("Tops")]
 player = NodePath("../Player")
+random_waves_base = 10
 
-[node name="Side Walls" type="TileMapLayer" parent="TileMapLayer" unique_id=1268823674]
+[node name="Side Walls" type="TileMapLayer" parent="Level Gen" unique_id=1268823674]
 z_index = -1000
 z_as_relative = false
 tile_set = SubResource("TileSet_j6edp")
@@ -203,12 +205,12 @@ script = ExtResource("16_mci7o")
 display_source_id = 1
 single_atlas_coords = Vector2i(3, 0)
 
-[node name="SortingLayer" type="Node" parent="TileMapLayer/Side Walls" unique_id=154413621]
+[node name="SortingLayer" type="Node" parent="Level Gen/Side Walls" unique_id=154413621]
 script = ExtResource("7_ek1xu")
 layer_name = &"wall"
 metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 
-[node name="Tops" type="TileMapLayer" parent="TileMapLayer" unique_id=1024917762]
+[node name="Tops" type="TileMapLayer" parent="Level Gen" unique_id=1024917762]
 z_index = -400
 z_as_relative = false
 position = Vector2(-16, -40)
@@ -216,12 +218,22 @@ tile_set = SubResource("TileSet_j6edp")
 script = ExtResource("16_e0xjg")
 display_source_id = 2
 
-[node name="SortingLayer" type="Node" parent="TileMapLayer/Tops" unique_id=1581853842]
+[node name="SortingLayer" type="Node" parent="Level Gen/Tops" unique_id=1581853842]
 script = ExtResource("7_ek1xu")
 layer_name = &"foreground"
 metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1092973872]
+
+[node name="Tumors Label" type="Label" parent="CanvasLayer" unique_id=1739204518]
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 432.0
+offset_bottom = 88.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 40
+text = "Tumors left: 0"
 
 [node name="Win Screen" type="Control" parent="CanvasLayer" unique_id=509846110]
 layout_mode = 3

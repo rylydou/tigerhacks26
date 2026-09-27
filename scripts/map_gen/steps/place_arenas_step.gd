@@ -12,8 +12,9 @@ extends MapStep
 
 func apply(ctx: MapContext) -> void:
 	var size := Vector2(ctx.grid.size)
+	var target := ctx.arena_count if ctx.arena_count >= 0 else count
 	for _i in max_attempts:
-		if ctx.arenas.size() >= count:
+		if ctx.arenas.size() >= target:
 			return
 		var radius := ctx.rng.randf_range(radius_range.x, radius_range.y)
 		var pad := radius + edge_margin
@@ -23,4 +24,4 @@ func apply(ctx: MapContext) -> void:
 		if ctx.arenas.all(func(a: MapContext.Arena) -> bool:
 				return center.distance_to(a.center) >= radius + a.radius + min_gap):
 			ctx.arenas.append(MapContext.Arena.new(center, radius))
-	push_warning("PlaceArenasStep: only placed %d/%d arenas" % [ctx.arenas.size(), count])
+	push_warning("PlaceArenasStep: only placed %d/%d arenas" % [ctx.arenas.size(), target])

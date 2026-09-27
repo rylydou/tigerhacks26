@@ -3,7 +3,7 @@ extends Upgrade
 
 const HealPickup := preload("res://scripts/upgrades/effects/heal_pickup.gd")
 
-const HEAL_PER_PICKUP := 15.0
+const HEAL_PER_PICKUP := 5.0
 ## Pixels
 const SCATTER_RADIUS := 12.0
 

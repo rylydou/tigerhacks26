@@ -2,6 +2,8 @@ extends Area2D
 ## Heals the player on touch. Waits on the ground while the player is at full health.
 
 
+const TEXTURE := preload("res://content/art/health_pickup.png")
+
 var amount := 5.0
 
 var _time := randf() * TAU
@@ -48,7 +50,4 @@ func pop_from(from: Vector2) -> void:
 
 func _draw() -> void:
 	var bob := Vector2(0.0, sin(_time * 4.0) * 1.5)
-	draw_circle(bob, 6.0, Color(0.2, 0.85, 0.35))
-	draw_circle(bob, 6.0, Color.WHITE, false, 1.0)
-	draw_rect(Rect2(bob + Vector2(-1.0, -3.5), Vector2(2.0, 7.0)), Color.WHITE)
-	draw_rect(Rect2(bob + Vector2(-3.5, -1.0), Vector2(7.0, 2.0)), Color.WHITE)
+	draw_texture(TEXTURE, bob - TEXTURE.get_size() * 0.5)

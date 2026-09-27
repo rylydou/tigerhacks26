@@ -47,9 +47,18 @@ var stun_timer := 0.0
 var flash_timer := 0.0
 var knockback_velocity := Vector2.ZERO
 
+var health_scaled := false
+
 var dying := false
 var death_velocity := Vector2.ZERO
 var death_spin := 0.0
+
+
+func _enter_tree() -> void:
+	# Before children's _ready, so the health bar picks up the scaled max_health.
+	if health_scaled: return
+	health_scaled = true
+	max_health = roundi(max_health * GameLoop.enemy_health_multiplier())
 
 
 func _ready() -> void:

@@ -8,13 +8,13 @@ var fairy: FairyNode
 
 
 func get_icon() -> Texture2D:
-	return preload("res://content/art/placeholder.png")
+	return preload("res://content/art/target_reticle.png")
 
 func get_name() -> String:
 	return "Fairy"
 
 func get_description() -> String:
-	return "A fairy hovers over random enemies. Marked enemies take increased damage."
+	return "A targeting reticle locks onto random nearby enemies. Marked enemies take increased damage."
 
 func get_stat_at_level(level: int) -> String:
 	return "Marked enemies take %d%% damage" % roundi(get_multiplier(level) * 100.0)

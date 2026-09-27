@@ -14,6 +14,8 @@ class Arena:
 var grid: MapGrid
 var rng: RandomNumberGenerator
 var arenas: Array[Arena] = []
+## Overrides PlaceArenasStep.count when >= 0 (e.g. to scale tumors with level).
+var arena_count := -1
 
 
 func _init(grid_size: Vector2i, rng_seed: int) -> void:

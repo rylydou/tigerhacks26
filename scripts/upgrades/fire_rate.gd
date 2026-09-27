@@ -11,7 +11,7 @@ func get_description() -> String:
 	return "Shoot faster."
 
 func get_stat_at_level(level: int) -> String:
-	return "+%d%% fire rate" % (level * 15)
+	return "+%d%% fire rate" % (level * 25)
 
 func get_max_level() -> int:
 	return 5
@@ -19,5 +19,5 @@ func get_max_level() -> int:
 
 func _activate() -> void:
 	player.stat_attack_speed_scale.augment(func(value: float, ctx: Dictionary) -> float:
-		return value + ctx['base_value'] * 0.15 * level
+		return value + ctx['base_value'] * 0.25 * level
 	)

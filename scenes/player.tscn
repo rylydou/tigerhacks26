@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dn73adkgnhehh" path="res://content/art/aim_indicator.png" id="5_smehm"]
 [ext_resource type="Texture2D" uid="uid://bhlo1ddjpbuu4" path="res://content/art/player_claw.png" id="5_y4r1p"]
 [ext_resource type="Script" uid="uid://cmh4vrcbqixfw" path="res://scripts/nodes/arrow_marker.gd" id="6_tuyoq"]
+[ext_resource type="Script" path="res://scripts/nodes/objective_pointer.gd" id="7_objptr"]
 [ext_resource type="PackedScene" uid="uid://dc8xyp5dwr6r6" path="res://scenes/health_bar.tscn" id="7_fjrip"]
 [ext_resource type="Texture2D" uid="uid://b7kc3vpy4q0ws" path="res://content/art/player_tentacle_segment.png" id="8_d2wvv"]
 [ext_resource type="Script" uid="uid://6fxhucstpsuh" path="res://scripts/nodes/player_claws.gd" id="9_claws"]
@@ -66,6 +67,7 @@ gizmo_extents = 2.0
 
 [node name="Aim Indicator" type="Node2D" parent="Anchor/Aim" unique_id=752974397]
 z_as_relative = false
+script = ExtResource("7_objptr")
 
 [node name="SortingLayer" type="Node" parent="Anchor/Aim/Aim Indicator" unique_id=833504443]
 script = ExtResource("3_qlg0r")

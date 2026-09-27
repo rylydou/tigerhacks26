@@ -170,10 +170,10 @@ upgrade_buttons = [NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 1"), Node
 [node name="TextureRect" type="TextureRect" parent="." unique_id=500628467]
 z_index = -1210
 z_as_relative = false
-offset_left = -1024.0
-offset_top = -1024.0
-offset_right = 1024.0
-offset_bottom = 1024.0
+offset_left = -4096.0
+offset_top = -4096.0
+offset_right = 4096.0
+offset_bottom = 4096.0
 texture = ExtResource("6_lv11a")
 stretch_mode = 1
 metadata/_edit_lock_ = true

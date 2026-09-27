@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://b53xmjqtgm4r3" path="res://scripts/map_gen/steps/carve_tunnels_step.gd" id="12_mci7o"]
 [ext_resource type="Script" uid="uid://cf716wnr1xou8" path="res://scripts/map_gen/steps/smooth_step.gd" id="13_ceqwj"]
 [ext_resource type="Script" uid="uid://c31ipm6w48f6c" path="res://scripts/map_gen/steps/fill_isolated_step.gd" id="14_emgfa"]
+[ext_resource type="Material" uid="uid://dq1txoibl0wnc" path="res://resources/materials/shadow.tres" id="15_acbcj"]
 [ext_resource type="Texture2D" uid="uid://cvl25pap17t0y" path="res://content/art/tileset_template.png" id="15_oq6fy"]
 [ext_resource type="Texture2D" uid="uid://bgrpwrjmalfk3" path="res://content/art/tileset_side_walls.png" id="16_ceqwj"]
 [ext_resource type="Script" uid="uid://po8u41gtfnpo" path="res://scripts/map_gen/dual_grid_layer.gd" id="16_e0xjg"]
@@ -46,7 +47,6 @@ min_gap = 2.0
 [sub_resource type="Resource" id="Resource_glu8d"]
 script = ExtResource("11_e0xjg")
 edge_falloff = 8.0
-arena_influence = 1.0
 
 [sub_resource type="Resource" id="Resource_xnjde"]
 script = ExtResource("12_mci7o")
@@ -212,13 +212,27 @@ script = ExtResource("8_g04cy")
 map_size = Vector2i(64, 64)
 generate_on_ready = false
 steps = Array[ExtResource("9_emgfa")]([SubResource("Resource_0p4x6"), SubResource("Resource_glu8d"), SubResource("Resource_xnjde"), SubResource("Resource_dbd5e"), SubResource("Resource_g04cy")])
-visual_layers = [NodePath("Side Walls"), NodePath("Tops")]
+visual_layers = [NodePath("Side Walls"), NodePath("Tops"), NodePath("Shadow")]
 player = NodePath("../Player")
 player_safe_radius = 6.0
 pack_radius = 1.0
 pack_min_distance = 3.0
 arena_margin = 3.0
 pack_attempts = 5
+
+[node name="Shadow" type="TileMapLayer" parent="Level Gen" unique_id=1093365463]
+z_index = -1100
+z_as_relative = false
+material = ExtResource("15_acbcj")
+position = Vector2(-16, 8)
+tile_set = SubResource("TileSet_j6edp")
+script = ExtResource("16_e0xjg")
+display_source_id = 2
+
+[node name="SortingLayer" type="Node" parent="Level Gen/Shadow" unique_id=665612483]
+script = ExtResource("7_ek1xu")
+layer_name = &"shadow"
+metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 
 [node name="Side Walls" type="TileMapLayer" parent="Level Gen" unique_id=1268823674]
 z_index = -1000

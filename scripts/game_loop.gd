@@ -70,6 +70,19 @@ func _process(_delta: float) -> void:
 		_win_level()
 
 
+## Let a controller confirm the focused upgrade button (A / bottom face button).
+func _input(event: InputEvent) -> void:
+	if state != State.CHOOSING_UPGRADE:
+		return
+	var joy := event as InputEventJoypadButton
+	if not joy or not joy.pressed or joy.button_index != JOY_BUTTON_A:
+		return
+	var focused := get_viewport().gui_get_focus_owner()
+	if focused is Button and focused in upgrade_buttons and focused.visible:
+		get_viewport().set_input_as_handled()
+		(focused as Button).pressed.emit()
+
+
 ## Objective count, ignoring non-2D helper nodes that share the group (e.g. the tumor's AI node).
 func get_remaining_objectives() -> int:
 	return get_tree().get_nodes_in_group(OBJECTIVE_GROUP).filter(

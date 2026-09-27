@@ -33,7 +33,7 @@ _data = {
 &"spawn": SubResource("Animation_1hhae")
 }
 
-[node name="Tumor" type="CharacterBody2D" unique_id=1744553126 node_paths=PackedStringArray("shaker") groups=["objective"]]
+[node name="Tumor" type="CharacterBody2D" unique_id=1744553126 node_paths=PackedStringArray("shaker") groups=["despawn", "enemy", "objective"]]
 z_index = -695
 z_as_relative = false
 material = SubResource("ShaderMaterial_ahyh1")
@@ -42,7 +42,7 @@ motion_mode = 1
 script = ExtResource("2_jok2d")
 activation_radius = 2.0
 spawn_radius_min = 2.0
-spawn_radius_max = 6.0
+spawn_radius_max = 5.0
 max_alive_enemies = 5
 spawn_cooldown = 3.0
 interval_time = 15.0

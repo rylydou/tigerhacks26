@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 radius = 6.0
 
-[node name="Player Bullet" type="Area2D" unique_id=1522787912]
+[node name="Player Bullet" type="Area2D" unique_id=1522787912 groups=["despawn"]]
 z_index = -600
 z_as_relative = false
 collision_layer = 144

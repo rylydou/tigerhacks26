@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ht3n"]
 radius = 5.0
 
-[node name="Xp" type="Area2D" unique_id=1273370755]
+[node name="Xp" type="Area2D" unique_id=1273370755 groups=["despawn"]]
 collision_mask = 48
 script = ExtResource("1_t8wu5")
 

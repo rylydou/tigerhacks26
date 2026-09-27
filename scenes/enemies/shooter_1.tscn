@@ -18,18 +18,19 @@
 [ext_resource type="Script" uid="uid://c3kxdy6tuip1g" path="res://scripts/ai/wait_until_grounded.gd" id="11_0kb7m"]
 [ext_resource type="Script" uid="uid://cmh4vrcbqixfw" path="res://scripts/nodes/arrow_marker.gd" id="11_7dfrs"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndfwh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4de86"]
 resource_local_to_scene = true
 shader = ExtResource("2_wg5ct")
 shader_parameter/invert_intensity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/desaturate = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1bvlm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 
-[node name="Trooper" unique_id=1744553126 instance=ExtResource("1_ndfwh")]
-material = SubResource("ShaderMaterial_ndfwh")
+[node name="Trooper" unique_id=1744553126 groups=["despawn", "enemy"] instance=ExtResource("1_ndfwh")]
+material = SubResource("ShaderMaterial_4de86")
 max_health = 20
 
 [node name="SetAggro" type="Node" parent="AI" parent_id_path=PackedInt32Array(321266617) index="0" unique_id=309202717]

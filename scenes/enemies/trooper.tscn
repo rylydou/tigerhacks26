@@ -10,11 +10,12 @@
 [ext_resource type="Script" uid="uid://3drffr203isv" path="res://scripts/ai/move.gd" id="6_yu4b7"]
 [ext_resource type="Script" uid="uid://5obrtbl58nle" path="res://scripts/components/hitbox.gd" id="9_yu4b7"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n5i6k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yu4b7"]
 resource_local_to_scene = true
 shader = ExtResource("2_a48sw")
 shader_parameter/invert_intensity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/desaturate = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1bvlm"]
 radius = 12.0
@@ -22,8 +23,8 @@ radius = 12.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 radius = 13.0
 
-[node name="Trooper" unique_id=1744553126 instance=ExtResource("1_kcpkc")]
-material = SubResource("ShaderMaterial_n5i6k")
+[node name="Trooper" unique_id=1744553126 groups=["despawn", "enemy"] instance=ExtResource("1_kcpkc")]
+material = SubResource("ShaderMaterial_yu4b7")
 max_health = 20
 
 [node name="SetAggro" type="Node" parent="AI" parent_id_path=PackedInt32Array(321266617) index="0" unique_id=309202717]

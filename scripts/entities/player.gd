@@ -5,6 +5,7 @@ static var instance: Player
 
 
 signal dealt_damage_to_enemy(damage: int)
+signal died
 
 
 @export var health := 100
@@ -143,3 +144,4 @@ func die() -> void:
 	SFX.event(&"player_death").at(global_position).play()
 	health = max_health
 	velocity = Vector2.ZERO
+	died.emit()

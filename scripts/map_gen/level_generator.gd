@@ -14,6 +14,8 @@ var nav := AStarGrid2D.new()
 @export var map_size := Vector2i(256, 256)
 ## 0 = random each run.
 @export var rng_seed := 0
+## Disable when something else (e.g. GameLoop) calls generate().
+@export var generate_on_ready := true
 @export var steps: Array[MapStep] = [
 	PlaceArenasStep.new(),
 	NoiseStep.new(),
@@ -47,7 +49,8 @@ func _exit_tree() -> void:
 
 
 func _ready() -> void:
-	generate()
+	if generate_on_ready:
+		generate()
 
 
 func to_tile(world_position: Vector2) -> Vector2i:

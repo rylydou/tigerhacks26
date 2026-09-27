@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bef1kodxao80y" path="res://content/art/melee_bacteria.png" id="6_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://bvc3n3njy78js" path="res://content/art/ranged_bacteria.png" id="7_tipki"]
 [ext_resource type="Texture2D" uid="uid://dtw2wsnn0aent" path="res://content/art/placeholder.png" id="8_tipki"]
+[ext_resource type="Texture2D" uid="uid://rc1jrs1472il" path="res://content/art/Purple_guy.png" id="9_85g3d"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5bu17"]
 texture = ExtResource("1_0wfyh")
@@ -141,6 +142,11 @@ flip_h = true
 [node name="Placeholder" type="Sprite2D" parent="." unique_id=972503827]
 position = Vector2(-310, 166)
 texture = ExtResource("8_tipki")
+
+[node name="PurpleGuy" type="Sprite2D" parent="." unique_id=977901865]
+position = Vector2(-287, 165)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("9_85g3d")
 
 [connection signal="pressed" from="CanvasLayer/Main Menu/Button Container/Start Button" to="." method="start_game"]
 [connection signal="pressed" from="CanvasLayer/Main Menu/Button Container/Quit Button" to="." method="quit_game"]

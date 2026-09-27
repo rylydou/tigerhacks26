@@ -26,6 +26,9 @@ var nav := AStarGrid2D.new()
 @export_group("Tiles")
 @export var wall_source_id := 0
 @export var wall_atlas_coords := Vector2i.ZERO
+## Purely visual wall tiles painted around the map so its edges don't end in a hard line
+## against empty space. Not part of the nav grid.
+@export var border_padding := 24
 ## Visual layers rebuilt from this layer after generating. Each needs a refresh(world) method.
 @export var visual_layers: Array[TileMapLayer] = []
 @export_group("Spawns")
@@ -147,9 +150,10 @@ func generate(level := 1) -> MapGrid:
 
 func _paint_tiles(grid: MapGrid) -> void:
 	clear()
-	for y in grid.size.y:
-		for x in grid.size.x:
-			if grid.is_wall(x, y):
+	var bounds := Rect2i(Vector2i.ZERO, grid.size)
+	for y in range(-border_padding, grid.size.y + border_padding):
+		for x in range(-border_padding, grid.size.x + border_padding):
+			if not bounds.has_point(Vector2i(x, y)) or grid.is_wall(x, y):
 				set_cell(_to_cell(grid, Vector2i(x, y)), wall_source_id, wall_atlas_coords)
 
 

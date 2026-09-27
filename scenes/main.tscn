@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://cvguk7t5510lo"]
 
 [ext_resource type="Texture2D" uid="uid://b5y05ew7xqgww" path="res://content/art/menu_button_unpressed.png" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://ccvnxi1rbtfiq" path="res://scenes/main.gd" id="1_sugp2"]
 [ext_resource type="Texture2D" uid="uid://gf2ugt25t41d" path="res://content/art/menu_button_pressed.png" id="2_sugp2"]
+[ext_resource type="Texture2D" uid="uid://dn2qoahh2td4u" path="res://content/art/background.png" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://bef1kodxao80y" path="res://content/art/melee_bacteria.png" id="6_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://bvc3n3njy78js" path="res://content/art/ranged_bacteria.png" id="7_tipki"]
+[ext_resource type="Texture2D" uid="uid://dtw2wsnn0aent" path="res://content/art/placeholder.png" id="8_tipki"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5bu17"]
 texture = ExtResource("1_0wfyh")
@@ -28,8 +34,27 @@ texture = ExtResource("1_0wfyh")
 texture = ExtResource("2_sugp2")
 
 [node name="Main" type="Node" unique_id=380468002]
+script = ExtResource("1_sugp2")
 
-[node name="Main Menu" type="Control" parent="." unique_id=2021067527]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1045438135]
+z_index = -1210
+z_as_relative = false
+offset_left = -959.0
+offset_top = -886.0
+offset_right = 1089.0
+offset_bottom = 1162.0
+texture = ExtResource("4_tbgi4")
+stretch_mode = 1
+
+[node name="SortingLayer" type="Node" parent="TextureRect" unique_id=1177075861]
+script = ExtResource("5_tefeu")
+bias = -10
+layer_name = &"floor"
+metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=781533442]
+
+[node name="Main Menu" type="Control" parent="CanvasLayer" unique_id=2021067527]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,7 +64,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu" unique_id=1488562985]
+[node name="Button Container" type="VBoxContainer" parent="CanvasLayer/Main Menu" unique_id=1488562985]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -53,7 +78,7 @@ offset_bottom = 127.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Start Button" type="Button" parent="Main Menu/VBoxContainer" unique_id=2086730872]
+[node name="Start Button" type="Button" parent="CanvasLayer/Main Menu/Button Container" unique_id=2086730872]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -68,7 +93,7 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_sugp2")
 text = "Start
 "
 
-[node name="Quit Button" type="Button" parent="Main Menu/VBoxContainer" unique_id=256625058]
+[node name="Quit Button" type="Button" parent="CanvasLayer/Main Menu/Button Container" unique_id=256625058]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -81,3 +106,41 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_iywne")
 theme_override_styles/hover = SubResource("StyleBoxTexture_jyhfs")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_tbgi4")
 text = "Quit"
+
+[node name="Title Container" type="VBoxContainer" parent="CanvasLayer/Main Menu" unique_id=830114750]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_top = 254.0
+offset_right = 240.0
+offset_bottom = 364.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Main Menu/Title Container" unique_id=275519755]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "Nano Bots"
+horizontal_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=138075779]
+zoom = Vector2(3, 3)
+
+[node name="MeleeBacteria" type="Sprite2D" parent="." unique_id=1670445944]
+position = Vector2(-175, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("6_o6xl0")
+
+[node name="RangedBacteria" type="Sprite2D" parent="." unique_id=806651183]
+position = Vector2(175, 0)
+scale = Vector2(5, 5)
+texture = ExtResource("7_tipki")
+flip_h = true
+
+[node name="Placeholder" type="Sprite2D" parent="." unique_id=972503827]
+position = Vector2(-310, 166)
+texture = ExtResource("8_tipki")
+
+[connection signal="pressed" from="CanvasLayer/Main Menu/Button Container/Start Button" to="." method="start_game"]
+[connection signal="pressed" from="CanvasLayer/Main Menu/Button Container/Quit Button" to="." method="quit_game"]

@@ -6,13 +6,19 @@ extends Node
 
 var waves: Array[Wave] = []
 
+func resume_game() -> void:
+	get_tree().paused = not get_tree().paused
+	pause_menu.hide()
+
+func quit_game() -> void:
+	get_tree().quit()
 
 func _ready() -> void:
 	waves = load_waves("res://resources/waves.csv")
 
 
 func _process(delta: float) -> void:
-	if Input.is_action_pressed(&"pause"):
+	if Input.is_action_just_pressed(&"pause"):
 		get_tree().paused = not get_tree().paused
 		pause_menu.visible = get_tree().paused
 

@@ -6,6 +6,10 @@ enum State { GENERATING, PLAYING, WON, CHOOSING_UPGRADE }
 
 const OBJECTIVE_GROUP := &"objective"
 
+
+static var current: GameLoop
+
+
 @export var level_generator: LevelGenerator
 @export var player: Player
 
@@ -19,13 +23,17 @@ const OBJECTIVE_GROUP := &"objective"
 @export_group("Upgrades")
 ## Shown after the win animation. Set its process_mode to Always.
 @export var upgrade_screen: Control
-## One button per upgrade choice (placeholder: just labeled, picking does nothing yet).
+## One button per upgrade choice. Each clear offers as many upgrades as there are buttons.
 @export var upgrade_buttons: Array[Button] = []
 
 var state := State.GENERATING
 var level := 0
 
 signal upgrade_picked(index: int)
+
+
+func _enter_tree() -> void:
+	GameLoop.current = self
 
 
 func _ready() -> void:
@@ -39,6 +47,7 @@ func _ready() -> void:
 	for i in upgrade_buttons.size():
 		upgrade_buttons[i].pressed.connect(func() -> void: upgrade_picked.emit(i))
 	_hide_ui()
+	Cheats.register()
 	_start_level.call_deferred()
 
 
@@ -76,23 +85,31 @@ func _win_level() -> void:
 
 	state = State.CHOOSING_UPGRADE
 	var choice := await _choose_upgrade()
-	print("Picked upgrade %d (placeholder)" % choice)
-	# TODO: apply the real upgrade here.
+	if choice:
+		var upgrade := player.add_upgrade(choice)
+		print("Picked upgrade %s (Lv %d)" % [upgrade.get_name(), upgrade.level])
 
 	_start_level()
 
 
-func _choose_upgrade() -> int:
+## Returns the picked upgrade script, or null if there was nothing to pick.
+func _choose_upgrade() -> Script:
 	if not upgrade_screen or upgrade_buttons.is_empty():
 		push_warning("GameLoop: no upgrade UI assigned, skipping upgrade pick")
-		return -1
+		return null
+	var offers := UpgradePool.roll(player, upgrade_buttons.size())
+	if offers.is_empty():
+		return null
 	for i in upgrade_buttons.size():
-		upgrade_buttons[i].text = "Upgrade %d\n(placeholder)" % (i + 1)
+		var button := upgrade_buttons[i]
+		button.visible = i < offers.size()
+		if button.visible:
+			button.text = UpgradePool.describe(player, offers[i])
 	upgrade_screen.show()
 	upgrade_buttons[0].grab_focus()
 	var index: int = await upgrade_picked
 	upgrade_screen.hide()
-	return index
+	return offers[index]
 
 
 func _despawn_all() -> void:

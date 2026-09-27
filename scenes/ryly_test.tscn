@@ -164,7 +164,7 @@ level_generator = NodePath("TileMapLayer")
 player = NodePath("Player")
 win_screen = NodePath("CanvasLayer/Win Screen")
 upgrade_screen = NodePath("CanvasLayer/Upgrade Screen")
-upgrade_buttons = [NodePath("CanvasLayer/Upgrade Screen/Button")]
+upgrade_buttons = [NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 1"), NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 2"), NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 3")]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=500628467]
 z_index = -1210
@@ -264,17 +264,60 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Button" type="Button" parent="CanvasLayer/Upgrade Screen" unique_id=1666141061]
+[node name="Backdrop" type="ColorRect" parent="CanvasLayer/Upgrade Screen" unique_id=1893047215]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Title" type="Label" parent="CanvasLayer/Upgrade Screen" unique_id=1205738894]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 180.0
+offset_right = 400.0
+offset_bottom = 260.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "Choose an Upgrade"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Choices" type="HBoxContainer" parent="CanvasLayer/Upgrade Screen" unique_id=742915306]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = 124.0
-offset_right = 28.0
-offset_bottom = 146.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Choice 1" type="Button" parent="CanvasLayer/Upgrade Screen/Choices" unique_id=1370592841]
+custom_minimum_size = Vector2(480, 280)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Upgrade"
+autowrap_mode = 3
+
+[node name="Choice 2" type="Button" parent="CanvasLayer/Upgrade Screen/Choices" unique_id=588203417]
+custom_minimum_size = Vector2(480, 280)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Upgrade"
+autowrap_mode = 3
+
+[node name="Choice 3" type="Button" parent="CanvasLayer/Upgrade Screen/Choices" unique_id=2011457763]
+custom_minimum_size = Vector2(480, 280)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Upgrade"
+autowrap_mode = 3

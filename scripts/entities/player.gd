@@ -7,9 +7,17 @@ static var instance: Player
 signal dealt_damage_to_enemy(damage: int)
 signal died
 
+## Emitted right before a bullet is added to the scene, so upgrades can modify it.
+signal shot(bullet: BasicProjectile)
+signal hit_target(target: Node2D, damage: int)
+signal killed_enemy(enemy: Enemy)
+
 
 @export var health := 100
-@onready var max_health := health
+@onready var base_max_health := health
+var max_health: int:
+	get:
+		return roundi(stat_max_health.compute(base_max_health, {}))
 
 @export var move_speed := 4.0
 
@@ -26,13 +34,26 @@ var gamepad := Gamepad.create(Gamepad.DEVICE_AUTO)
 
 var use_mouse_aim := false
 
+## Seconds since the player last had movement input
+var still_time := 0.0
+## Fractional healing carried over between `heal()` calls
+var heal_remainder := 0.0
+
+var upgrades: Array[Upgrade] = []
+
 
 # --- STATS ---
+# Each stat is computed from the raw value and returns the final value (see Stat).
 var stat_move_speed := Stat.new()
+var stat_max_health := Stat.new()
+var stat_healing := Stat.new()
 var stat_damage_taken := Stat.new()
 var stat_hit_invuln_time := Stat.new()
 
+## ctx: target, distance (in Global.UNIT_SCALE), source (the hitbox, may be null)
+
 var stat_attack_damage_scale := Stat.new()
+## ctx: same as stat_attack_damage_scale
 var stat_knockback_scale := Stat.new()
 var stat_attack_speed_scale := Stat.new()
 var stat_attack_size_scale := Stat.new()
@@ -53,18 +74,24 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	_process_movement(delta)
 	
+	still_time = 0.0 if is_moving() else still_time + delta
+	
 	shoot_cooldown -= delta
-	if gamepad.attack.down:
+	if is_shooting():
 		if shoot_cooldown <= 0.0:
 			# Perform attack logic here
-			shoot_cooldown = 1.0 / fire_rate
+			shoot_cooldown = 1.0 / stat_attack_speed_scale.compute(fire_rate, {})
 			shoot()
+	
+	for upgrade in upgrades:
+		upgrade._tick(delta)
 	
 	super._physics_process(delta)
 
 
 func _process_movement(delta: float) -> void:
 	var move_input := gamepad.move.normalized()
+	input = move_input
 	
 	if gamepad.is_mouse_and_keyboard():
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -96,7 +123,7 @@ func _process_movement(delta: float) -> void:
 	if aim_input != Vector2.ZERO:
 		angle = aim_input.angle()
 	
-	var speed := move_speed
+	var speed := stat_move_speed.compute(move_speed, {})
 	velocity = move_input * speed * Global.UNIT_SCALE
 	move_and_slide()
 
@@ -107,18 +134,32 @@ func shoot() -> void:
 	bullet_instance.global_position = shoot_pos_node.global_position
 	bullet_instance.rotation = shoot_pos_node.global_rotation
 	bullet_instance.player = self
+	
+	var ctx := {}
+	bullet_instance.speed = stat_proj_speed_scale.compute(bullet_instance.speed, ctx)
+	bullet_instance.range = stat_proj_range_scale.compute(bullet_instance.range, ctx)
+	bullet_instance.pierce_count = roundi(stat_proj_pierce.compute(bullet_instance.pierce_count, ctx))
+	bullet_instance.scale *= stat_attack_size_scale.compute(1.0, ctx)
+	
+	shot.emit(bullet_instance)
 	get_tree().current_scene.add_child(bullet_instance)
 	SFX.event(&"player_shoot").at(global_position).play()
 
 
-func try_attack(target: Node2D, damage: int, knockback_strength: float) -> bool:
+func try_attack(target: Node2D, damage: float, knockback_strength: float, source: Node = null) -> bool:
 	if not target.has_method(Hurtbox.METHOD_NAME): return false
 	
-	var floating_damange := damage
+	var ctx := {
+		'target': target,
+		'distance': global_position.distance_to(target.global_position) / Global.UNIT_SCALE,
+		'source': source,
+	}
+	
+	var floating_damange := stat_attack_damage_scale.compute(damage, ctx)
 	var real_damage := floori(floating_damange)
 	real_damage += int(Math.rand_bool(floating_damange - real_damage))
 	
-	var real_knockback := knockback_strength
+	var real_knockback := stat_knockback_scale.compute(knockback_strength, ctx)
 	
 	# if real_damage > 0:
 	# 	VFX.damage_number(
@@ -130,11 +171,14 @@ func try_attack(target: Node2D, damage: int, knockback_strength: float) -> bool:
 	# 			crit,
 	# 	)
 	
-	var knockback_vector := global_position.direction_to(target.global_position) * knockback_strength
+	var knockback_vector := global_position.direction_to(target.global_position) * real_knockback
 	
 	var did_hit: bool = target.call(Hurtbox.METHOD_NAME, real_damage, knockback_vector)
 	if did_hit:
 		dealt_damage_to_enemy.emit(int(real_damage))
+		hit_target.emit(target, real_damage)
+		if target is Enemy and (target as Enemy).dying:
+			killed_enemy.emit(target)
 	
 	return did_hit
 
@@ -143,7 +187,7 @@ func take_damage(damage: int, knockback: Vector2) -> bool:
 	SFX.event(&"player_hit").at(global_position).play()
 	
 	# Apply damage to the player's health
-	health -= damage
+	health -= roundi(stat_damage_taken.compute(damage, {}))
 	
 	# Apply knockback to the player
 	velocity += knockback
@@ -160,3 +204,41 @@ func die() -> void:
 	health = max_health
 	velocity = Vector2.ZERO
 	died.emit()
+
+
+func heal(amount: float) -> void:
+	if amount <= 0.0 or health <= 0: return
+	if health >= max_health:
+		heal_remainder = 0.0
+		return
+	
+	heal_remainder += stat_healing.compute(amount, {})
+	var whole := floori(heal_remainder)
+	heal_remainder -= whole
+	health = mini(health + whole, max_health)
+
+
+func is_moving() -> bool:
+	return input != Vector2.ZERO
+
+
+func is_shooting() -> bool:
+	return gamepad.attack.down
+
+
+func get_upgrade(script: Script) -> Upgrade:
+	for upgrade in upgrades:
+		if upgrade.get_script() == script:
+			return upgrade
+	return null
+
+
+## Takes the upgrade, or levels it up if the player already has it.
+func add_upgrade(script: Script) -> Upgrade:
+	var upgrade := get_upgrade(script)
+	if not upgrade:
+		upgrade = script.new()
+		upgrade.player = self
+		upgrades.append(upgrade)
+	upgrade._upgrade()
+	return upgrade

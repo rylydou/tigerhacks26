@@ -44,15 +44,15 @@ func attack_node(node: Node2D) -> bool:
 			return false
 	
 	# Compute damage
-	var damage := base_damage
+	var damage: float = base_damage
 	damage *= Math.rand_var(1.0, damage_variation / 2.0)
 	
 	var has_hit := false
 	
 	if is_instance_valid(player):
-		has_hit = player.try_attack(node, damage, knockback_strength)
+		has_hit = player.try_attack(node, damage, knockback_strength, self)
 	elif node.has_method(&"take_damage"):
-		has_hit = node.take_damage(damage, Vector2.RIGHT * knockback_strength)
+		has_hit = node.take_damage(int(damage), Vector2.RIGHT * knockback_strength)
 	
 	if not has_hit:
 		return false

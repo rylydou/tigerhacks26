@@ -1,4 +1,13 @@
 class_name Stat extends RefCounted
+## A value that upgrades can modify. `compute()` is given the raw (base) value and returns the final value.
+## Augments run in priority order (lowest first). `ctx['base_value']` holds the raw value so augments
+## can add a percentage of the base without compounding.
+
+
+## Flat or percent-of-base bonuses
+const PRIORITY_ADD := 0
+## Multipliers, applied after every additive bonus
+const PRIORITY_MULTIPLY := 100
 
 
 class Augmentation:
@@ -26,7 +35,7 @@ func augment(callback: Callable, priority := 0) -> int:
 		var index := (count - 1) - r_index
 		var test := augmentations[index]
 		if test.priority > priority: continue
-		augmentations.insert(index, augmentation)
+		augmentations.insert(index + 1, augmentation)
 		return next_id
 	
 	augmentations.push_front(augmentation)

@@ -195,7 +195,10 @@ generate_on_ready = false
 steps = Array[ExtResource("9_emgfa")]([SubResource("Resource_0p4x6"), SubResource("Resource_glu8d"), SubResource("Resource_xnjde"), SubResource("Resource_dbd5e"), SubResource("Resource_g04cy")])
 visual_layers = [NodePath("Side Walls"), NodePath("Tops")]
 player = NodePath("../Player")
-random_waves_base = 10
+player_safe_radius = 6.0
+pack_radius = 1.0
+pack_min_distance = 3.0
+arena_margin = 3.0
 
 [node name="Side Walls" type="TileMapLayer" parent="Level Gen" unique_id=1268823674]
 z_index = -1000

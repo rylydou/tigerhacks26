@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://bxf5gldlks754"]
-
-[ext_resource type="Material" uid="uid://tdbnhqllw6xf" path="res://resources/materials/light.tres" id="1_0552e"]
-
-[node name="Light" type="Sprite2D"]
-z_index = 90
-z_as_relative = false
-texture_filter = 2
-material = ExtResource("1_0552e")

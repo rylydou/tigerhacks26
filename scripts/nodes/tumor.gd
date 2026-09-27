@@ -20,6 +20,10 @@ const SPAWN_ATTEMPTS := 10
 @export var spawn_radius_min := 3.0
 ## In Global.UNIT_SCALE
 @export var spawn_radius_max := 8.0
+## In Global.UNIT_SCALE. Spawn radius for the final waves released on death
+@export var death_spawn_radius := 1.0
+## Number of final waves on death is picked from this (weighted by repeats)
+@export var death_wave_counts: Array[int] = [1, 1, 1, 2]
 ## In Global.UNIT_SCALE. Enemies that would spawn closer than this to the player are dropped
 @export var min_player_distance := 2.0
 ## A new wave won't start while this many of the tumor's enemies are alive (a wave may go over)
@@ -119,6 +123,9 @@ func take_damage(damage: int, knockback: Vector2) -> bool:
 func die() -> void:
 	SFX.event(&"tumor_death").at(global_position).play()
 	#VFX.poof(global_position)
+	my_spawns = my_spawns.filter(is_instance_valid)
+	for i in death_wave_counts.pick_random():
+		spawn_wave(0.0, death_spawn_radius)
 	died.emit()
 	queue_free()
 
@@ -138,9 +145,9 @@ func update_spawning(delta: float) -> void:
 	
 	my_spawns = my_spawns.filter(is_instance_valid)
 	
-	if pending_milestone_waves > 0 and time_since_spawn >= spawn_cooldown:
+	# Only use up the milestone once it actually spawns (it can fail at the enemy cap)
+	if pending_milestone_waves > 0 and time_since_spawn >= spawn_cooldown and spawn_wave():
 		pending_milestone_waves -= 1
-		spawn_wave()
 	
 	if interval_waves_spawned >= interval_max_waves: return
 	interval_timer += delta
@@ -186,13 +193,18 @@ func check_milestones() -> void:
 			pending_milestone_waves += 1
 
 
-## Spawns a random wave. Returns false if at the enemy cap or no waves are defined.
-func spawn_wave() -> bool:
+## Spawns a random wave. Returns false if at the enemy cap, no waves are defined or there's nowhere to spawn.
+func spawn_wave(radius_min := spawn_radius_min, radius_max := spawn_radius_max) -> bool:
 	var waves := Game.waves
 	
 	if waves.is_empty(): return false
 	# Allowed to go over the cap with a single wave, but not start one while at it
 	if my_spawns.size() >= max_alive_enemies: return false
+	
+	var candidates := _get_spawn_positions(radius_min, radius_max)
+	if candidates.is_empty():
+		push_warning("Tumor at %s has no open tiles to spawn on" % global_position)
+		return false
 	
 	SFX.event(&"tumor_spawn").at(global_position).play()
 	
@@ -200,11 +212,13 @@ func spawn_wave() -> bool:
 	spawn_shake_timer = spawn_shake_duration
 	# Game.waves already contains each wave repeated by its weight
 	var wave: Wave = waves.pick_random()
+	var available: Array[Vector2] = []
 	for entry in wave.spawns:
 		for i in entry.count:
-			var pos := _find_spawn_position()
-			if pos == Vector2.INF:
-				continue
+			# Spread enemies over different tiles, only doubling up once every tile is taken
+			if available.is_empty():
+				available = candidates.duplicate()
+			var pos: Vector2 = available.pop_at(randi() % available.size())
 			var enemy: Node2D = entry.scene.instantiate()
 			enemy.add_to_group(Global.DESPAWN_GROUP)
 			enemy.global_position = pos
@@ -213,14 +227,33 @@ func spawn_wave() -> bool:
 	return true
 
 
-## Random point in the spawn ring that's not in a wall or too close to the player. Vector2.INF if none found.
-func _find_spawn_position() -> Vector2:
-	for attempt in SPAWN_ATTEMPTS:
-		var dist := randf_range(spawn_radius_min, spawn_radius_max) * Global.UNIT_SCALE
-		var pos := global_position + Vector2.from_angle(randf() * TAU) * dist
-		if LevelGenerator.current and not LevelGenerator.current.is_open(pos):
-			continue
-		if Player.instance and pos.distance_to(Player.instance.global_position) < min_player_distance * Global.UNIT_SCALE:
-			continue
-		return pos
-	return Vector2.INF
+## Open positions to spawn on: the spawn ring away from the player, falling back to looser
+## limits when walls or the player leave no room there. Empty if everything nearby is wall.
+func _get_spawn_positions(radius_min: float, radius_max: float) -> Array[Vector2]:
+	var open: Array[Vector2] = []
+	if LevelGenerator.current:
+		open = LevelGenerator.current.get_open_positions_near(global_position, radius_max * Global.UNIT_SCALE)
+	else:
+		# No level to query walls from, so any point in the ring is fine
+		for attempt in SPAWN_ATTEMPTS:
+			var dist := randf_range(radius_min, radius_max) * Global.UNIT_SCALE
+			open.append(global_position + Vector2.from_angle(randf() * TAU) * dist)
+	
+	# [min distance from tumor, min distance from player], strictest first
+	var tiers: Array[Vector2] = [
+		Vector2(radius_min, min_player_distance),
+		Vector2(0.0, min_player_distance),
+		Vector2(0.0, 0.0),
+	]
+	for tier in tiers:
+		var min_self := tier.x * Global.UNIT_SCALE
+		var min_player := tier.y * Global.UNIT_SCALE
+		var valid := open.filter(func(pos: Vector2) -> bool:
+			if pos.distance_to(global_position) < min_self: return false
+			if Player.instance and pos.distance_to(Player.instance.global_position) < min_player: return false
+			return true)
+		if not valid.is_empty():
+			var result: Array[Vector2] = []
+			result.assign(valid)
+			return result
+	return []

@@ -11,7 +11,7 @@ func get_description() -> String:
 	return "Move faster."
 
 func get_stat_at_level(level: int) -> String:
-	return "+%d%% move speed" % (level * 15)
+	return "+%d%% move speed" % (level * 30)
 
 func get_max_level() -> int:
 	return 5
@@ -19,5 +19,5 @@ func get_max_level() -> int:
 
 func _activate() -> void:
 	player.stat_move_speed.augment(func(value: float, ctx: Dictionary) -> float:
-		return value + ctx['base_value'] * 0.15 * level
+		return value + ctx['base_value'] * 0.30 * level
 	)

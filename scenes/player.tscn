@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dc8xyp5dwr6r6" path="res://scenes/health_bar.tscn" id="7_fjrip"]
 [ext_resource type="Texture2D" uid="uid://b7kc3vpy4q0ws" path="res://content/art/player_tentacle_segment.png" id="8_d2wvv"]
 [ext_resource type="Script" uid="uid://6fxhucstpsuh" path="res://scripts/nodes/player_claws.gd" id="9_claws"]
+[ext_resource type="PackedScene" uid="uid://bwokgdo8siiaw" path="res://scenes/shadow.tscn" id="12_3v2ag"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 radius = 12.0
@@ -102,3 +103,6 @@ texture = ExtResource("2_g2els")
 
 [node name="Health Bar" parent="." unique_id=156660026 instance=ExtResource("7_fjrip")]
 position = Vector2(0, 8)
+
+[node name="Shadow" parent="." unique_id=1277822842 instance=ExtResource("12_3v2ag")]
+position = Vector2(0, 11)

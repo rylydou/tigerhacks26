@@ -67,6 +67,22 @@ func is_open(world_position: Vector2) -> bool:
 	return nav.is_in_boundsv(tile) and not nav.is_point_solid(tile)
 
 
+## World-space centers of every open tile within max_distance of the world position.
+func get_open_positions_near(world_position: Vector2, max_distance: float) -> Array[Vector2]:
+	var result: Array[Vector2] = []
+	var center := to_tile(world_position)
+	var reach := ceili(max_distance / minf(nav.cell_size.x, nav.cell_size.y)) + 1
+	for y in range(center.y - reach, center.y + reach + 1):
+		for x in range(center.x - reach, center.x + reach + 1):
+			var tile := Vector2i(x, y)
+			if not nav.is_in_boundsv(tile) or nav.is_point_solid(tile):
+				continue
+			var pos := to_world(tile)
+			if pos.distance_to(world_position) <= max_distance:
+				result.append(pos)
+	return result
+
+
 ## Tile path between two world positions. Empty if unreachable.
 func get_id_path(from: Vector2, to: Vector2) -> Array[Vector2i]:
 	var from_tile := to_tile(from)
@@ -106,6 +122,9 @@ func _paint_tiles(grid: MapGrid) -> void:
 
 
 func _build_nav(grid: MapGrid) -> void:
+	# update() is a no-op when region/cell size are unchanged, which would keep the previous
+	# level's solid points. clear() forces a full rebuild.
+	nav.clear()
 	nav.region = Rect2i(_to_cell(grid, Vector2i.ZERO), grid.size)
 	nav.cell_size = tile_set.tile_size
 	nav.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES

@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://coxfu178vwrco" path="res://scenes/player.tscn" id="1_hljss"]
 [ext_resource type="Script" uid="uid://cnprj4g3ro15s" path="res://scripts/game_loop.gd" id="1_mci7o"]
+[ext_resource type="AudioStream" uid="uid://bsf2wywefahk" path="res://content/music/Ludum Dare 38 - Track 6.ogg" id="2_dbd5e"]
+[ext_resource type="Script" uid="uid://ctv04n3byeowe" path="res://scripts/components/music_fade_in.gd" id="3_b0pyn"]
 [ext_resource type="Texture2D" uid="uid://dn2qoahh2td4u" path="res://content/art/background.png" id="6_lv11a"]
 [ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="7_ek1xu"]
 [ext_resource type="Script" uid="uid://d3gtrw58eq813" path="res://scripts/map_gen/level_generator.gd" id="8_g04cy"]
@@ -178,6 +180,12 @@ win_screen = NodePath("CanvasLayer/Win Screen")
 upgrade_screen = NodePath("CanvasLayer/Upgrade Screen")
 upgrade_buttons = [NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 1"), NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 2"), NodePath("CanvasLayer/Upgrade Screen/Choices/Choice 3")]
 
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=989608220]
+stream = ExtResource("2_dbd5e")
+autoplay = true
+bus = &"music"
+script = ExtResource("3_b0pyn")
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=500628467]
 z_index = -1210
 z_as_relative = false
@@ -210,7 +218,7 @@ player_safe_radius = 6.0
 pack_radius = 1.0
 pack_min_distance = 3.0
 arena_margin = 3.0
-save_png = true
+pack_attempts = 5
 
 [node name="Side Walls" type="TileMapLayer" parent="Level Gen" unique_id=1268823674]
 z_index = -1000

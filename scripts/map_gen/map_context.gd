@@ -16,9 +16,23 @@ var rng: RandomNumberGenerator
 var arenas: Array[Arena] = []
 ## Overrides PlaceArenasStep.count when >= 0 (e.g. to scale tumors with level).
 var arena_count := -1
+## When true, snapshot() records images of the grid for debugging/presentation.
+var record_snapshots := false
+var snapshots: Dictionary[String, Image] = {}
 
 
 func _init(grid_size: Vector2i, rng_seed: int) -> void:
 	grid = MapGrid.new(grid_size)
 	rng = RandomNumberGenerator.new()
 	rng.seed = rng_seed
+
+
+## Records the grid (white = wall) with arena centers as red pixels.
+func snapshot(label: String) -> void:
+	if not record_snapshots or label.is_empty():
+		return
+	var image := grid.to_image()
+	image.convert(Image.FORMAT_RGB8)
+	for arena in arenas:
+		image.set_pixelv(Vector2i(arena.center), Color.RED)
+	snapshots[label] = image

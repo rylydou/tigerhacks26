@@ -8,14 +8,22 @@
 [ext_resource type="Texture2D" uid="uid://dn73adkgnhehh" path="res://content/art/aim_indicator.png" id="5_smehm"]
 [ext_resource type="Texture2D" uid="uid://bhlo1ddjpbuu4" path="res://content/art/player_claw.png" id="5_y4r1p"]
 [ext_resource type="Script" uid="uid://cmh4vrcbqixfw" path="res://scripts/nodes/arrow_marker.gd" id="6_tuyoq"]
-[ext_resource type="Script" path="res://scripts/nodes/objective_pointer.gd" id="7_objptr"]
 [ext_resource type="PackedScene" uid="uid://dc8xyp5dwr6r6" path="res://scenes/health_bar.tscn" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://dlhcbo0ogr0yi" path="res://scripts/nodes/objective_pointer.gd" id="7_objptr"]
 [ext_resource type="Texture2D" uid="uid://b7kc3vpy4q0ws" path="res://content/art/player_tentacle_segment.png" id="8_d2wvv"]
 [ext_resource type="Script" uid="uid://6fxhucstpsuh" path="res://scripts/nodes/player_claws.gd" id="9_claws"]
 [ext_resource type="PackedScene" uid="uid://bwokgdo8siiaw" path="res://scenes/shadow.tscn" id="12_3v2ag"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6edp"]
 radius = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jej6c"]
+bg_color = Color(1, 0.73333335, 0.26666668, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0)
 
 [node name="Player" type="CharacterBody2D" unique_id=291338747 node_paths=PackedStringArray("cursor_node", "shoot_pos_node")]
 z_index = -800
@@ -106,5 +114,10 @@ texture = ExtResource("2_g2els")
 [node name="Health Bar" parent="." unique_id=156660026 instance=ExtResource("7_fjrip")]
 position = Vector2(0, 8)
 
+[node name="Fill" parent="Health Bar" index="1" unique_id=1394816185]
+theme_override_styles/fill = SubResource("StyleBoxFlat_jej6c")
+
 [node name="Shadow" parent="." unique_id=1277822842 instance=ExtResource("12_3v2ag")]
 position = Vector2(0, 11)
+
+[editable path="Health Bar"]

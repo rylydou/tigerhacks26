@@ -29,3 +29,7 @@ func apply(ctx: MapContext) -> void:
 	for i in grid.cells.size():
 		if not reached[i]:
 			grid.cells[i] = 1
+
+
+func label() -> String:
+	return "hole_fill"

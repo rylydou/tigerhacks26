@@ -18,7 +18,7 @@ var last_position := Vector2.ZERO
 
 
 func get_icon() -> Texture2D:
-	return preload("res://content/art/placeholder.png")
+	return preload("res://content/art/static_shock_upgrade.png")
 
 func get_name() -> String:
 	return "Static Charge"

@@ -5,7 +5,7 @@ const HEALTH_PER_LEVEL := 20
 
 
 func get_icon() -> Texture2D:
-	return preload("res://content/art/placeholder.png")
+	return preload("res://content/art/max_hp_upgrade.png")
 
 func get_name() -> String:
 	return "Max HP"

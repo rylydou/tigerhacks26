@@ -40,3 +40,7 @@ func _carve(grid: MapGrid, from: Vector2, to: Vector2) -> void:
 	var steps := ceili(from.distance_to(to))
 	for i in steps + 1:
 		grid.fill_circle(from.lerp(to, float(i) / maxi(steps, 1)), radius, false)
+
+
+func label() -> String:
+	return "tunnels"

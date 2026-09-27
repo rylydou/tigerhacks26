@@ -6,7 +6,7 @@ const MULTIPLIER_PER_LEVEL := 1.25
 
 
 func get_icon() -> Texture2D:
-	return preload("res://content/art/placeholder.png")
+	return preload("res://content/art/damage_upgrade.png")
 
 func get_name() -> String:
 	return "Damage"

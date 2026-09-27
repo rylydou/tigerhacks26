@@ -7,7 +7,7 @@ const HEAL_PER_SECOND_PER_LEVEL := 10.0
 
 
 func get_icon() -> Texture2D:
-	return preload("res://content/art/placeholder.png")
+	return preload("res://content/art/still_healing_upgrade.png")
 
 func get_name() -> String:
 	return "Rest"

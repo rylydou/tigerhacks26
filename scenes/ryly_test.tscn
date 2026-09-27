@@ -17,6 +17,10 @@
 [ext_resource type="Script" uid="uid://po8u41gtfnpo" path="res://scripts/map_gen/dual_grid_layer.gd" id="16_e0xjg"]
 [ext_resource type="Script" uid="uid://dpcjbtkvehexw" path="res://scripts/map_gen/side_wall_layer.gd" id="16_mci7o"]
 [ext_resource type="Texture2D" uid="uid://cm5u5f05lb411" path="res://content/art/tileset_tops.png" id="17_0p4x6"]
+[ext_resource type="Texture2D" uid="uid://cqb5mgioxpamj" path="res://content/art/ui_battery_outline.png" id="18_0p4x6"]
+[ext_resource type="Texture2D" uid="uid://df43arvkfd462" path="res://content/art/ui_battery_inner.png" id="19_glu8d"]
+[ext_resource type="Script" uid="uid://b40p3l4npw1bw" path="res://scripts/ui/upgrade_hotbar.gd" id="20_hotbr"]
+[ext_resource type="Script" uid="uid://cj407wxxg8b50" path="res://scripts/ui/health_bar.gd" id="21_hpbar"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0xjg"]
 texture = ExtResource("8_oq6fy")
@@ -35,7 +39,7 @@ script = ExtResource("10_oq6fy")
 count = 2
 radius_range = Vector2(3, 5)
 edge_margin = 3.0
-min_gap = 3.0
+min_gap = 2.0
 
 [sub_resource type="Resource" id="Resource_glu8d"]
 script = ExtResource("11_e0xjg")
@@ -115,6 +119,13 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_mci7o")
 sources/2 = SubResource("TileSetAtlasSource_xnjde")
 sources/1 = SubResource("TileSetAtlasSource_ceqwj")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glu8d"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0, 0.2509804)
 
 [sub_resource type="Animation" id="Animation_ceqwj"]
 length = 0.001
@@ -199,6 +210,7 @@ player_safe_radius = 6.0
 pack_radius = 1.0
 pack_min_distance = 3.0
 arena_margin = 3.0
+save_png = true
 
 [node name="Side Walls" type="TileMapLayer" parent="Level Gen" unique_id=1268823674]
 z_index = -1000
@@ -228,6 +240,29 @@ metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1092973872]
 
+[node name="Health Bar" type="TextureProgressBar" parent="CanvasLayer" unique_id=1735273912]
+texture_repeat = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -40.0
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -16)
+offset_transform_scale = Vector2(4, 4)
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 16
+stretch_margin_right = 16
+texture_under = ExtResource("18_0p4x6")
+texture_progress = ExtResource("19_glu8d")
+script = ExtResource("21_hpbar")
+
 [node name="Tumors Label" type="Label" parent="CanvasLayer" unique_id=1739204518]
 offset_left = 32.0
 offset_top = 24.0
@@ -238,7 +273,26 @@ theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 40
 text = "Tumors left: 0"
 
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1925250829]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -12.0
+offset_top = 12.0
+offset_right = 12.0
+offset_bottom = 36.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_glu8d")
+
+[node name="Upgrade Hotbar" type="HBoxContainer" parent="CanvasLayer/PanelContainer" unique_id=1873402956]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+alignment = 1
+script = ExtResource("20_hotbr")
+
 [node name="Win Screen" type="Control" parent="CanvasLayer" unique_id=509846110]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -271,6 +325,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Upgrade Screen" type="Control" parent="CanvasLayer" unique_id=1443757928]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

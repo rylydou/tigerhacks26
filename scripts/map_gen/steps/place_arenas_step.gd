@@ -25,3 +25,7 @@ func apply(ctx: MapContext) -> void:
 				return center.distance_to(a.center) >= radius + a.radius + min_gap):
 			ctx.arenas.append(MapContext.Arena.new(center, radius))
 	push_warning("PlaceArenasStep: only placed %d/%d arenas" % [ctx.arenas.size(), target])
+
+
+func label() -> String:
+	return "arenas"

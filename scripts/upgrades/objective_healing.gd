@@ -2,7 +2,7 @@ extends Upgrade
 
 
 func get_icon() -> Texture2D:
-	return preload("res://content/art/placeholder.png")
+	return preload("res://content/art/objective_healing_upgrade.png")
 
 func get_name() -> String:
 	return "Objective Healing"

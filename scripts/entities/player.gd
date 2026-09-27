@@ -11,6 +11,8 @@ signal died
 signal shot(bullet: BasicProjectile)
 signal hit_target(target: Node2D, damage: int)
 signal killed_enemy(enemy: Enemy)
+## Emitted after an upgrade is taken or leveled up.
+signal upgrades_changed
 
 
 @export var health := 100
@@ -241,4 +243,5 @@ func add_upgrade(script: Script) -> Upgrade:
 		upgrade.player = self
 		upgrades.append(upgrade)
 	upgrade._upgrade()
+	upgrades_changed.emit()
 	return upgrade

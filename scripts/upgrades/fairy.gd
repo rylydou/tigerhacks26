@@ -8,10 +8,10 @@ var fairy: FairyNode
 
 
 func get_icon() -> Texture2D:
-	return preload("res://content/art/target_reticle.png")
+	return preload("res://content/art/fairy_upgrade.png")
 
 func get_name() -> String:
-	return "Fairy"
+	return "Targeting Software Update"
 
 func get_description() -> String:
 	return "A targeting reticle locks onto random nearby enemies. Marked enemies take increased damage."

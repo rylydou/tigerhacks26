@@ -7,13 +7,13 @@ const FAR := 5.0
 
 
 func get_icon() -> Texture2D:
-	return preload("res://content/art/placeholder.png")
+	return preload("res://content/art/panic_upgrade.png")
 
 func get_name() -> String:
-	return "Panic"
+	return "Self-Defense Protocol"
 
 func get_description() -> String:
-	return "Deal more damage to nearby enemies. Can't be taken with Focus."
+	return "Deal more damage to nearby enemies. Can't be taken with Focus Protocol."
 
 func get_stat_at_level(level: int) -> String:
 	return "Up to +%d%% damage up close" % (level * 40)

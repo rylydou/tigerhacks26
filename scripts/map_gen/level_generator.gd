@@ -56,10 +56,11 @@ var nav := AStarGrid2D.new()
 ## Random center picks per wave before giving up on it.
 @export var pack_attempts := 30
 @export_group("Debug")
+## Saves a PNG of each generation step (arena centers in red) to png_dir.
 @export var save_png := false
-@export var output_path := "user://map.png"
-## Marks arena centers with red pixels in the saved PNG.
-@export var mark_arenas := true
+@export var png_dir := "user://map_steps"
+## Pixels per map cell in the saved PNGs.
+@export_range(1, 16) var png_scale := 4
 
 
 func _enter_tree() -> void:
@@ -121,9 +122,11 @@ func generate(level := 1) -> MapGrid:
 	var ctx := MapContext.new(map_size, used_seed)
 	if tumors_base >= 0:
 		ctx.arena_count = mini(tumors_base + floori(tumors_per_level * (level - 1)), tumors_max)
+	ctx.record_snapshots = save_png
 	for step in steps:
 		if step:
 			step.apply(ctx)
+			ctx.snapshot(step.label())
 
 	_paint_tiles(ctx.grid)
 	_build_nav(ctx.grid)
@@ -249,13 +252,14 @@ func _to_cell(grid: MapGrid, p: Vector2i) -> Vector2i:
 
 
 func _save_png(ctx: MapContext) -> void:
-	var image := ctx.grid.to_image()
-	if mark_arenas:
-		image.convert(Image.FORMAT_RGB8)
-		for arena in ctx.arenas:
-			image.set_pixelv(Vector2i(arena.center), Color.RED)
-	var err := image.save_png(output_path)
-	if err == OK:
-		print("Map saved to %s" % ProjectSettings.globalize_path(output_path))
-	else:
-		push_error("Failed to save map: %s" % error_string(err))
+	DirAccess.make_dir_recursive_absolute(png_dir)
+	var index := 1
+	for label in ctx.snapshots:
+		var path := png_dir.path_join("%02d_%s.png" % [index, label])
+		var image := ctx.snapshots[label]
+		image.resize(image.get_width() * png_scale, image.get_height() * png_scale, Image.INTERPOLATE_NEAREST)
+		var err := image.save_png(path)
+		if err != OK:
+			push_error("Failed to save %s: %s" % [path, error_string(err)])
+		index += 1
+	print("Map steps saved to %s" % ProjectSettings.globalize_path(png_dir))

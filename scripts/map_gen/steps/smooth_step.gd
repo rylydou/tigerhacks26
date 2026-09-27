@@ -11,7 +11,7 @@ extends MapStep
 
 func apply(ctx: MapContext) -> void:
 	var grid := ctx.grid
-	for _i in iterations:
+	for i in iterations:
 		var next := grid.cells.duplicate()
 		for y in grid.size.y:
 			for x in grid.size.x:
@@ -21,3 +21,4 @@ func apply(ctx: MapContext) -> void:
 				elif walls > fill_above:
 					next[y * grid.size.x + x] = 1
 		grid.cells = next
+		ctx.snapshot("smoothing_%d" % (i + 1))

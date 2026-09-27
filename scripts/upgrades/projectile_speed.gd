@@ -2,7 +2,7 @@ extends Upgrade
 
 
 func get_icon() -> Texture2D:
-	return preload("res://content/art/placeholder.png")
+	return preload("res://content/art/projectile_speed.png")
 
 func get_name() -> String:
 	return "Projectile Speed"

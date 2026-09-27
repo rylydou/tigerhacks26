@@ -12,7 +12,7 @@ func get_icon() -> Texture2D:
 	return preload("res://content/art/placeholder.png")
 
 func get_name() -> String:
-	return "Healing Drops"
+	return "Biomass Converter"
 
 func get_description() -> String:
 	return "Enemies drop healing orbs when killed (%d HP each)." % HEAL_PER_PICKUP

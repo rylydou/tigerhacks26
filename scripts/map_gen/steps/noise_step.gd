@@ -14,15 +14,23 @@ extends MapStep
 
 func apply(ctx: MapContext) -> void:
 	var grid := ctx.grid
+	var rolls := PackedFloat32Array()
+	rolls.resize(grid.cells.size())
 	for y in grid.size.y:
 		for x in grid.size.x:
 			var edge_dist := mini(mini(x, y), mini(grid.size.x - 1 - x, grid.size.y - 1 - y))
 			if edge_dist == 0:
-				grid.set_wall(x, y, true)
+				rolls[y * grid.size.x + x] = -1.0
 				continue
 			var density := lerpf(edge_density, center_density, clampf(edge_dist / edge_falloff, 0.0, 1.0))
-			density *= _arena_factor(ctx.arenas, Vector2(x, y))
-			grid.set_wall(x, y, ctx.rng.randf() < density)
+			# Normalized by density so arena thinning below reuses the same roll
+			rolls[y * grid.size.x + x] = ctx.rng.randf() / density
+			grid.set_wall(x, y, rolls[y * grid.size.x + x] < 1.0)
+	ctx.snapshot("noise")
+
+	for y in grid.size.y:
+		for x in grid.size.x:
+			grid.set_wall(x, y, rolls[y * grid.size.x + x] < _arena_factor(ctx.arenas, Vector2(x, y)))
 
 
 ## 0 inside an arena's clear core, ramping to 1 at its influence radius.
@@ -32,3 +40,7 @@ func _arena_factor(arenas: Array[MapContext.Arena], p: Vector2) -> float:
 		var t := inverse_lerp(a.radius * arena_clear_ratio, a.radius * arena_influence, p.distance_to(a.center))
 		factor = minf(factor, clampf(t, 0.0, 1.0))
 	return factor
+
+
+func label() -> String:
+	return "arena_space"

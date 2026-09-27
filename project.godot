@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Tiger Hacks"
-config/version="0.0.1"
+config/name="Nanobots"
+config/version="1.0.0"
 run/main_scene="uid://cvguk7t5510lo"
 config/features=PackedStringArray("4.7")
 config/icon="res://icon.svg"
@@ -42,7 +42,7 @@ window/size/mode.release=3
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/devtools/plugin.cfg", "res://addons/godottpd/plugin.cfg", "res://addons/run_preset/plugin.cfg", "res://addons/soundscaper/plugin.cfg")
+enabled=PackedStringArray("res://addons/devtools/plugin.cfg", "res://addons/run_preset/plugin.cfg", "res://addons/soundscaper/plugin.cfg")
 
 [file_customization]
 

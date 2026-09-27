@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://brbihjb6josjy"]
 
 [ext_resource type="PackedScene" uid="uid://coxfu178vwrco" path="res://scenes/player.tscn" id="1_hljss"]
+[ext_resource type="Script" uid="uid://cnprj4g3ro15s" path="res://scripts/game_loop.gd" id="1_mci7o"]
 [ext_resource type="Texture2D" uid="uid://dn2qoahh2td4u" path="res://content/art/background.png" id="6_lv11a"]
 [ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="7_ek1xu"]
 [ext_resource type="Script" uid="uid://d3gtrw58eq813" path="res://scripts/map_gen/level_generator.gd" id="8_g04cy"]
@@ -14,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cvl25pap17t0y" path="res://content/art/tileset_template.png" id="15_oq6fy"]
 [ext_resource type="Texture2D" uid="uid://bgrpwrjmalfk3" path="res://content/art/tileset_side_walls.png" id="16_ceqwj"]
 [ext_resource type="Script" uid="uid://po8u41gtfnpo" path="res://scripts/map_gen/dual_grid_layer.gd" id="16_e0xjg"]
+[ext_resource type="Script" uid="uid://dpcjbtkvehexw" path="res://scripts/map_gen/side_wall_layer.gd" id="16_mci7o"]
 [ext_resource type="Texture2D" uid="uid://cm5u5f05lb411" path="res://content/art/tileset_tops.png" id="17_0p4x6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0xjg"]
@@ -71,25 +73,21 @@ texture_region_size = Vector2i(32, 32)
 3:3/0 = 0
 0:3/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_glu8d"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ceqwj"]
 texture = ExtResource("16_ceqwj")
 texture_region_size = Vector2i(32, 32)
+0:0/size_in_atlas = Vector2i(1, 2)
 0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 16)
+1:0/size_in_atlas = Vector2i(1, 2)
 1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, 16)
+2:0/size_in_atlas = Vector2i(1, 2)
 2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, 16)
+3:0/size_in_atlas = Vector2i(1, 2)
 3:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-0:3/0 = 0
+3:0/0/texture_origin = Vector2i(0, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xnjde"]
 texture = ExtResource("17_0p4x6")
@@ -114,10 +112,11 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_j6edp"]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_mci7o")
-sources/1 = SubResource("TileSetAtlasSource_glu8d")
 sources/2 = SubResource("TileSetAtlasSource_xnjde")
+sources/1 = SubResource("TileSetAtlasSource_ceqwj")
 
 [node name="Ryly Test" type="Node2D" unique_id=986588181]
+script = ExtResource("1_mci7o")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=500628467]
 z_index = -1210
@@ -138,20 +137,22 @@ metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 
 [node name="Player" parent="." unique_id=291338747 instance=ExtResource("1_hljss")]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1846879771 node_paths=PackedStringArray("visual_layers")]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1846879771 node_paths=PackedStringArray("visual_layers", "player")]
 self_modulate = Color(1, 1, 1, 0)
 tile_set = SubResource("TileSet_emgfa")
 script = ExtResource("8_g04cy")
 map_size = Vector2i(64, 64)
 steps = Array[ExtResource("9_emgfa")]([SubResource("Resource_0p4x6"), SubResource("Resource_glu8d"), SubResource("Resource_xnjde"), SubResource("Resource_dbd5e"), SubResource("Resource_g04cy")])
 visual_layers = [NodePath("Side Walls"), NodePath("Tops")]
+player = NodePath("../Player")
 
 [node name="Side Walls" type="TileMapLayer" parent="TileMapLayer" unique_id=1268823674]
 z_index = -1000
 z_as_relative = false
 tile_set = SubResource("TileSet_j6edp")
-script = ExtResource("16_e0xjg")
+script = ExtResource("16_mci7o")
 display_source_id = 1
+single_atlas_coords = Vector2i(3, 0)
 
 [node name="SortingLayer" type="Node" parent="TileMapLayer/Side Walls" unique_id=154413621]
 script = ExtResource("7_ek1xu")

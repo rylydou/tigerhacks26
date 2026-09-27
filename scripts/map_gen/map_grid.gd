@@ -37,6 +37,19 @@ func count_wall_neighbors(x: int, y: int) -> int:
 	return count
 
 
+## Air cell closest to target whose 8 neighbors are also air. Returns target if none found.
+func find_open_cell_near(target: Vector2i) -> Vector2i:
+	var best := target
+	var best_dist := INF
+	for y in range(1, size.y - 1):
+		for x in range(1, size.x - 1):
+			var d := target.distance_squared_to(Vector2i(x, y))
+			if d < best_dist and not is_wall(x, y) and count_wall_neighbors(x, y) == 0:
+				best_dist = d
+				best = Vector2i(x, y)
+	return best
+
+
 func fill_circle(center: Vector2, radius: float, wall: bool) -> void:
 	var min_p := Vector2i((center - Vector2.ONE * radius).floor()).max(Vector2i.ZERO)
 	var max_p := Vector2i((center + Vector2.ONE * radius).ceil()).min(size - Vector2i.ONE)

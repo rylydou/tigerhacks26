@@ -5,6 +5,9 @@ signal damage_taken()
 signal died()
 
 
+const SPAWN_ATTEMPTS := 10
+
+
 @export var health := 100
 @onready var max_health := health
 
@@ -199,9 +202,8 @@ func spawn_wave() -> bool:
 	var wave: Wave = waves.pick_random()
 	for entry in wave.spawns:
 		for i in entry.count:
-			var dist := randf_range(spawn_radius_min, spawn_radius_max) * Global.UNIT_SCALE
-			var pos := global_position + Vector2.from_angle(randf() * TAU) * dist
-			if Player.instance and pos.distance_to(Player.instance.global_position) < min_player_distance * Global.UNIT_SCALE:
+			var pos := _find_spawn_position()
+			if pos == Vector2.INF:
 				continue
 			var enemy: Node2D = entry.scene.instantiate()
 			enemy.add_to_group(Global.DESPAWN_GROUP)
@@ -209,3 +211,16 @@ func spawn_wave() -> bool:
 			get_tree().current_scene.add_child.call_deferred(enemy)
 			my_spawns.append(enemy)
 	return true
+
+
+## Random point in the spawn ring that's not in a wall or too close to the player. Vector2.INF if none found.
+func _find_spawn_position() -> Vector2:
+	for attempt in SPAWN_ATTEMPTS:
+		var dist := randf_range(spawn_radius_min, spawn_radius_max) * Global.UNIT_SCALE
+		var pos := global_position + Vector2.from_angle(randf() * TAU) * dist
+		if LevelGenerator.current and not LevelGenerator.current.is_open(pos):
+			continue
+		if Player.instance and pos.distance_to(Player.instance.global_position) < min_player_distance * Global.UNIT_SCALE:
+			continue
+		return pos
+	return Vector2.INF

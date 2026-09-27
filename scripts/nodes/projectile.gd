@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 		if raycast.is_colliding():
 			position = raycast.get_collision_point()
 			force_update_transform()
-			SFX.event(&"projectile_wall_hit").at(global_position).play()
+			#SFX.event(&"projectile_wall_hit").at(global_position).play()
 			destroy(true)
 	
 	_previous_position = position

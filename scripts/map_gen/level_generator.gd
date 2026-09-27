@@ -24,9 +24,11 @@ var nav := AStarGrid2D.new()
 @export_group("Tiles")
 @export var wall_source_id := 0
 @export var wall_atlas_coords := Vector2i.ZERO
-## Visual layers rebuilt from this layer after generating.
-@export var visual_layers: Array[DualGridLayer] = []
+## Visual layers rebuilt from this layer after generating. Each needs a refresh(world) method.
+@export var visual_layers: Array[TileMapLayer] = []
 @export_group("Spawns")
+## Moved to the open cell nearest the map center after generating.
+@export var player: Node2D
 @export var tumor_scene: PackedScene = preload("res://scenes/objectives/tumor.tscn")
 @export_group("Debug")
 @export var save_png := false
@@ -56,6 +58,12 @@ func to_world(tile: Vector2i) -> Vector2:
 	return to_global(map_to_local(tile))
 
 
+## True if the world position is inside the map and not in a wall.
+func is_open(world_position: Vector2) -> bool:
+	var tile := to_tile(world_position)
+	return nav.is_in_boundsv(tile) and not nav.is_point_solid(tile)
+
+
 ## Tile path between two world positions. Empty if unreachable.
 func get_id_path(from: Vector2, to: Vector2) -> Array[Vector2i]:
 	var from_tile := to_tile(from)
@@ -75,9 +83,11 @@ func generate() -> MapGrid:
 	_paint_tiles(ctx.grid)
 	_build_nav(ctx.grid)
 	for layer in visual_layers:
-		if layer:
+		if layer and layer.has_method(&"refresh"):
 			layer.refresh(self)
 	_spawn_tumors(ctx)
+	if player:
+		player.global_position = to_global(map_to_local(_to_cell(ctx.grid, ctx.grid.find_open_cell_near(ctx.grid.size / 2))))
 	if save_png:
 		_save_png(ctx)
 	print("Map generated (seed %d), %d wall tiles" % [used_seed, get_used_cells().size()])

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SoundEvent" format=3 uid="uid://cx5oldi3pwci5"]
+
+[ext_resource type="Script" uid="uid://crch1a5rk337u" path="res://addons/soundscaper/scripts/resources/sound_event.gd" id="1_08cdr"]
+[ext_resource type="AudioStream" uid="uid://casrkawg667og" path="res://content/sfx/shoot-1.wav" id="2_psabp"]
+[ext_resource type="AudioStream" uid="uid://ohh4kf2mtsli" path="res://content/sfx/shoot-2.wav" id="3_ovdyg"]
+[ext_resource type="AudioStream" uid="uid://4ak6uintgtcp" path="res://content/sfx/shoot-3.wav" id="4_hvs31"]
+[ext_resource type="AudioStream" uid="uid://b4lw0prorekjs" path="res://content/sfx/shoot-4.wav" id="5_oxsjw"]
+[ext_resource type="AudioStream" uid="uid://td6h8u57ybel" path="res://content/sfx/shoot-5.wav" id="6_w6mrt"]
+[ext_resource type="AudioStream" uid="uid://b0cbdgoc6b222" path="res://content/sfx/shoot-6.wav" id="7_6mgik"]
+[ext_resource type="AudioStream" uid="uid://q4eiifaeapuj" path="res://content/sfx/shoot-7.wav" id="8_8j51a"]
+
+[resource]
+script = ExtResource("1_08cdr")
+streams = Array[AudioStream]([ExtResource("2_psabp"), ExtResource("3_ovdyg"), ExtResource("4_hvs31"), ExtResource("5_oxsjw"), ExtResource("6_w6mrt"), ExtResource("7_6mgik"), ExtResource("8_8j51a")])
+bus = &"sfx"
+volume = -15.0
+random_pitch_variation = 6.0
+metadata/_custom_type_script = "uid://crch1a5rk337u"

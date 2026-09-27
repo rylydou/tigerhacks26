@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://brbihjb6josjy"]
 
 [ext_resource type="PackedScene" uid="uid://coxfu178vwrco" path="res://scenes/player.tscn" id="1_hljss"]
-[ext_resource type="PackedScene" uid="uid://bdvkkoo15mqai" path="res://scenes/enemies/trooper.tscn" id="2_ne7xr"]
-[ext_resource type="Shader" uid="uid://dngmyb4e35gx5" path="res://content/shaders/actor.gdshader" id="3_qxrsy"]
-[ext_resource type="PackedScene" uid="uid://m8pqti13a75g" path="res://scenes/enemies/shooter_1.tscn" id="5_lgnhk"]
 [ext_resource type="Texture2D" uid="uid://dn2qoahh2td4u" path="res://content/art/background.png" id="6_lv11a"]
 [ext_resource type="Script" uid="uid://dkcr2cy77fa0a" path="res://scripts/components/sorting_layer.gd" id="7_ek1xu"]
 [ext_resource type="Script" uid="uid://d3gtrw58eq813" path="res://scripts/map_gen/level_generator.gd" id="8_g04cy"]
@@ -18,34 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://bgrpwrjmalfk3" path="res://content/art/tileset_side_walls.png" id="16_ceqwj"]
 [ext_resource type="Script" uid="uid://po8u41gtfnpo" path="res://scripts/map_gen/dual_grid_layer.gd" id="16_e0xjg"]
 [ext_resource type="Texture2D" uid="uid://cm5u5f05lb411" path="res://content/art/tileset_tops.png" id="17_0p4x6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e0xjg"]
-resource_local_to_scene = true
-shader = ExtResource("3_qxrsy")
-shader_parameter/invert_intensity = 0.0
-shader_parameter/flash_color = Color(1, 1, 1, 0)
-shader_parameter/desaturate = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mci7o"]
-resource_local_to_scene = true
-shader = ExtResource("3_qxrsy")
-shader_parameter/invert_intensity = 0.0
-shader_parameter/flash_color = Color(1, 1, 1, 0)
-shader_parameter/desaturate = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ceqwj"]
-resource_local_to_scene = true
-shader = ExtResource("3_qxrsy")
-shader_parameter/invert_intensity = 0.0
-shader_parameter/flash_color = Color(1, 1, 1, 0)
-shader_parameter/desaturate = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0p4x6"]
-resource_local_to_scene = true
-shader = ExtResource("3_qxrsy")
-shader_parameter/invert_intensity = 0.0
-shader_parameter/flash_color = Color(1, 1, 1, 0)
-shader_parameter/desaturate = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0xjg"]
 texture = ExtResource("8_oq6fy")
@@ -168,22 +137,6 @@ layer_name = &"floor"
 metadata/_custom_type_script = "uid://dkcr2cy77fa0a"
 
 [node name="Player" parent="." unique_id=291338747 instance=ExtResource("1_hljss")]
-
-[node name="Trooper" parent="." unique_id=1744553126 instance=ExtResource("2_ne7xr")]
-material = SubResource("ShaderMaterial_e0xjg")
-position = Vector2(100, 1)
-
-[node name="Trooper2" parent="." unique_id=1988776274 instance=ExtResource("5_lgnhk")]
-material = SubResource("ShaderMaterial_mci7o")
-position = Vector2(-110, -49)
-
-[node name="Trooper3" parent="." unique_id=1135049489 instance=ExtResource("5_lgnhk")]
-material = SubResource("ShaderMaterial_ceqwj")
-position = Vector2(-63, -128)
-
-[node name="Trooper4" parent="." unique_id=814614736 instance=ExtResource("5_lgnhk")]
-material = SubResource("ShaderMaterial_0p4x6")
-position = Vector2(-134, 109)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1846879771 node_paths=PackedStringArray("visual_layers")]
 self_modulate = Color(1, 1, 1, 0)

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SoundEvent" format=3 uid="uid://bnawa207egwek"]
+
+[ext_resource type="Script" uid="uid://crch1a5rk337u" path="res://addons/soundscaper/scripts/resources/sound_event.gd" id="1_t4r21"]
+[ext_resource type="AudioStream" uid="uid://nvlhwsxt5mbu" path="res://content/sfx/hit_1.wav" id="2_t4r21"]
+
+[resource]
+script = ExtResource("1_t4r21")
+streams = Array[AudioStream]([ExtResource("2_t4r21")])
+bus = &"sfx"
+volume = 10.0
+random_pitch_variation = 6.0
+metadata/_custom_type_script = "uid://crch1a5rk337u"

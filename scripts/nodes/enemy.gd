@@ -228,11 +228,12 @@ func set_aggro(player: Player) -> void:
 
 
 func update_nav() -> void:
-	return
-	# if not is_instance_valid(Map.room): return
-	# if not is_instance_valid(aggro): return
-	# id_path = Map.room.data.nav.get_id_path(Map.room.to_tile(global_position), Map.room.to_tile(aggro.global_position))
-	# nav_update_timer = nav_update_cooldown
+	nav_update_timer = nav_update_cooldown
+	var level := LevelGenerator.current
+	if not level or not is_instance_valid(aggro):
+		id_path = []
+		return
+	id_path = level.get_id_path(global_position, aggro.global_position)
 
 
 func update_move_angle() -> void:
@@ -240,38 +241,27 @@ func update_move_angle() -> void:
 
 
 func nav_angle() -> float:
-	return global_position.angle_to_point(aggro.global_position)
-	
-	# if (
-	# 	not is_instance_valid(Map.room) or
-	# 	is_instance_valid(aggro) and (
-	# 		ignore_nav or
-	# 		has_line_of_sight
-	# )):
-	# 	return global_position.angle_to_point(aggro.global_position)
-	
-	# if not id_path or id_path.is_empty() or nav_update_timer <= 0.0:
-	# 	update_nav()
-	
-	# if not id_path or id_path.is_empty():
-	# 	update_nav()
-	# 	die()
-	# 	return angle
-	
-	# var my_id := Map.room.to_tile(global_position)
-	
-	# var closest_id: Vector2i = id_path.back()
-	# var closest_id_dist_sqr := INF
-	# for index in id_path.size():
-	# 	var id := id_path[index]
-	# 	if my_id == id:
-	# 		if index >= id_path.size() - 1: return angle
-	# 		var next_id := id_path[index + 1]
-	# 		return Vector2(my_id).angle_to_point(next_id)
-		
-	# 	var distance_sqr := (my_id - id).length_squared()
-	# 	if distance_sqr <= closest_id_dist_sqr:
-	# 		closest_id_dist_sqr = distance_sqr
-	# 		closest_id = id
-	
-	# return Vector2(my_id).angle_to_point(closest_id)
+	var direct := global_position.angle_to_point(aggro.global_position)
+	var level := LevelGenerator.current
+	if not level or ignore_nav or has_line_of_sight:
+		return direct
+
+	if id_path.is_empty() or nav_update_timer <= 0.0:
+		update_nav()
+	if id_path.is_empty():
+		return direct
+
+	# Head toward the path tile after the one we're on, or the closest tile if we've drifted off.
+	var my_id := level.to_tile(global_position)
+	var target_index := id_path.size() - 1
+	var closest_dist_sqr := INF
+	for index in id_path.size():
+		if id_path[index] == my_id:
+			target_index = mini(index + 1, id_path.size() - 1)
+			break
+		var dist_sqr := (my_id - id_path[index]).length_squared()
+		if dist_sqr < closest_dist_sqr:
+			closest_dist_sqr = dist_sqr
+			target_index = index
+
+	return global_position.angle_to_point(level.to_world(id_path[target_index]))

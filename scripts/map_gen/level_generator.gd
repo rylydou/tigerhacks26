@@ -5,6 +5,12 @@ extends TileMapLayer
 
 const SPAWNED_GROUP := &"level_generator_spawned"
 
+## The active level, for systems that need map queries (e.g. enemy pathfinding).
+static var current: LevelGenerator
+
+## Pathfinding grid over the generated map, in tile coords. Walls are solid.
+var nav := AStarGrid2D.new()
+
 @export var map_size := Vector2i(256, 256)
 ## 0 = random each run.
 @export var rng_seed := 0
@@ -29,8 +35,34 @@ const SPAWNED_GROUP := &"level_generator_spawned"
 @export var mark_arenas := true
 
 
+func _enter_tree() -> void:
+	current = self
+
+
+func _exit_tree() -> void:
+	if current == self:
+		current = null
+
+
 func _ready() -> void:
 	generate()
+
+
+func to_tile(world_position: Vector2) -> Vector2i:
+	return local_to_map(to_local(world_position))
+
+
+func to_world(tile: Vector2i) -> Vector2:
+	return to_global(map_to_local(tile))
+
+
+## Tile path between two world positions. Empty if unreachable.
+func get_id_path(from: Vector2, to: Vector2) -> Array[Vector2i]:
+	var from_tile := to_tile(from)
+	var to_tile_id := to_tile(to)
+	if not nav.is_in_boundsv(from_tile) or not nav.is_in_boundsv(to_tile_id):
+		return []
+	return nav.get_id_path(from_tile, to_tile_id, true)
 
 
 func generate() -> MapGrid:
@@ -41,6 +73,7 @@ func generate() -> MapGrid:
 			step.apply(ctx)
 
 	_paint_tiles(ctx.grid)
+	_build_nav(ctx.grid)
 	for layer in visual_layers:
 		if layer:
 			layer.refresh(self)
@@ -57,6 +90,17 @@ func _paint_tiles(grid: MapGrid) -> void:
 		for x in grid.size.x:
 			if grid.is_wall(x, y):
 				set_cell(_to_cell(grid, Vector2i(x, y)), wall_source_id, wall_atlas_coords)
+
+
+func _build_nav(grid: MapGrid) -> void:
+	nav.region = Rect2i(_to_cell(grid, Vector2i.ZERO), grid.size)
+	nav.cell_size = tile_set.tile_size
+	nav.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
+	nav.update()
+	for y in grid.size.y:
+		for x in grid.size.x:
+			if grid.is_wall(x, y):
+				nav.set_point_solid(_to_cell(grid, Vector2i(x, y)))
 
 
 func _spawn_tumors(ctx: MapContext) -> void:

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SoundEvent" format=3 uid="uid://de0ib8ljqlsnk"]
+
+[ext_resource type="Script" uid="uid://crch1a5rk337u" path="res://addons/soundscaper/scripts/resources/sound_event.gd" id="1_b1kvm"]
+[ext_resource type="AudioStream" uid="uid://cpo77jxt7vh0o" path="res://content/sfx/vo_alert.wav" id="2_b1kvm"]
+
+[resource]
+script = ExtResource("1_b1kvm")
+streams = Array[AudioStream]([ExtResource("2_b1kvm")])
+bus = &"sfx"
+random_pitch_variation = 6.0
+metadata/_custom_type_script = "uid://crch1a5rk337u"

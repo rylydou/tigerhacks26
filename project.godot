@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [audio]
 
 soundscaper/soundbank_dir="res://resources/sound_events"
+buses/default_bus_layout="uid://cen5xsh5q7pg0"
 
 [autoload]
 
@@ -60,6 +61,21 @@ objective=""
 
 common/snap_controls_to_pixels=false
 theme/custom="uid://bba71h53b5b7"
+
+[importer_defaults]
+
+wav={
+"compress/mode": 2,
+"edit/loop_begin": 0,
+"edit/loop_end": -1,
+"edit/loop_mode": 1,
+"edit/normalize": true,
+"edit/trim": true,
+"force/8_bit": false,
+"force/max_rate": true,
+"force/max_rate_hz": 44100,
+"force/mono": false
+}
 
 [input]
 

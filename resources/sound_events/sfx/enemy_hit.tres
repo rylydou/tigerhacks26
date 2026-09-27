@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SoundEvent" format=3 uid="uid://d4kqu1rh1lkyf"]
+
+[ext_resource type="Script" uid="uid://crch1a5rk337u" path="res://addons/soundscaper/scripts/resources/sound_event.gd" id="1_mgu25"]
+[ext_resource type="AudioStream" uid="uid://bgv2ekbdr427a" path="res://content/sfx/hit_enemy.wav" id="2_nxcx4"]
+
+[resource]
+script = ExtResource("1_mgu25")
+streams = Array[AudioStream]([ExtResource("2_nxcx4")])
+bus = &"sfx"
+random_pitch_variation = 6.0
+metadata/_custom_type_script = "uid://crch1a5rk337u"

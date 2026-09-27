@@ -9,7 +9,7 @@ const SCATTER_RADIUS := 12.0
 
 
 func get_icon() -> Texture2D:
-	return preload("res://content/art/placeholder.png")
+	return preload("res://content/art/health_drop_upgrade.png")
 
 func get_name() -> String:
 	return "Biomass Converter"

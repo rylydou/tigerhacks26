@@ -372,22 +372,34 @@ theme_override_constants/separation = 32
 alignment = 1
 
 [node name="Choice 1" type="Button" parent="CanvasLayer/Upgrade Screen/Choices" unique_id=1370592841]
-custom_minimum_size = Vector2(480, 280)
+custom_minimum_size = Vector2(480, 380)
 layout_mode = 2
+theme_override_constants/icon_max_width = 96
 theme_override_font_sizes/font_size = 32
 text = "Upgrade"
 autowrap_mode = 3
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
 
 [node name="Choice 2" type="Button" parent="CanvasLayer/Upgrade Screen/Choices" unique_id=588203417]
-custom_minimum_size = Vector2(480, 280)
+custom_minimum_size = Vector2(480, 380)
 layout_mode = 2
+theme_override_constants/icon_max_width = 96
 theme_override_font_sizes/font_size = 32
 text = "Upgrade"
 autowrap_mode = 3
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
 
 [node name="Choice 3" type="Button" parent="CanvasLayer/Upgrade Screen/Choices" unique_id=2011457763]
-custom_minimum_size = Vector2(480, 280)
+custom_minimum_size = Vector2(480, 380)
 layout_mode = 2
+theme_override_constants/icon_max_width = 96
 theme_override_font_sizes/font_size = 32
 text = "Upgrade"
 autowrap_mode = 3
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true

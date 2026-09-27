@@ -134,6 +134,7 @@ func _choose_upgrade() -> Script:
 		button.visible = i < offers.size()
 		if button.visible:
 			button.text = UpgradePool.describe(player, offers[i])
+			button.icon = UpgradePool.preview(player, offers[i]).get_icon()
 	upgrade_screen.show()
 	upgrade_buttons[0].grab_focus()
 	var index: int = await upgrade_picked

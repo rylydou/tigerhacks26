@@ -9,7 +9,7 @@ var timer := 0.0
 
 
 func get_icon() -> Texture2D:
-	return preload("res://content/art/placeholder.png")
+	return preload("res://content/art/objective_damage_upgrade.png")
 
 func get_name() -> String:
 	return "Objective Frenzy"

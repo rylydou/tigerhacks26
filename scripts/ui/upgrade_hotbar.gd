@@ -21,6 +21,7 @@ func _connect_player() -> void:
 func _rebuild() -> void:
 	for child in get_children():
 		child.queue_free()
+	visible = not Player.instance.upgrades.is_empty()
 	for upgrade in Player.instance.upgrades:
 		add_child(_make_slot(upgrade))
 
